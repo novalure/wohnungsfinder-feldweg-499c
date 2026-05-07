@@ -47,19 +47,23 @@ export function Navigation() {
         solid ? 'bg-bg/95 shadow-header backdrop-blur' : 'bg-transparent'
       }`}
     >
-      <div className="section-shell grid h-20 grid-cols-[auto_1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
+      <div
+        className={`section-shell grid h-20 grid-cols-[auto_1fr_auto] items-center gap-4 transition-[grid-template-columns] duration-500 ease-out lg:grid-cols-[1fr_minmax(0,var(--nav-center-width))_1fr] ${
+          solid ? '[--nav-center-width:260px]' : '[--nav-center-width:0px]'
+        }`}
+      >
         <a href="#hero" className="flex items-center gap-3 lg:hidden" aria-label={`${project.name} Start`}>
           <span className="rounded-md bg-white/95 px-2 py-1 shadow-sm">
             <Image src={company.logoSvg} width={82} height={60} alt={company.name} priority />
           </span>
-          <span
-            className={`hidden text-sm font-semibold md:block ${solid ? 'text-ink' : 'text-white'}`}
-          >
-            {project.name}
-          </span>
         </a>
 
-        <nav className="hidden items-center justify-end gap-8 lg:flex" aria-label="Hauptnavigation links">
+        <nav
+          className={`hidden items-center justify-end transition-[gap] duration-500 ease-out lg:flex ${
+            solid ? 'gap-8' : 'gap-10'
+          }`}
+          aria-label="Hauptnavigation links"
+        >
           {leftNavItems.map(([label, href]) => (
             <a key={href} href={href} className={`text-sm font-medium transition ${linkClasses}`}>
               {label}
@@ -69,8 +73,8 @@ export function Navigation() {
 
         <a
           href="#hero"
-          className={`hidden min-w-[220px] text-center transition duration-300 lg:block ${
-            solid ? 'translate-y-0 opacity-100' : '-translate-y-1 opacity-0 pointer-events-none'
+          className={`hidden overflow-hidden whitespace-nowrap text-center transition-all duration-500 ease-out lg:block ${
+            solid ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
           }`}
           aria-label={`${project.name} Start`}
         >
@@ -82,8 +86,17 @@ export function Navigation() {
           </span>
         </a>
 
-        <div className="hidden items-center gap-8 lg:flex">
-          <nav className="flex items-center gap-8" aria-label="Hauptnavigation rechts">
+        <div
+          className={`hidden items-center justify-start transition-[gap] duration-500 ease-out lg:flex ${
+            solid ? 'gap-8' : 'gap-10'
+          }`}
+        >
+          <nav
+            className={`flex items-center transition-[gap] duration-500 ease-out ${
+              solid ? 'gap-8' : 'gap-10'
+            }`}
+            aria-label="Hauptnavigation rechts"
+          >
             {rightNavItems.map(([label, href]) => (
               <a key={href} href={href} className={`text-sm font-medium transition ${linkClasses}`}>
                 {label}
