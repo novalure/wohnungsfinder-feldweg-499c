@@ -21,7 +21,7 @@ export function Intro() {
         <Reveal delay={0.1}>
           <div className="max-w-reading">
             <p className="eyebrow">Vallis Achen Residenzen</p>
-            <h2 className="mt-4 font-serif text-5xl leading-tight text-ink md:text-6xl">
+            <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
               Eine Adresse mit über 800 Jahren tirolischer Talgeschichte.
             </h2>
             <div className="my-8 flex items-center gap-4 text-accent2">

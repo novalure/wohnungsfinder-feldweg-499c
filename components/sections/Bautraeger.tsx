@@ -20,7 +20,7 @@ export function Bautraeger() {
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
           <Reveal>
             <p className="eyebrow">Bauträger</p>
-            <h2 className="mt-4 font-serif text-5xl leading-tight text-ink md:text-6xl">
+            <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
               Verlässlichkeit, klare Zuständigkeiten, persönliche Begleitung.
             </h2>
             <div className="mt-8 rounded-md border border-line bg-bg p-6">

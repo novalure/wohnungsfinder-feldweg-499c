@@ -26,17 +26,17 @@ export function Hero() {
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/35 to-ink/20" />
       <div className="section-shell relative z-10 flex min-h-[90vh] flex-col items-center justify-center pt-24 text-center text-white md:min-h-screen">
-        <p className="eyebrow text-accent2">{project.address}</p>
-        <h1 className="mt-6 max-w-5xl font-serif text-6xl font-semibold leading-[0.95] md:text-8xl">
+        <p className="eyebrow max-w-full break-words text-accent2">{project.address}</p>
+        <h1 className="mt-6 max-w-5xl text-balance break-words font-serif text-[3.15rem] font-semibold leading-[0.92] sm:text-6xl md:text-8xl">
           {project.name}
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-white/88 md:text-xl">
+        <p className="mt-6 max-w-2xl text-base leading-7 text-white/88 md:text-xl md:leading-8">
           {project.tagline}
         </p>
-        <p className="mt-3 max-w-3xl font-serif text-3xl leading-tight text-white md:text-5xl">
+        <p className="mt-3 max-w-3xl text-balance break-words font-serif text-2xl leading-tight text-white sm:text-3xl md:text-5xl">
           {project.claim}
         </p>
-        <div className="mt-9 flex flex-wrap justify-center gap-3">
+        <div className="mt-9 flex w-full flex-wrap justify-center gap-3">
           <ButtonLink href="#kontakt">
             <Mail size={18} />
             Exposé anfragen

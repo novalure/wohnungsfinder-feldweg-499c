@@ -11,7 +11,7 @@ export function Footer() {
     <footer className="bg-ink py-14 text-white">
       <div className="section-shell grid gap-10 md:grid-cols-3">
         <div>
-          <p className="font-serif text-4xl">{project.name}</p>
+          <p className="break-words font-serif text-3xl sm:text-4xl">{project.name}</p>
           <p className="mt-3 leading-7 text-white/70">{project.address}</p>
           <div className="mt-6 flex items-center gap-4">
             <Image src={bautraeger.logo} width={130} height={48} alt={bautraeger.name} />

@@ -49,7 +49,7 @@ export function Ausstattung() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="eyebrow">Ausstattung</p>
-            <h2 className="mt-4 font-serif text-5xl leading-tight text-ink md:text-6xl">
+            <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
               Materialien, die Ruhe ausstrahlen und im Alltag bestehen.
             </h2>
             <div className="mt-6 grid gap-5 text-lg leading-8 text-muted md:grid-cols-2">

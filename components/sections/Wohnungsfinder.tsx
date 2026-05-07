@@ -82,7 +82,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
       <div className="section-shell">
         <div className="max-w-3xl">
           <p className="eyebrow">Wohnungen</p>
-          <h2 className="mt-4 font-serif text-5xl leading-tight text-ink md:text-6xl">
+          <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
             Sechs Einheiten. Klare Auswahl. Persönliche Beratung.
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted">
@@ -158,13 +158,13 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
 
           <div className="min-w-0">
             <div className="overflow-hidden rounded-md border border-line shadow-soft">
-              <table className="w-full table-fixed text-sm">
+              <table className="w-full table-fixed text-[12px] sm:text-sm">
                 <colgroup>
-                  <col className="w-[28%]" />
-                  <col className="w-[17%]" />
-                  <col className="w-[27%]" />
-                  <col className="w-[23%]" />
-                  <col className="w-[5%]" />
+                  <col className="w-[30%] sm:w-[28%]" />
+                  <col className="w-[13%] sm:w-[17%]" />
+                  <col className="w-[25%] sm:w-[27%]" />
+                  <col className="w-[24%] sm:w-[23%]" />
+                  <col className="w-[8%] sm:w-[5%]" />
                 </colgroup>
                 <thead>
                   <tr className="bg-bg">
@@ -201,21 +201,21 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                               : 'inset 0 0 0 0 transparent',
                           }}
                         >
-                          <td className="px-2 py-3 font-semibold text-ink sm:px-3">
+                          <td className="px-2 py-3 font-semibold leading-tight text-ink sm:px-3">
                             <span>{wohnung.top}</span>
                             <StatusBadge status={wohnung.status} />
                           </td>
-                          <td className="px-2 py-3 text-muted sm:px-3">{wohnung.zimmer}</td>
-                          <td className="px-2 py-3 text-right tabular-nums text-muted sm:px-3">
+                          <td className="px-1 py-3 text-muted sm:px-3">{wohnung.zimmer}</td>
+                          <td className="px-1 py-3 text-right tabular-nums text-muted sm:px-3">
                             {formatM2(wohnung.wohnflaeche)}
                           </td>
-                          <td className="px-2 py-3 text-right tabular-nums font-semibold text-ink sm:px-3">
+                          <td className="px-1 py-3 text-right tabular-nums font-semibold text-ink sm:px-3">
                             {formatEUR(wohnung.kpGesamt)}
                           </td>
-                          <td className="px-2 py-3 text-muted">
+                          <td className="px-1 py-3 text-center text-muted sm:px-2">
                             <ChevronDown
-                              size={18}
-                              className="transition-transform duration-200"
+                              size={16}
+                              className="mx-auto transition-transform duration-200 sm:h-[18px] sm:w-[18px]"
                               style={{
                                 transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                               }}
@@ -274,7 +274,7 @@ function TableHead({
 }) {
   return (
     <th
-      className={`px-2 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted sm:px-3 sm:text-xs ${
+      className={`px-1 py-3 text-[9px] font-semibold uppercase tracking-[0.08em] text-muted sm:px-3 sm:text-xs sm:tracking-[0.14em] ${
         align === 'right' ? 'text-right' : 'text-left'
       }`}
     >
@@ -290,7 +290,7 @@ function FragmentRow({ children }: { children: React.ReactNode }) {
 function StatusBadge({ status }: { status: WohnungsStatus }) {
   return (
     <span
-      className={`mt-1 inline-flex rounded-full px-2 py-0.5 text-[10px] font-semibold sm:ml-2 sm:mt-0 sm:text-[11px] ${statusClasses[status]}`}
+      className={`mt-1 hidden rounded-full px-2 py-0.5 text-[10px] font-semibold sm:ml-2 sm:mt-0 sm:inline-flex sm:text-[11px] ${statusClasses[status]}`}
     >
       {statusLabels[status]}
     </span>

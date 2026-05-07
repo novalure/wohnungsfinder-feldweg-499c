@@ -33,7 +33,7 @@ export function Projekt() {
       <div className="section-shell">
         <Reveal className="max-w-3xl">
           <p className="eyebrow">Projekt</p>
-          <h2 className="mt-4 font-serif text-5xl leading-tight text-ink md:text-6xl">
+          <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
             Ein kleines Ensemble mit klarem Anspruch.
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted">

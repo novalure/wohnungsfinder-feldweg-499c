@@ -22,6 +22,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--color-bg);
+  overflow-x: clip;
 }
 
 body {
@@ -32,6 +33,7 @@ body {
   font-family: var(--font-sans), Inter, ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 body[data-menu-open='true'] {
@@ -54,8 +56,15 @@ img {
 }
 
 .section-shell {
-  width: min(100% - 32px, 1280px);
+  width: min(calc(100% - 32px), 1280px);
   margin-inline: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .section-shell {
+    width: min(calc(100% - 24px), 1280px);
+  }
 }
 
 .eyebrow {

@@ -87,7 +87,7 @@ export function Kontakt({ prefillTop }: Props) {
       <div className="section-shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
         <div>
           <p className="eyebrow">Kontakt</p>
-          <h2 className="mt-4 font-serif text-5xl leading-tight text-ink md:text-6xl">
+          <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
             Wir freuen uns auf Ihre Anfrage.
           </h2>
           <div className="mt-10 rounded-md border border-line bg-surface p-6 shadow-soft">
