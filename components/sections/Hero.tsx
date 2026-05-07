@@ -16,7 +16,7 @@ export function Hero() {
     <section id="hero" className="relative min-h-[90vh] overflow-hidden md:min-h-screen">
       <motion.div className="absolute inset-0" style={{ scale }}>
         <Image
-          src="/img/hero.jpg"
+          src="/img/hero.png"
           alt="Premium-Wohnbauprojekt am Achensee mit Berg- und Wasserbezug"
           fill
           priority

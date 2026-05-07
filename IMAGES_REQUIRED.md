@@ -4,7 +4,7 @@ Alle Bilder liegen unter `public/img/`. Die aktuell enthaltenen Dateien sind Pla
 
 | Datei | Zweck | Empfohlenes Format | Mindestauflösung |
 |---|---|---:|---:|
-| `/img/hero.jpg` | Hero-Visualisierung, erster Eindruck | JPG/AVIF/WebP, 16:9 bis 21:9 | 2400 × 1400 px |
+| `/img/hero.png` | Hero-Visualisierung, erster Eindruck | PNG/JPG/AVIF/WebP, 16:9 bis 21:9 | 1672 × 941 px |
 | `/img/og-image.jpg` | OpenGraph/Twitter Sharing | JPG | 1200 × 630 px |
 | `/img/intro-vertikal.jpg` | Intro-Storytelling, See/Berge/Holzdetail | JPG, 4:5 | 1400 × 1750 px |
 | `/img/projekt-01.jpg` | Projektgalerie Hauptbild | JPG, 16:9 | 1800 × 1050 px |
@@ -30,4 +30,4 @@ Zusätzliche spätere Slots:
 
 - `/img/grundrisse/top-01.svg` bis `/img/grundrisse/top-06.svg`
 - `/img/visualisierungen/top-01-a.jpg` usw.
-- optionales Hero-Video: `/video/achensee-loop.mp4`, maximal 6 MB, mit `/img/hero.jpg` als Poster
+- optionales Hero-Video: `/video/achensee-loop.mp4`, maximal 6 MB, mit `/img/hero.png` als Poster
