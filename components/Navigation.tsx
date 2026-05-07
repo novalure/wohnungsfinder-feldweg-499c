@@ -59,7 +59,7 @@ export function Navigation() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition ${
-        solid ? 'bg-bg/95 shadow-header backdrop-blur' : 'bg-transparent'
+        solid ? 'bg-transparent lg:bg-bg/95 lg:shadow-header lg:backdrop-blur' : 'bg-transparent'
       }`}
     >
       <div
@@ -137,7 +137,7 @@ export function Navigation() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-bg px-6 py-6 lg:hidden">
+        <div className="fixed inset-0 z-50 bg-white px-6 py-6 lg:hidden">
           <div className="flex items-center justify-between">
             <ProjectWordmark />
             <button
