@@ -1,0 +1,80 @@
+[
+  {
+    "id": "top-01",
+    "top": "Top 1",
+    "zimmer": 2,
+    "wfl": 56.37,
+    "freiflaeche": "Terrasse 14,31 m², Garten 143,10 m²",
+    "ausrichtung": "{{HIMMELSRICHTUNG}}",
+    "stockwerk": "EG",
+    "preis": 382258,
+    "status": "verfuegbar",
+    "grundriss": "/grundrisse/wohnung-1.png",
+    "highlights": ["Privater Garten", "Zwei Stellplätze", "Ruhige Orientierung"]
+  },
+  {
+    "id": "top-02",
+    "top": "Top 2",
+    "zimmer": 2,
+    "wfl": 57.07,
+    "freiflaeche": "Terrasse 14,31 m², Garten 45,50 m²",
+    "ausrichtung": "{{HIMMELSRICHTUNG}}",
+    "stockwerk": "EG",
+    "preis": 340690.4,
+    "status": "verfuegbar",
+    "grundriss": "/grundrisse/wohnung-2.png",
+    "highlights": ["Kompakter Garten", "Effizienter Grundriss", "Ein Stellplatz"]
+  },
+  {
+    "id": "top-03",
+    "top": "Top 3",
+    "zimmer": 2,
+    "wfl": 56.13,
+    "freiflaeche": "Terrasse 14,31 m², Garten 95,80 m²",
+    "ausrichtung": "{{HIMMELSRICHTUNG}}",
+    "stockwerk": "EG",
+    "preis": 367930.5,
+    "status": "verfuegbar",
+    "grundriss": "/grundrisse/wohnung-3.png",
+    "highlights": ["Großzügiger Garten", "Zwei Stellplätze", "Kurze Wege ins Freie"]
+  },
+  {
+    "id": "top-04",
+    "top": "Top 4",
+    "zimmer": 2,
+    "wfl": 56.53,
+    "freiflaeche": "Balkon 8,40 m²",
+    "ausrichtung": "{{HIMMELSRICHTUNG}}",
+    "stockwerk": "OG",
+    "preis": 363483,
+    "status": "verfuegbar",
+    "grundriss": "/grundrisse/wohnung-4.png",
+    "highlights": ["Balkon", "Zwei Stellplätze", "Blick in die Umgebung"]
+  },
+  {
+    "id": "top-05",
+    "top": "Top 5",
+    "zimmer": 2,
+    "wfl": 57.23,
+    "freiflaeche": "Balkon 8,40 m²",
+    "ausrichtung": "{{HIMMELSRICHTUNG}}",
+    "stockwerk": "OG",
+    "preis": 346402.5,
+    "status": "verfuegbar",
+    "grundriss": "/grundrisse/wohnung-5.png",
+    "highlights": ["Balkon", "Ein Stellplatz", "Klar zonierter Wohnbereich"]
+  },
+  {
+    "id": "top-06",
+    "top": "Top 6",
+    "zimmer": 2,
+    "wfl": 56.32,
+    "freiflaeche": "Balkon 8,40 m²",
+    "ausrichtung": "{{HIMMELSRICHTUNG}}",
+    "stockwerk": "OG",
+    "preis": 362244,
+    "status": "verfuegbar",
+    "grundriss": "/grundrisse/wohnung-6.png",
+    "highlights": ["Balkon", "Zwei Stellplätze", "Ruhige Obergeschosslage"]
+  }
+]

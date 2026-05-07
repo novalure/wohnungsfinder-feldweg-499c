@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80" viewBox="0 0 240 80" role="img" aria-label="GRASL Immobilien">
+  <rect width="240" height="80" fill="#FAF7F2"/>
+  <text x="24" y="38" fill="#1F2A2E" font-family="Inter, Arial, sans-serif" font-size="23" font-weight="700" letter-spacing="3">GRASL</text>
+  <text x="25" y="58" fill="#6B7378" font-family="Inter, Arial, sans-serif" font-size="13" letter-spacing="2">IMMOBILIEN</text>
+  <path d="M190 22h24l-12 20 18 16h-26l-14-16z" fill="#B89968"/>
+</svg>

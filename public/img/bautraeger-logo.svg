@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80" viewBox="0 0 240 80" role="img" aria-label="Bauträger Logo">
+  <rect width="240" height="80" fill="#FFFFFF"/>
+  <circle cx="43" cy="40" r="21" fill="#2F4A3A"/>
+  <path d="M32 44 43 25l11 19H32Z" fill="#FAF7F2"/>
+  <text x="78" y="36" fill="#1F2A2E" font-family="Inter, Arial, sans-serif" font-size="19" font-weight="700">BAUTRÄGER</text>
+  <text x="80" y="56" fill="#6B7378" font-family="Inter, Arial, sans-serif" font-size="12" letter-spacing="1.4">PROJEKTGESELLSCHAFT</text>
+</svg>

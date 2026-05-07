@@ -1,0 +1,49 @@
+{
+  "project": {
+    "name": "{{PROJEKTNAME}}",
+    "tagline": "{{TAGLINE}}",
+    "claim": "{{CLAIM_HERO}}",
+    "address": "{{STRASSE_HAUSNR}}, {{PLZ}} {{ORT}}",
+    "ortKurz": "{{ORT_KURZ}}",
+    "anzahlWohnungen": 6,
+    "wohnflaecheRange": "{{WFL_VON}}-{{WFL_BIS}} m²",
+    "zimmerRange": "{{ZI_VON}}-{{ZI_BIS}} Zimmer",
+    "hwb": "{{HWB_WERT}} kWh/m²a",
+    "fertigstellung": "{{FERTIGSTELLUNG_QUARTAL}}",
+    "preisAb": "ab € {{PREIS_AB}}"
+  },
+  "company": {
+    "name": "GRASL Immobilien",
+    "legalName": "{{FIRMA_LEGAL_NAME}}",
+    "address": "{{FIRMA_ADRESSE}}",
+    "uid": "{{UID_NUMMER}}",
+    "fb": "{{FIRMENBUCH_NR}}",
+    "fbGericht": "{{FB_GERICHT}}",
+    "geschaeftsfuehrer": "{{GF_NAME}}",
+    "logoSvg": "/img/logo-grasl.svg"
+  },
+  "contact": {
+    "ansprechpartner": "{{ANSPRECHPARTNER_NAME}}",
+    "rolle": "{{ANSPRECHPARTNER_ROLLE}}",
+    "telefon": "{{TELEFON_E164}}",
+    "telefonDisplay": "{{TELEFON_ANZEIGE}}",
+    "mobil": "{{MOBIL_E164}}",
+    "mobilDisplay": "{{MOBIL_ANZEIGE}}",
+    "email": "{{EMAIL_KONTAKT}}",
+    "portrait": "/img/ansprechpartner.jpg"
+  },
+  "bautraeger": {
+    "name": "{{BAUTRAEGER_NAME}}",
+    "logo": "/img/bautraeger-logo.svg",
+    "url": "{{BAUTRAEGER_URL}}"
+  },
+  "downloads": {
+    "expose": "/pdf/{{PROJEKTNAME}}_Expose.pdf",
+    "preisliste": "/pdf/{{PROJEKTNAME}}_Preisliste.pdf",
+    "bab": "/pdf/{{PROJEKTNAME}}_BAB.pdf"
+  },
+  "tracking": {
+    "ga4": "{{GA4_ID}}",
+    "metaPixel": "{{META_PIXEL_ID}}"
+  }
+}
