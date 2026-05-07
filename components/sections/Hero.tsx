@@ -5,7 +5,7 @@ import { ChevronDown, Download, Mail, Phone } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import projectConfig from '@/config/project.json'
 import { ButtonLink } from '@/components/ui/Button'
-import { trackEmailClick, trackPdfDownload, trackPhoneClick } from '@/lib/analytics'
+import { trackPdfDownload, trackPhoneClick } from '@/lib/analytics'
 
 export function Hero() {
   const { project, contact, downloads } = projectConfig
@@ -60,13 +60,6 @@ export function Hero() {
             {contact.telefonDisplay}
           </ButtonLink>
         </div>
-        <a
-          href={`mailto:${contact.email}`}
-          className="mt-5 hidden text-sm text-white/80 underline-offset-4 hover:text-white hover:underline md:inline"
-          onClick={() => trackEmailClick(contact.email)}
-        >
-          {contact.email}
-        </a>
         <a
           href="#intro"
           className="absolute bottom-8 hidden flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/75 md:inline-flex"
