@@ -45,6 +45,10 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
     trackEvent('wohnung_detail_open', { wohnung_nr: nr, top: `Top ${nr}` })
   }, [])
 
+  const closeActive = useCallback(() => {
+    setActiveApt(null)
+  }, [])
+
   const handleEnter = useCallback((nr: number) => setHoveredApt(nr), [])
   const handleLeave = useCallback(() => setHoveredApt(null), [])
   const openLightbox = useCallback((nr: number) => setLightboxApt(nr), [])
@@ -87,10 +91,18 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
           </p>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-5 lg:gap-10">
-          <div className="lg:col-span-3">
+        <div
+          className={`mt-12 grid grid-cols-1 gap-8 transition-[grid-template-columns] duration-300 lg:gap-10 ${
+            activeApt === null
+              ? 'lg:grid-cols-[minmax(0,1.55fr)_minmax(420px,1fr)]'
+              : 'lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.45fr)]'
+          }`}
+        >
+          <div>
             <div
-              className="relative w-full overflow-hidden rounded-md bg-bg shadow-soft"
+              className={`relative w-full overflow-hidden rounded-md bg-bg shadow-soft transition-all duration-300 ${
+                activeApt === null ? '' : 'lg:mt-2'
+              }`}
               style={{ aspectRatio: '1672 / 941' }}
             >
               <Image
@@ -98,7 +110,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                 alt="Front-Skizze Feldweg 499c mit sechs markierten Wohnungen"
                 fill
                 priority
-                sizes="(min-width: 1024px) 58vw, 100vw"
+                sizes={activeApt === null ? '(min-width: 1024px) 58vw, 100vw' : '(min-width: 1024px) 32vw, 100vw'}
                 className="select-none object-cover"
                 draggable={false}
               />
@@ -144,15 +156,21 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
             </p>
           </div>
 
-          <div className="lg:col-span-2">
-            <div className="overflow-x-auto rounded-md border border-line shadow-soft">
-              <table className="w-full min-w-[680px] text-sm">
+          <div className="min-w-0">
+            <div className="overflow-hidden rounded-md border border-line shadow-soft">
+              <table className="w-full table-fixed text-sm">
+                <colgroup>
+                  <col className="w-[28%]" />
+                  <col className="w-[17%]" />
+                  <col className="w-[27%]" />
+                  <col className="w-[23%]" />
+                  <col className="w-[5%]" />
+                </colgroup>
                 <thead>
                   <tr className="bg-bg">
                     <TableHead>Top</TableHead>
                     <TableHead>Zimmer</TableHead>
                     <TableHead align="right">ca. Fläche</TableHead>
-                    <TableHead align="right">KP Wohnung</TableHead>
                     <TableHead align="right">KP gesamt</TableHead>
                     <th className="w-8 px-2 py-3" aria-hidden="true" />
                   </tr>
@@ -183,18 +201,15 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                               : 'inset 0 0 0 0 transparent',
                           }}
                         >
-                          <td className="px-3 py-3 font-semibold text-ink">
+                          <td className="px-2 py-3 font-semibold text-ink sm:px-3">
                             <span>{wohnung.top}</span>
                             <StatusBadge status={wohnung.status} />
                           </td>
-                          <td className="px-3 py-3 text-muted">{wohnung.zimmer}</td>
-                          <td className="px-3 py-3 text-right tabular-nums text-muted">
+                          <td className="px-2 py-3 text-muted sm:px-3">{wohnung.zimmer}</td>
+                          <td className="px-2 py-3 text-right tabular-nums text-muted sm:px-3">
                             {formatM2(wohnung.wohnflaeche)}
                           </td>
-                          <td className="px-3 py-3 text-right tabular-nums font-medium text-muted">
-                            {formatEUR(wohnung.kpWohnung)}
-                          </td>
-                          <td className="px-3 py-3 text-right tabular-nums font-semibold text-ink">
+                          <td className="px-2 py-3 text-right tabular-nums font-semibold text-ink sm:px-3">
                             {formatEUR(wohnung.kpGesamt)}
                           </td>
                           <td className="px-2 py-3 text-muted">
@@ -208,7 +223,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                           </td>
                         </tr>
                         <tr aria-hidden={!isOpen}>
-                          <td colSpan={6} className="p-0">
+                          <td colSpan={5} className="p-0">
                             <div
                               id={detailId}
                               className={`accordion-grid ${isOpen ? 'is-open' : ''}`}
@@ -218,6 +233,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                                   wohnung={wohnung}
                                   onOpenLightbox={() => openLightbox(wohnung.nr)}
                                   onAnfrage={onAnfrage}
+                                  onClose={closeActive}
                                 />
                               </div>
                             </div>
@@ -258,7 +274,7 @@ function TableHead({
 }) {
   return (
     <th
-      className={`px-3 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-muted ${
+      className={`px-2 py-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted sm:px-3 sm:text-xs ${
         align === 'right' ? 'text-right' : 'text-left'
       }`}
     >
@@ -274,7 +290,7 @@ function FragmentRow({ children }: { children: React.ReactNode }) {
 function StatusBadge({ status }: { status: WohnungsStatus }) {
   return (
     <span
-      className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${statusClasses[status]}`}
+      className={`mt-1 inline-flex rounded-full px-2 py-0.5 text-[10px] font-semibold sm:ml-2 sm:mt-0 sm:text-[11px] ${statusClasses[status]}`}
     >
       {statusLabels[status]}
     </span>
@@ -285,10 +301,12 @@ function DetailPanel({
   wohnung,
   onOpenLightbox,
   onAnfrage,
+  onClose,
 }: {
   wohnung: Wohnung
   onOpenLightbox: () => void
   onAnfrage?: (top: string, nr: number) => void
+  onClose: () => void
 }) {
   const hwb = projectConfig.project.hwb
 
@@ -328,6 +346,14 @@ function DetailPanel({
           >
             <Send size={17} />
             {wohnung.top} anfragen
+          </button>
+          <button
+            type="button"
+            className="ml-3 mt-6 inline-flex items-center gap-2 rounded-md border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent"
+            onClick={onClose}
+          >
+            <X size={17} />
+            Schließen
           </button>
         </div>
 
