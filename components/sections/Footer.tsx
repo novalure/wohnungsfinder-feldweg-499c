@@ -15,9 +15,7 @@ export function Footer() {
           <p className="mt-3 leading-7 text-white/70">{project.address}</p>
           <div className="mt-6 flex items-center gap-4">
             <Image src={bautraeger.logo} width={130} height={48} alt={bautraeger.name} />
-            <span className="rounded-md bg-white px-2 py-1">
-              <Image src={company.logoSvg} width={82} height={60} alt={company.name} />
-            </span>
+            <Image src="/img/logo_weiss_grasl.png" width={92} height={67} alt={company.name} />
           </div>
         </div>
         <div>
