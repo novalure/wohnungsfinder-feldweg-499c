@@ -20,7 +20,7 @@
     "fb": "{{FIRMENBUCH_NR}}",
     "fbGericht": "{{FB_GERICHT}}",
     "geschaeftsfuehrer": "{{GF_NAME}}",
-    "logoSvg": "/img/logo-grasl.svg"
+    "logoSvg": "/img/logo_schwarz_grasl.png"
   },
   "contact": {
     "ansprechpartner": "{{ANSPRECHPARTNER_NAME}}",

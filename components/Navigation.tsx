@@ -46,7 +46,9 @@ export function Navigation() {
     >
       <div className="section-shell flex h-20 items-center justify-between">
         <a href="#hero" className="flex items-center gap-3" aria-label={`${project.name} Start`}>
-          <Image src={company.logoSvg} width={118} height={38} alt={company.name} priority />
+          <span className="rounded-md bg-white/95 px-2 py-1 shadow-sm">
+            <Image src={company.logoSvg} width={82} height={60} alt={company.name} priority />
+          </span>
           <span
             className={`hidden text-sm font-semibold md:block ${
               solid ? 'text-ink' : 'text-white'
@@ -83,7 +85,7 @@ export function Navigation() {
       {open && (
         <div className="fixed inset-0 z-50 bg-bg px-6 py-6 lg:hidden">
           <div className="flex items-center justify-between">
-            <Image src={company.logoSvg} width={130} height={42} alt={company.name} />
+            <Image src={company.logoSvg} width={90} height={66} alt={company.name} />
             <button
               type="button"
               className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink"

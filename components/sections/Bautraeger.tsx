@@ -45,7 +45,7 @@ export function Bautraeger() {
               ))}
             </div>
             <div className="mt-8 flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-start">
-              <Image src={company.logoSvg} width={170} height={54} alt={company.name} />
+              <Image src={company.logoSvg} width={104} height={76} alt={company.name} />
               <div>
                 <h3 className="flex items-center gap-2 font-serif text-3xl text-ink">
                   <ShieldCheck className="h-5 w-5 text-accent2" />
