@@ -18,6 +18,22 @@ const navItems = [
 const leftNavItems = navItems.slice(0, 3)
 const rightNavItems = navItems.slice(3)
 
+function ProjectWordmark({ compact = false }: { compact?: boolean }) {
+  return (
+    <span
+      className={`block font-serif font-semibold uppercase text-ink ${
+        compact ? 'text-[1.25rem] leading-[0.82]' : 'text-[1.45rem] leading-[0.82]'
+      }`}
+    >
+      <span className="block">Vallis</span>
+      <span className="block">
+        <span>Achen</span>
+      </span>
+      <span className="block">Residenzen</span>
+    </span>
+  )
+}
+
 export function Navigation() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
@@ -49,7 +65,7 @@ export function Navigation() {
     >
       <div
         className={`section-shell grid h-20 grid-cols-[auto_1fr_auto] items-center gap-4 transition-[grid-template-columns] duration-500 ease-out lg:grid-cols-[1fr_minmax(0,var(--nav-center-width))_1fr] ${
-          solid ? '[--nav-center-width:260px]' : '[--nav-center-width:0px]'
+          solid ? '[--nav-center-width:250px]' : '[--nav-center-width:0px]'
         }`}
       >
         <a href="#hero" className="flex items-center gap-3 lg:hidden" aria-label={`${project.name} Start`}>
@@ -73,17 +89,12 @@ export function Navigation() {
 
         <a
           href="#hero"
-          className={`hidden overflow-hidden whitespace-nowrap text-center transition-all duration-500 ease-out lg:block ${
+          className={`hidden overflow-hidden text-center transition-all duration-500 ease-out lg:block ${
             solid ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
           }`}
           aria-label={`${project.name} Start`}
         >
-          <span className="block font-serif text-2xl font-semibold leading-none text-ink">
-            {project.name}
-          </span>
-          <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.18em] text-accent2">
-            {project.ortKurz}
-          </span>
+          <ProjectWordmark compact />
         </a>
 
         <div
@@ -123,7 +134,7 @@ export function Navigation() {
       {open && (
         <div className="fixed inset-0 z-50 bg-bg px-6 py-6 lg:hidden">
           <div className="flex items-center justify-between">
-            <Image src={company.logoSvg} width={90} height={66} alt={company.name} />
+            <ProjectWordmark />
             <button
               type="button"
               className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink"

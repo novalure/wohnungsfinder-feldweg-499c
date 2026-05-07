@@ -1,6 +1,6 @@
 {
   "project": {
-    "name": "{{PROJEKTNAME}}",
+    "name": "Vallis Achen Residenzen",
     "tagline": "{{TAGLINE}}",
     "claim": "{{CLAIM_HERO}}",
     "address": "{{STRASSE_HAUSNR}}, {{PLZ}} {{ORT}}",
