@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import projectConfig from '@/config/project.json'
@@ -37,7 +36,7 @@ function ProjectWordmark({ compact = false }: { compact?: boolean }) {
 export function Navigation() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
-  const { project, company } = projectConfig
+  const { project } = projectConfig
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 80)
@@ -64,15 +63,11 @@ export function Navigation() {
       }`}
     >
       <div
-        className={`section-shell grid h-20 grid-cols-[auto_1fr_auto] items-center gap-4 transition-[grid-template-columns] duration-500 ease-out lg:grid-cols-[1fr_minmax(0,var(--nav-center-width))_1fr] ${
+        className={`section-shell grid h-20 grid-cols-[44px_1fr_44px] items-center gap-2 transition-[grid-template-columns] duration-500 ease-out lg:grid-cols-[1fr_minmax(0,var(--nav-center-width))_1fr] lg:gap-4 ${
           solid ? '[--nav-center-width:250px]' : '[--nav-center-width:0px]'
         }`}
       >
-        <a href="#hero" className="flex items-center gap-3 lg:hidden" aria-label={`${project.name} Start`}>
-          <span className="rounded-md bg-white/95 px-2 py-1 shadow-sm">
-            <Image src={company.logoSvg} width={82} height={60} alt={company.name} priority />
-          </span>
-        </a>
+        <span className="lg:hidden" aria-hidden="true" />
 
         <nav
           className={`hidden items-center justify-end transition-[gap] duration-500 ease-out lg:flex ${
@@ -90,6 +85,16 @@ export function Navigation() {
         <a
           href="#hero"
           className={`hidden overflow-hidden text-center transition-all duration-500 ease-out lg:block ${
+            solid ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
+          }`}
+          aria-label={`${project.name} Start`}
+        >
+          <ProjectWordmark compact />
+        </a>
+
+        <a
+          href="#hero"
+          className={`min-w-0 overflow-hidden text-center transition-all duration-500 ease-out lg:hidden ${
             solid ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
           }`}
           aria-label={`${project.name} Start`}

@@ -13,7 +13,7 @@ export function Hero() {
   const scale = useTransform(scrollY, [0, 700], [1, 1.08])
 
   return (
-    <section id="hero" className="relative min-h-[90vh] overflow-hidden md:min-h-screen">
+    <section id="hero" className="relative min-h-[88svh] overflow-hidden md:min-h-screen">
       <motion.div className="absolute inset-0" style={{ scale }}>
         <Image
           src="/img/hero.png"
@@ -21,11 +21,11 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[50%_52%] md:object-center"
         />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/35 to-ink/20" />
-      <div className="section-shell relative z-10 flex min-h-[90vh] flex-col items-center justify-center pt-24 text-center text-white md:min-h-screen">
+      <div className="section-shell relative z-10 flex min-h-[88svh] flex-col items-center justify-center pt-24 text-center text-white md:min-h-screen">
         <p className="eyebrow max-w-full break-words text-accent2">{project.address}</p>
         <h1 className="mt-6 max-w-5xl text-balance break-words font-serif text-[3.15rem] font-semibold leading-[0.92] sm:text-6xl md:text-8xl">
           {project.name}
