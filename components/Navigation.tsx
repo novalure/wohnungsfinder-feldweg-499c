@@ -15,6 +15,9 @@ const navItems = [
   ['Kontakt', '#kontakt'],
 ]
 
+const leftNavItems = navItems.slice(0, 3)
+const rightNavItems = navItems.slice(3)
+
 export function Navigation() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
@@ -44,35 +47,57 @@ export function Navigation() {
         solid ? 'bg-bg/95 shadow-header backdrop-blur' : 'bg-transparent'
       }`}
     >
-      <div className="section-shell flex h-20 items-center justify-between">
-        <a href="#hero" className="flex items-center gap-3" aria-label={`${project.name} Start`}>
+      <div className="section-shell grid h-20 grid-cols-[auto_1fr_auto] items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
+        <a href="#hero" className="flex items-center gap-3 lg:hidden" aria-label={`${project.name} Start`}>
           <span className="rounded-md bg-white/95 px-2 py-1 shadow-sm">
             <Image src={company.logoSvg} width={82} height={60} alt={company.name} priority />
           </span>
           <span
-            className={`hidden text-sm font-semibold md:block ${
-              solid ? 'text-ink' : 'text-white'
-            }`}
+            className={`hidden text-sm font-semibold md:block ${solid ? 'text-ink' : 'text-white'}`}
           >
             {project.name}
           </span>
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Hauptnavigation">
-          {navItems.map(([label, href]) => (
+        <nav className="hidden items-center justify-end gap-8 lg:flex" aria-label="Hauptnavigation links">
+          {leftNavItems.map(([label, href]) => (
             <a key={href} href={href} className={`text-sm font-medium transition ${linkClasses}`}>
               {label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <ButtonLink href="#kontakt">Exposé anfragen</ButtonLink>
+        <a
+          href="#hero"
+          className={`hidden min-w-[220px] text-center transition duration-300 lg:block ${
+            solid ? 'translate-y-0 opacity-100' : '-translate-y-1 opacity-0 pointer-events-none'
+          }`}
+          aria-label={`${project.name} Start`}
+        >
+          <span className="block font-serif text-2xl font-semibold leading-none text-ink">
+            {project.name}
+          </span>
+          <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.18em] text-accent2">
+            {project.ortKurz}
+          </span>
+        </a>
+
+        <div className="hidden items-center gap-8 lg:flex">
+          <nav className="flex items-center gap-8" aria-label="Hauptnavigation rechts">
+            {rightNavItems.map(([label, href]) => (
+              <a key={href} href={href} className={`text-sm font-medium transition ${linkClasses}`}>
+                {label}
+              </a>
+            ))}
+          </nav>
+          <ButtonLink href="#kontakt" className="px-4 py-2.5">
+            Exposé anfragen
+          </ButtonLink>
         </div>
 
         <button
           type="button"
-          className={`inline-flex h-11 w-11 items-center justify-center rounded-md lg:hidden ${
+          className={`inline-flex h-11 w-11 items-center justify-center justify-self-end rounded-md lg:hidden ${
             solid ? 'text-ink' : 'text-white'
           }`}
           onClick={() => setOpen(true)}
