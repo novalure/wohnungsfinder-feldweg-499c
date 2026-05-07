@@ -49,7 +49,7 @@ export function Bautraeger() {
               <div>
                 <h3 className="flex items-center gap-2 font-serif text-3xl text-ink">
                   <ShieldCheck className="h-5 w-5 text-accent2" />
-                  Vertrieb durch {company.name}
+                  Exklusiver Vertrieb durch {company.name}
                 </h3>
                 <p className="mt-3 leading-7 text-muted">
                   {company.address}. USt- und firmenbuchrelevante Angaben werden in

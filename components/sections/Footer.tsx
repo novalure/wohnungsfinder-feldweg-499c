@@ -63,6 +63,15 @@ export function Footer() {
           262 und 297/1996. Diese Provision gilt auch bei Weitergabe der
           Informationen an Dritte.
         </p>
+        <div className="mt-5 max-w-4xl">
+          <p className="font-semibold text-white/75">Quellenverzeichnis</p>
+          <p className="mt-2 break-words">
+            Storytelling-Text: Martin Bitschnau / Hannes Obermair, Tiroler
+            Urkundenbuch, II. Abteilung: Die Urkunden zur Geschichte des Inn-,
+            Eisack- und Pustertals. Band 2: 1140–1200, Universitätsverlag
+            Wagner, Innsbruck 2012.
+          </p>
+        </div>
         <p className="mt-4">
           © {new Date().getFullYear()} {company.name}. Website-Konzept und Umsetzung
           für Immobilienmarketing.

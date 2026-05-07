@@ -84,14 +84,14 @@ export function Kontakt({ prefillTop }: Props) {
 
   return (
     <section id="kontakt" className="py-28 md:py-36">
-      <div className="section-shell grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-        <div>
+      <div className="section-shell grid min-w-0 gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="min-w-0">
           <p className="eyebrow">Kontakt</p>
           <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
             Wir freuen uns auf Ihre Anfrage.
           </h2>
-          <div className="mt-10 rounded-md border border-line bg-surface p-6 shadow-soft">
-            <div className="flex gap-5">
+          <div className="mt-10 max-w-full overflow-hidden rounded-md border border-line bg-surface p-4 shadow-soft sm:p-6">
+            <div className="flex min-w-0 flex-col gap-5 sm:flex-row">
               <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md bg-bg">
                 <Image
                   src={contact.portrait}
@@ -101,8 +101,8 @@ export function Kontakt({ prefillTop }: Props) {
                   className="object-cover"
                 />
               </div>
-              <div>
-                <p className="font-serif text-3xl text-ink">{contact.ansprechpartner}</p>
+              <div className="min-w-0">
+                <p className="break-words font-serif text-2xl text-ink sm:text-3xl">{contact.ansprechpartner}</p>
                 <p className="mt-1 text-sm font-semibold text-accent">{contact.rolle}</p>
                 <p className="mt-3 text-sm text-muted">Auch am Wochenende erreichbar</p>
               </div>
@@ -110,7 +110,7 @@ export function Kontakt({ prefillTop }: Props) {
             <div className="mt-6 grid gap-3">
               <a
                 href={`tel:${contact.telefon}`}
-                className="inline-flex items-center gap-3 text-ink hover:text-accent"
+                className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
                 onClick={() => trackPhoneClick('kontakt_telefon')}
               >
                 <Phone size={18} />
@@ -118,7 +118,7 @@ export function Kontakt({ prefillTop }: Props) {
               </a>
               <a
                 href={`tel:${contact.mobil}`}
-                className="inline-flex items-center gap-3 text-ink hover:text-accent"
+                className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
                 onClick={() => trackPhoneClick('kontakt_mobil')}
               >
                 <Smartphone size={18} />
@@ -126,7 +126,7 @@ export function Kontakt({ prefillTop }: Props) {
               </a>
               <a
                 href={`mailto:${contact.email}`}
-                className="inline-flex items-center gap-3 text-ink hover:text-accent"
+                className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
                 onClick={() => trackEmailClick(contact.email)}
               >
                 <Mail size={18} />
@@ -136,7 +136,7 @@ export function Kontakt({ prefillTop }: Props) {
           </div>
         </div>
 
-        <div className="rounded-md border border-line bg-surface p-6 shadow-soft md:p-8">
+        <div className="min-w-0 max-w-full overflow-hidden rounded-md border border-line bg-surface p-4 shadow-soft sm:p-6 md:p-8">
           {sent ? (
             <div className="rounded-md bg-success/10 p-8">
               <p className="eyebrow text-success">Anfrage gesendet</p>
@@ -147,8 +147,8 @@ export function Kontakt({ prefillTop }: Props) {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-5">
-              <div className="grid gap-5 md:grid-cols-2">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid min-w-0 gap-5">
+              <div className="grid min-w-0 gap-5 md:grid-cols-2">
                 <Field label="Anrede" error={errors.anrede?.message}>
                   <select {...register('anrede')} className="form-field">
                     <option value="">Optional</option>
@@ -162,7 +162,7 @@ export function Kontakt({ prefillTop }: Props) {
                 </Field>
               </div>
 
-              <div className="grid gap-5 md:grid-cols-2">
+              <div className="grid min-w-0 gap-5 md:grid-cols-2">
                 <Field label="E-Mail" error={errors.email?.message}>
                   <input {...register('email')} className="form-field" type="email" autoComplete="email" />
                 </Field>
@@ -175,14 +175,14 @@ export function Kontakt({ prefillTop }: Props) {
                 <p className="text-sm font-semibold text-ink">Interesse</p>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   {interests.map((interest) => (
-                    <label key={interest} className="flex items-center gap-3 rounded-md border border-line px-3 py-3 text-sm text-ink">
+                    <label key={interest} className="flex min-w-0 items-center gap-3 rounded-md border border-line px-3 py-3 text-sm text-ink">
                       <input
                         type="checkbox"
                         value={interest}
                         className="h-4 w-4 accent-accent"
                         {...register('interesse')}
                       />
-                      {interest}
+                      <span className="min-w-0 break-words">{interest}</span>
                     </label>
                   ))}
                 </div>
@@ -203,9 +203,9 @@ export function Kontakt({ prefillTop }: Props) {
                 aria-hidden="true"
               />
 
-              <label className="flex gap-3 text-sm leading-6 text-muted">
+              <label className="flex min-w-0 gap-3 text-sm leading-6 text-muted">
                 <input type="checkbox" className="mt-1 h-4 w-4 accent-accent" {...register('datenschutz')} />
-                <span>
+                <span className="min-w-0 break-words">
                   Ich habe die{' '}
                   <Link href="/datenschutz" className="font-semibold text-accent underline-offset-4 hover:underline">
                     Datenschutzbestimmungen
@@ -239,7 +239,7 @@ function Field({
   children: React.ReactNode
 }) {
   return (
-    <label className="grid gap-2">
+    <label className="grid min-w-0 gap-2">
       <span className="text-sm font-semibold text-ink">{label}</span>
       {children}
       {error && <span className="text-sm text-danger">{error}</span>}
