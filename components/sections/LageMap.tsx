@@ -3,7 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect } from 'react'
 
-const center: [number, number] = [47.4308, 11.7329]
+const projectLocation: [number, number] = [47.542, 11.7044]
 
 export function LageMap() {
   useEffect(() => {
@@ -12,22 +12,14 @@ export function LageMap() {
     async function init() {
       const L = await import('leaflet')
       map = L.map('lage-map', {
-        center,
-        zoom: 12,
+        center: projectLocation,
+        zoom: 16,
         scrollWheelZoom: false,
       })
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap',
       }).addTo(map)
-
-      const points = [
-        ['Projekt', center],
-        ['Achenseeufer', [47.4364, 11.7108]],
-        ['Karwendel-Bergbahn', [47.4393, 11.7019]],
-        ['Rofanbahn', [47.4215, 11.7532]],
-        ['Bahnhof Jenbach', [47.3885, 11.7734]],
-      ] as const
 
       const icon = L.divIcon({
         className: '',
@@ -36,9 +28,9 @@ export function LageMap() {
         iconAnchor: [9, 9],
       })
 
-      points.forEach(([label, coords]) => {
-        L.marker(coords as [number, number], { icon }).addTo(map!).bindPopup(label)
-      })
+      L.marker(projectLocation, { icon })
+        .addTo(map)
+        .bindPopup('Vallis Achen Residenzen<br />A-6215 Achenkirch, Feldweg 499c')
     }
 
     init()
