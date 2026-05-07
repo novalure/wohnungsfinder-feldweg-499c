@@ -1,8 +1,8 @@
 {
   "project": {
     "name": "Vallis Achen Residenzen",
-    "tagline": "{{TAGLINE}}",
-    "claim": "{{CLAIM_HERO}}",
+    "tagline": "Premium-Wohnen im Achental",
+    "claim": "Wo das Tal seinen Namen fand.",
     "address": "A-6215 Achenkirch, Feldweg 499c",
     "ortKurz": "{{ORT_KURZ}}",
     "anzahlWohnungen": 6,
