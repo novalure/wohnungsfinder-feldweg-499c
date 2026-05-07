@@ -62,14 +62,14 @@ export function Hero() {
         </div>
         <a
           href={`mailto:${contact.email}`}
-          className="mt-5 text-sm text-white/80 underline-offset-4 hover:text-white hover:underline"
+          className="mt-5 hidden text-sm text-white/80 underline-offset-4 hover:text-white hover:underline md:inline"
           onClick={() => trackEmailClick(contact.email)}
         >
           {contact.email}
         </a>
         <a
           href="#intro"
-          className="absolute bottom-8 inline-flex flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/75"
+          className="absolute bottom-8 hidden flex-col items-center gap-2 text-xs uppercase tracking-[0.2em] text-white/75 md:inline-flex"
         >
           Scroll
           <ChevronDown size={20} />
