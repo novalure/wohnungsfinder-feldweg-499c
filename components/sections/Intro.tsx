@@ -20,9 +20,9 @@ export function Intro() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="max-w-reading">
-            <p className="eyebrow">Ankommen am Achensee</p>
+            <p className="eyebrow">Vallis Achen Residenzen</p>
             <h2 className="mt-4 font-serif text-5xl leading-tight text-ink md:text-6xl">
-              Wo Wasser, Wald und Karwendel den Alltag leiser machen.
+              Eine Adresse mit über 800 Jahren tirolischer Talgeschichte.
             </h2>
             <div className="my-8 flex items-center gap-4 text-accent2">
               <span className="h-px w-16 bg-line" />
@@ -31,20 +31,19 @@ export function Intro() {
             </div>
             <div className="space-y-5 text-lg leading-8 text-muted">
               <p>
-                Am Achensee entsteht ein kleines Wohnensemble für Menschen, die
-                Rückzug und Qualität nicht als Gegensätze verstehen. Die Architektur
-                bleibt ruhig, die Materialien sind bewusst gewählt, die Umgebung
-                spricht für sich.
+                Das Achental gehört zu den ältesten urkundlich dokumentierten
+                Tälern Tirols. Bereits um 1140 hielten lateinische
+                Schenkungsurkunden des Klosters St. Georgenberg-Fiecht das Gebiet
+                rund um den heutigen Achensee fest - jene Urkundentradition, in
+                der das Tal später als „Vallis Achen“ überliefert wurde.
               </p>
               <p>
-                Morgens liegt das Licht über dem Wasser, mittags öffnen sich Wege in
-                Richtung Karwendel und Rofan, abends wird der Blick auf die Berge zum
-                selbstverständlichen Teil des Wohnens.
+                Mit den Vallis Achen Residenzen kehrt dieser historische Name
+                zurück an seinen Ursprungsort: ins Herz von Achenkirch, dorthin,
+                wo die dokumentierte Geschichte der Region ihren Anfang nahm.
               </p>
               <p>
-                Sechs Eigentumswohnungen schaffen einen privaten Rahmen mit klarer
-                Planung, hochwertiger Ausstattung und kurzen Wegen zu See, Natur und
-                regionaler Infrastruktur.
+                Eine Adresse mit über 800 Jahren tirolischer Talgeschichte.
               </p>
             </div>
             <ConversionLinks className="mt-8" />
