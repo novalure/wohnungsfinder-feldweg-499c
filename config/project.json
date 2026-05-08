@@ -44,6 +44,7 @@
   },
   "tracking": {
     "ga4": "{{GA4_ID}}",
+    "hotjar": "{{HOTJAR_ID}}",
     "metaPixel": "{{META_PIXEL_ID}}"
   }
 }

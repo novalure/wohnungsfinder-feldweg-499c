@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { Navigation } from './Navigation'
-import { CookieBanner } from './CookieBanner'
 import { ExitIntent } from './ExitIntent'
 import { StickyCta } from './StickyCta'
 import { Hero } from './sections/Hero'
@@ -68,7 +67,6 @@ export function OnePager() {
       <Footer />
       <StickyCta onClick={handleGeneralAnfrage} />
       <ExitIntent />
-      <CookieBanner />
     </>
   )
 }

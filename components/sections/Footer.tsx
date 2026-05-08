@@ -47,14 +47,14 @@ export function Footer() {
             <Link href="/quellenverzeichnis" className="hover:text-white">
               Quellenverzeichnis
             </Link>
+            <Link href="/cookie-richtlinie" className="hover:text-white">
+              Cookie-Richtlinie
+            </Link>
             <button
               type="button"
               className="w-fit text-left hover:text-white"
               onClick={() => {
-                if (typeof window !== 'undefined') {
-                  localStorage.removeItem('cookie-consent')
-                  window.location.reload()
-                }
+                window.dispatchEvent(new Event('cookie-consent:open'))
               }}
             >
               Cookie-Einstellungen öffnen

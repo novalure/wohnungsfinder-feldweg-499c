@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import 'photoswipe/style.css'
 import '../styles/globals.css'
 import projectConfig from '@/config/project.json'
+import { CookieBanner } from '@/components/CookieBanner'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -57,7 +58,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de-AT" className={`${inter.variable} ${cormorant.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieBanner />
+      </body>
     </html>
   )
 }

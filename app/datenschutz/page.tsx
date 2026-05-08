@@ -17,7 +17,9 @@ export default function DatenschutzPage() {
       <article className="mt-10 max-w-3xl space-y-8 leading-8 text-muted">
         <div>
           <p className="eyebrow">Datenschutz</p>
-          <h1 className="mt-4 font-serif text-6xl leading-tight text-ink">Datenschutzerklärung</h1>
+          <h1 className="mt-4 font-serif text-6xl leading-tight text-ink">
+            Datenschutzerklärung
+          </h1>
           <p className="mt-5">
             Dieses Template enthält Standardklauseln für Österreich und muss vor
             Live-Gang juristisch geprüft und auf die tatsächlich eingesetzten Dienste
@@ -41,10 +43,14 @@ export default function DatenschutzPage() {
         <section>
           <h2 className="font-serif text-3xl text-ink">Cookies und Webanalyse</h2>
           <p>
-            Essenzielle Cookies dienen dem Betrieb der Website. Marketing- und
-            Analyse-Cookies werden erst nach Zustimmung gesetzt. Die Zustimmung kann
-            über die Cookie-Einstellungen widerrufen werden. Rechtsgrundlagen sind
-            DSGVO, DSG 2018 und TKG 2003.
+            Notwendige Cookies dienen dem Betrieb der Website und der Speicherung
+            Ihrer Einwilligung. Google Analytics 4 und Hotjar werden nur nach
+            Zustimmung zur Kategorie Statistik geladen. Meta Pixel wird nur nach
+            Zustimmung zur Kategorie Marketing geladen. Details finden Sie in der{' '}
+            <Link href="/cookie-richtlinie" className="font-semibold text-accent underline-offset-4 hover:underline">
+              Cookie-Richtlinie
+            </Link>
+            .
           </p>
         </section>
         <section>
@@ -58,9 +64,10 @@ export default function DatenschutzPage() {
         <section>
           <h2 className="font-serif text-3xl text-ink">Auftragsverarbeiter</h2>
           <p>
-            Eingesetzte Dienste wie Hosting, E-Mail-Versand, reCAPTCHA, Karten,
-            Analytics und Meta Pixel sind vor Live-Gang konkret zu benennen und mit
-            passenden Rechtsgrundlagen zu dokumentieren.
+            Eingesetzte Dienste können Hosting über Vercel, E-Mail-Versand über
+            Resend.com, Kartenmaterial, Google Analytics 4, Hotjar und Meta Pixel
+            umfassen. Resend.com wird nur serverseitig zur Mail-Auslieferung
+            verwendet und setzt im Browser keine Cookies.
           </p>
         </section>
       </article>
