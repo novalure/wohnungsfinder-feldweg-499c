@@ -2,15 +2,15 @@
 
 import Image from 'next/image'
 import {
-  BatteryCharging,
-  Blinds,
+  BadgeCheck,
+  Building2,
   Download,
-  Home,
-  Layers,
-  Sparkles,
-  ThermometerSun,
-  Waves,
-  Zap,
+  Droplets,
+  Flame,
+  Leaf,
+  PanelsTopLeft,
+  ShieldCheck,
+  Trees,
   type LucideIcon,
 } from 'lucide-react'
 import projectConfig from '@/config/project.json'
@@ -18,15 +18,47 @@ import { Reveal } from '@/components/Reveal'
 import { ButtonLink } from '@/components/ui/Button'
 import { trackPdfDownload } from '@/lib/analytics'
 
-const features: Array<[LucideIcon, string]> = [
-  [Layers, 'Eichenparkett / Naturholzböden'],
-  [ThermometerSun, 'Fußbodenheizung mit Wärmepumpe'],
-  [Home, 'Dreifach-isolierverglaste Holz-Alu-Fenster'],
-  [Blinds, 'Elektrische Beschattung'],
-  [Waves, 'Markensanitär nach Ausstattungslinie'],
-  [Zap, 'Smart-Home-Vorbereitung'],
-  [BatteryCharging, 'E-Ladepunkte in der Tiefgarage'],
-  [Sparkles, 'Lift in alle Etagen'],
+const features: Array<{ icon: LucideIcon; title: string; subtitle: string }> = [
+  {
+    icon: Building2,
+    title: 'Massivbau in Ziegel und Beton',
+    subtitle: 'Solide Substanz für Generationen',
+  },
+  {
+    icon: Flame,
+    title: 'Fernwärme & Fußbodenheizung',
+    subtitle: 'Behagliche Wärme aus regionaler Quelle',
+  },
+  {
+    icon: PanelsTopLeft,
+    title: '3-fach-Verglasung, passivhausgeeignet',
+    subtitle: 'Ug ≤ 0,5 W/m²K, ruhige Räume',
+  },
+  {
+    icon: Leaf,
+    title: 'Energieklasse A+',
+    subtitle: 'fGEE 0,70 lt. Energieausweis',
+  },
+  {
+    icon: BadgeCheck,
+    title: 'Blower-Door-zertifiziert',
+    subtitle: 'Geprüfte Winddichtigkeit nach OIB-RL 6',
+  },
+  {
+    icon: Droplets,
+    title: 'Markensanitär, bodengleiche Dusche',
+    subtitle: 'Ausstattung nach Ausstattungslinie',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Sicherheits-Haustür, 5-fach-Verriegelung',
+    subtitle: 'Inkl. Sicherheitskarte und drei Schlüsseln',
+  },
+  {
+    icon: Trees,
+    title: 'Privatgarten oder Balkon',
+    subtitle: 'Eigener Freiraum für jede Einheit',
+  },
 ]
 
 export function Ausstattung() {
@@ -54,9 +86,9 @@ export function Ausstattung() {
             </h2>
             <div className="mt-6 grid gap-5 text-lg leading-8 text-muted md:grid-cols-2">
               <p>
-                Naturholz, helle Oberflächen und solide Haustechnik bilden die
-                Grundlage für ein Wohngefühl, das sich hochwertig anfühlt, ohne laut
-                zu werden.
+                Massive Bauweise, hochwertige Dämmung und solide Haustechnik bilden
+                die Grundlage für ein Wohngefühl, das sich wertbeständig anfühlt,
+                ohne laut zu werden.
               </p>
               <p>
                 Die Ausführung ist auf Komfort, Energieeffizienz und langfristige
@@ -76,10 +108,11 @@ export function Ausstattung() {
         </div>
 
         <Reveal className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {features.map(([Icon, label]) => (
-            <div key={String(label)} className="border-t border-line pt-5">
+          {features.map(({ icon: Icon, title, subtitle }) => (
+            <div key={title} className="border-t border-line pt-5">
               <Icon className="h-5 w-5 text-accent2" />
-              <p className="mt-3 font-semibold leading-6 text-ink">{label}</p>
+              <p className="mt-3 font-semibold leading-6 text-ink">{title}</p>
+              <p className="mt-1 text-sm leading-6 text-muted">{subtitle}</p>
             </div>
           ))}
         </Reveal>
