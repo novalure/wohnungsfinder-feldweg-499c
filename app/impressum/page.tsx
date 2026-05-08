@@ -17,7 +17,9 @@ export default function ImpressumPage() {
       <article className="mt-10 max-w-3xl space-y-8 leading-8 text-muted">
         <div>
           <p className="eyebrow">Impressum</p>
-          <h1 className="mt-4 font-serif text-6xl leading-tight text-ink">Angaben nach §5 ECG, §14 UGB, §25 MedienG</h1>
+          <h1 className="mt-4 font-serif text-6xl leading-tight text-ink">
+            Angaben nach §5 ECG, §14 UGB, §25 MedienG
+          </h1>
         </div>
         <section>
           <h2 className="font-serif text-3xl text-ink">Medieninhaber und Betreiber</h2>
@@ -28,9 +30,11 @@ export default function ImpressumPage() {
             <br />
             UID: {company.uid}
             <br />
-            Firmenbuch: {company.fb}, {company.fbGericht}
+            Rechtsform: {company.fb}
             <br />
-            Geschäftsführer: {company.geschaeftsfuehrer}
+            Zuständige Behörde: {company.fbGericht}
+            <br />
+            Inhaber: {company.geschaeftsfuehrer}
           </p>
         </section>
         <section>
@@ -39,14 +43,16 @@ export default function ImpressumPage() {
             E-Mail: {contact.email}
             <br />
             Telefon: {contact.telefonDisplay}
+            <br />
+            Mobil: {contact.mobilDisplay}
           </p>
         </section>
         <section>
           <h2 className="font-serif text-3xl text-ink">Unternehmensgegenstand</h2>
           <p>
-            Immobilienvermittlung und damit verbundene Dienstleistungen. Zuständige
-            Aufsichtsbehörde, Kammerzugehörigkeit, Gewerbeordnung und konkrete
-            berufsrechtliche Angaben sind vor Live-Gang zu ergänzen.
+            Immobilientreuhänder, Sachverständigenbüro und damit verbundene
+            Dienstleistungen. Berufsrechtliche Detailangaben sind vor Live-Gang
+            final rechtlich zu prüfen.
           </p>
         </section>
         <section>

@@ -21,12 +21,15 @@ export function Footer() {
         <div>
           <p className="font-semibold">Kontakt</p>
           <div className="mt-4 grid gap-2 text-white/72">
+            <p>{company.address}</p>
             <a href={`tel:${contact.telefon}`} className="hover:text-white">
               {contact.telefonDisplay}
             </a>
-            <a href={`tel:${contact.mobil}`} className="hover:text-white">
-              {contact.mobilDisplay}
-            </a>
+            {contact.mobil && contact.mobilDisplay && (
+              <a href={`tel:${contact.mobil}`} className="hover:text-white">
+                {contact.mobilDisplay}
+              </a>
+            )}
             <a href={`mailto:${contact.email}`} className="hover:text-white">
               {contact.email}
             </a>
