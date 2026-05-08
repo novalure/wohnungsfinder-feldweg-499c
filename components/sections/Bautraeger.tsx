@@ -1,66 +1,124 @@
+'use client'
+
 import Image from 'next/image'
-import { ExternalLink, ShieldCheck } from 'lucide-react'
+import { ExternalLink } from 'lucide-react'
+import { useState } from 'react'
 import projectConfig from '@/config/project.json'
 import { Reveal } from '@/components/Reveal'
 import { ButtonLink } from '@/components/ui/Button'
 import { ConversionLinks } from '@/components/ConversionLinks'
 
-const references = [
-  ['/img/referenz-01.jpg', 'Referenzprojekt mit ruhiger Wohnarchitektur'],
-  ['/img/referenz-02.jpg', 'Referenzprojekt in alpinem Kontext'],
-  ['/img/referenz-03.jpg', 'Detail eines realisierten Wohnprojekts'],
+const trustBadges = [
+  {
+    src: '/logos/grasl.svg',
+    alt: 'GRASL Immobilien',
+  },
+  {
+    src: '/logos/immobilientreuhaender.svg',
+    alt: 'Beh. konz. Immobilientreuhänder',
+  },
+  {
+    src: '/logos/sachverstaendiger.svg',
+    alt: 'Allg. beeideter & gerichtlich zertifizierter Sachverständiger',
+  },
+  {
+    src: '/logos/oevi.svg',
+    alt: 'ÖVI – Österreichischer Verband der Immobilienwirtschaft',
+  },
 ]
 
 export function Bautraeger() {
-  const { bautraeger, company } = projectConfig
+  const { bautraeger, company, contact } = projectConfig
 
   return (
     <section id="bautraeger" className="border-y border-line bg-surface py-28 md:py-36">
       <div className="section-shell">
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <Reveal>
-            <p className="eyebrow">Bauträger</p>
+            <p className="eyebrow">Exklusiver Vertriebspartner</p>
             <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
-              Verlässlichkeit, klare Zuständigkeiten, persönliche Begleitung.
+              GRASL Immobilien — Ihr Begleiter aus Schwaz.
             </h2>
-            <div className="mt-8 rounded-md border border-line bg-bg p-6">
-              <Image src={bautraeger.logo} width={180} height={64} alt={bautraeger.name} />
-              <p className="mt-5 leading-7 text-muted">
-                {bautraeger.name} steht als Bauträger für die Umsetzung des
-                Projekts. Unterlagen, Ausstattungsdetails und Verfügbarkeiten werden
-                im Vertrieb transparent aufbereitet.
+            <div className="mt-8 space-y-5 text-lg leading-8 text-muted">
+              <p>
+                Den Vertrieb der Wohnanlage am Feldweg übernimmt GRASL Immobilien
+                aus Schwaz. Als behördlich konzessionierter Immobilientreuhänder
+                und allgemein beeideter Sachverständiger für Immobilienbewertung
+                begleiten wir Sie persönlich – von der ersten Besichtigung bis zur
+                Schlüsselübergabe.
               </p>
-              <ButtonLink href={bautraeger.url} variant="secondary" className="mt-5">
-                <ExternalLink size={17} />
-                Bauträger ansehen
-              </ButtonLink>
+              <p>
+                Neben der Vermittlung bieten wir alle Leistungen rund um Ihren
+                Immobilienkauf aus einer Hand: Liegenschaftsbewertung,
+                Finanzierungsberatung, Vertragsservice und Energieausweis. Ein
+                Ansprechpartner, klare Zuständigkeiten.
+              </p>
             </div>
+            <ButtonLink
+              href="https://www.grasl-immobilien.at/de"
+              className="mt-8"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ExternalLink size={17} />
+              GRASL Immobilien kennenlernen
+            </ButtonLink>
           </Reveal>
+
           <Reveal delay={0.1}>
-            <div className="grid gap-4 md:grid-cols-3">
-              {references.map(([src, alt]) => (
-                <div key={src} className="relative aspect-[4/5] overflow-hidden rounded-md">
-                  <Image src={src} alt={alt} fill sizes="(min-width: 768px) 24vw, 100vw" className="object-cover" />
-                </div>
-              ))}
-            </div>
-            <div className="mt-8 flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-start">
-              <Image src={company.logoSvg} width={104} height={76} alt={company.name} />
-              <div>
-                <h3 className="flex items-center gap-2 font-serif text-3xl text-ink">
-                  <ShieldCheck className="h-5 w-5 text-accent2" />
-                  Exklusiver Vertrieb durch {company.name}
-                </h3>
-                <p className="mt-3 leading-7 text-muted">
-                  {company.address}. USt- und firmenbuchrelevante Angaben werden in
-                  den zentralen Projektdaten gepflegt und im Impressum ausgespielt.
-                </p>
+            <div className="rounded-md border border-line bg-bg p-4 sm:p-6">
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {trustBadges.map((badge) => (
+                  <TrustBadge key={badge.src} src={badge.src} alt={badge.alt} />
+                ))}
               </div>
             </div>
+            <p className="mt-5 text-sm leading-6 text-muted">
+              {company.name} · {company.address} · Tel. {contact.telefonDisplay}
+            </p>
             <ConversionLinks className="mt-8" />
           </Reveal>
         </div>
+
+        <Reveal className="mt-14 rounded-md border border-line bg-bg p-5 sm:p-6">
+          <div className="grid gap-5 md:grid-cols-[auto_1fr_auto] md:items-center">
+            <Image src={bautraeger.logo} width={150} height={54} alt={bautraeger.name} />
+            <div>
+              <p className="eyebrow">Bauträger</p>
+              <p className="mt-2 leading-7 text-muted">
+                {bautraeger.name} bleibt als Bauträger für die Umsetzung des
+                Projekts verantwortlich. Unterlagen, Ausstattungsdetails und
+                Verfügbarkeiten werden im Vertrieb transparent aufbereitet.
+              </p>
+            </div>
+            <ButtonLink href={bautraeger.url} variant="secondary" className="md:justify-self-end">
+              <ExternalLink size={17} />
+              Bauträger ansehen
+            </ButtonLink>
+          </div>
+        </Reveal>
       </div>
     </section>
+  )
+}
+
+function TrustBadge({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false)
+
+  return (
+    <div className="flex min-h-20 items-center justify-center rounded-sm border border-line bg-surface px-3 py-4">
+      {failed ? (
+        <span className="text-center text-xs font-semibold leading-5 text-muted">{alt}</span>
+      ) : (
+        <Image
+          src={src}
+          alt={alt}
+          width={140}
+          height={80}
+          className="max-h-12 w-auto max-w-[140px] object-contain"
+          onError={() => setFailed(true)}
+        />
+      )}
+    </div>
   )
 }
