@@ -27,7 +27,13 @@ export function Kontakt({ prefillTop }: Props) {
   const [sent, setSent] = useState(false)
   const hasMobile = Boolean(contact.mobil && contact.mobilDisplay)
   const interests = useMemo(
-    () => [...WOHNUNGEN.map((wohnung) => wohnung.top), 'noch unentschlossen'],
+    () => [
+      ...WOHNUNGEN.map((wohnung) => ({
+        label: wohnung.top,
+        status: wohnung.status,
+      })),
+      { label: 'noch unentschlossen', status: 'verfuegbar' as const },
+    ],
     [],
   )
 
@@ -176,17 +182,34 @@ export function Kontakt({ prefillTop }: Props) {
               <div>
                 <p className="text-sm font-semibold text-ink">Interesse</p>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
-                  {interests.map((interest) => (
-                    <label key={interest} className="flex min-w-0 items-center gap-3 rounded-md border border-line px-3 py-3 text-sm text-ink">
-                      <input
-                        type="checkbox"
-                        value={interest}
-                        className="h-4 w-4 accent-accent"
-                        {...register('interesse')}
-                      />
-                      <span className="min-w-0 break-words">{interest}</span>
-                    </label>
-                  ))}
+                  {interests.map((interest) => {
+                    const isSold = interest.status === 'verkauft'
+
+                    return (
+                      <label
+                        key={interest.label}
+                        className={`flex min-w-0 items-center gap-3 rounded-md border px-3 py-3 text-sm ${
+                          isSold
+                            ? 'cursor-not-allowed border-danger/35 bg-danger/10 text-muted'
+                            : 'border-line text-ink'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          value={interest.label}
+                          disabled={isSold}
+                          className="h-4 w-4 accent-accent disabled:cursor-not-allowed disabled:opacity-45"
+                          {...register('interesse')}
+                        />
+                        <span className="min-w-0 break-words">{interest.label}</span>
+                        {isSold && (
+                          <span className="ml-auto rounded-full bg-danger px-2 py-0.5 text-xs font-semibold text-white">
+                            verkauft
+                          </span>
+                        )}
+                      </label>
+                    )
+                  })}
                 </div>
                 {errors.interesse?.message && (
                   <p className="mt-2 text-sm text-danger">{errors.interesse.message}</p>
