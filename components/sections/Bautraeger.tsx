@@ -82,8 +82,7 @@ export function Bautraeger() {
             </div>
             <p className="mt-5 text-sm leading-6 text-muted">
               {company.name} · Münchner Straße 11 / 2. Stock,{' '}
-              <span className="block whitespace-nowrap sm:inline">A-6130 Schwaz</span>
-              {' '}· Tel. {contact.telefonDisplay}
+              <span className="whitespace-nowrap">A-6130 Schwaz · Tel. {contact.telefonDisplay}</span>
             </p>
             <ConversionLinks className="mt-8" />
           </Reveal>
@@ -98,9 +97,9 @@ function TrustBadge({ src, alt }: { src: string; alt: string }) {
   const [failed, setFailed] = useState(false)
 
   return (
-    <div className="flex h-20 min-w-0 items-center justify-center rounded-sm border border-line bg-surface px-3 py-3">
+    <div className="flex h-20 min-w-0 items-center justify-center rounded-sm border border-line bg-surface px-2 py-3 sm:px-3">
       {failed ? (
-        <span className="text-center text-xs font-semibold leading-5 text-muted">{alt}</span>
+        <span className="text-center text-sm font-semibold leading-none text-muted">Logo</span>
       ) : (
         <Image
           src={src}
