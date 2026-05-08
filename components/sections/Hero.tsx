@@ -17,7 +17,7 @@ export function Hero() {
       <motion.div className="absolute inset-0" style={{ scale }}>
         <Image
           src="/img/hero.png"
-          alt="Premium-Wohnbauprojekt am Achensee mit Berg- und Wasserbezug"
+          alt="Wohnbauprojekt am Achensee mit Berg- und Wasserbezug"
           fill
           priority
           sizes="100vw"

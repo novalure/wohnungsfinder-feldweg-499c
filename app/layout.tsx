@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.example.at'),
   title: `${project.name} — Eigentumswohnungen am Achensee | ${project.ortKurz}`,
   description:
-    'Premium-Eigentumswohnungen am Achensee in Tirol mit Bergblick, ruhiger Architektur und persönlicher Beratung durch GRASL Immobilien.',
+    'Eigentumswohnungen am Achensee in Tirol mit Bergblick, ruhiger Architektur und persönlicher Beratung durch GRASL Immobilien.',
   alternates: {
     canonical: '/',
     languages: {
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `${project.name} — Eigentumswohnungen am Achensee`,
-    description: 'Premium-Wohnbauprojekt mit 6 Eigentumswohnungen in Tirol.',
+    description: 'Wohnbauprojekt mit 6 Eigentumswohnungen in Tirol.',
     images: ['/img/og-image.jpg'],
   },
 }
