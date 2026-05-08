@@ -76,7 +76,9 @@ export function Bautraeger() {
               </div>
             </div>
             <p className="mt-5 text-sm leading-6 text-muted">
-              {company.name} · {company.address} · Tel. {contact.telefonDisplay}
+              {company.name} · Münchner Straße 11 / 2. Stock,{' '}
+              <span className="block whitespace-nowrap sm:inline">A-6130 Schwaz</span>
+              {' '}· Tel. {contact.telefonDisplay}
             </p>
             <ConversionLinks className="mt-8" />
           </Reveal>
