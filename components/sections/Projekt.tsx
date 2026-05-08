@@ -57,6 +57,12 @@ export function Projekt() {
                 Käufer:innen erhalten eine überschaubare Projektgröße mit persönlicher
                 Betreuung, transparenten Unterlagen und klaren Entscheidungswegen.
               </p>
+              <p className="text-base leading-7 text-muted/85">
+                Innenvisualisierungen zeigen beispielhafte Einrichtungsvorschläge
+                und Stimmungen; Ausführung, Ausstattung und Möblierung richten sich
+                nach den finalen Vertragsunterlagen und können ohne Gewähr
+                abweichen.
+              </p>
             </div>
             <ButtonLink
               href={downloads.expose}
