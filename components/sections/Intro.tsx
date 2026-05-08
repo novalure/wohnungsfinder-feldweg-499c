@@ -7,7 +7,7 @@ export function Intro() {
   return (
     <section id="intro" className="py-28 md:py-40">
       <div className="section-shell grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-center">
-        <Reveal>
+        <Reveal className="order-2 lg:order-1">
           <figure className="rounded-md">
             <Image
               src="/img/achensee-segelregatta.jpg"
@@ -19,7 +19,7 @@ export function Intro() {
             />
           </figure>
         </Reveal>
-        <Reveal delay={0.1}>
+        <Reveal className="order-1 lg:order-2" delay={0.1}>
           <div className="max-w-reading">
             <p className="eyebrow">Vallis Achen Residenzen</p>
             <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
