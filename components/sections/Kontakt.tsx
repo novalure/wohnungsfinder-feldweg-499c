@@ -25,6 +25,7 @@ async function getRecaptchaToken() {
 export function Kontakt({ prefillTop }: Props) {
   const { contact } = projectConfig
   const [sent, setSent] = useState(false)
+  const hasMobile = Boolean(contact.mobil && contact.mobilDisplay)
   const interests = useMemo(
     () => [...WOHNUNGEN.map((wohnung) => wohnung.top), 'noch unentschlossen'],
     [],
@@ -104,7 +105,6 @@ export function Kontakt({ prefillTop }: Props) {
               <div className="min-w-0">
                 <p className="break-words font-serif text-2xl text-ink sm:text-3xl">{contact.ansprechpartner}</p>
                 <p className="mt-1 text-sm font-semibold text-accent">{contact.rolle}</p>
-                <p className="mt-3 text-sm text-muted">Auch am Wochenende erreichbar</p>
               </div>
             </div>
             <div className="mt-6 grid gap-3">
@@ -116,14 +116,16 @@ export function Kontakt({ prefillTop }: Props) {
                 <Phone size={18} />
                 {contact.telefonDisplay}
               </a>
-              <a
-                href={`tel:${contact.mobil}`}
-                className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
-                onClick={() => trackPhoneClick('kontakt_mobil')}
-              >
-                <Smartphone size={18} />
-                {contact.mobilDisplay}
-              </a>
+              {hasMobile && (
+                <a
+                  href={`tel:${contact.mobil}`}
+                  className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
+                  onClick={() => trackPhoneClick('kontakt_mobil')}
+                >
+                  <Smartphone size={18} />
+                  {contact.mobilDisplay}
+                </a>
+              )}
               <a
                 href={`mailto:${contact.email}`}
                 className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
@@ -157,17 +159,17 @@ export function Kontakt({ prefillTop }: Props) {
                     <option value="Divers">Divers</option>
                   </select>
                 </Field>
-                <Field label="Vor- und Nachname" error={errors.name?.message}>
-                  <input {...register('name')} className="form-field" autoComplete="name" />
+                <Field label="Vor- und Nachname" error={errors.name?.message} required>
+                  <input {...register('name')} className="form-field" autoComplete="name" required />
                 </Field>
               </div>
 
               <div className="grid min-w-0 gap-5 md:grid-cols-2">
-                <Field label="E-Mail" error={errors.email?.message}>
-                  <input {...register('email')} className="form-field" type="email" autoComplete="email" />
+                <Field label="E-Mail" error={errors.email?.message} required>
+                  <input {...register('email')} className="form-field" type="email" autoComplete="email" required />
                 </Field>
-                <Field label="Telefon" error={errors.telefon?.message}>
-                  <input {...register('telefon')} className="form-field" type="tel" autoComplete="tel" />
+                <Field label="Telefon" error={errors.telefon?.message} required>
+                  <input {...register('telefon')} className="form-field" type="tel" autoComplete="tel" required />
                 </Field>
               </div>
 
@@ -204,7 +206,7 @@ export function Kontakt({ prefillTop }: Props) {
               />
 
               <label className="flex min-w-0 gap-3 text-sm leading-6 text-muted">
-                <input type="checkbox" className="mt-1 h-4 w-4 accent-accent" {...register('datenschutz')} />
+                <input type="checkbox" className="mt-1 h-4 w-4 accent-accent" {...register('datenschutz')} required />
                 <span className="min-w-0 break-words">
                   Ich habe die{' '}
                   <Link href="/datenschutz" className="font-semibold text-accent underline-offset-4 hover:underline">
@@ -232,15 +234,20 @@ export function Kontakt({ prefillTop }: Props) {
 function Field({
   label,
   error,
+  required,
   children,
 }: {
   label: string
   error?: string
+  required?: boolean
   children: React.ReactNode
 }) {
   return (
     <label className="grid min-w-0 gap-2">
-      <span className="text-sm font-semibold text-ink">{label}</span>
+      <span className="text-sm font-semibold text-ink">
+        {label}
+        {required && <span className="text-accent2"> *</span>}
+      </span>
       {children}
       {error && <span className="text-sm text-danger">{error}</span>}
     </label>

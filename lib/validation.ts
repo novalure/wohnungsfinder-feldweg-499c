@@ -4,7 +4,7 @@ export const leadSchema = z.object({
   anrede: z.string().optional(),
   name: z.string().min(2, 'Bitte geben Sie Ihren Namen ein.'),
   email: z.string().email('Bitte geben Sie eine gültige E-Mail-Adresse ein.'),
-  telefon: z.string().optional(),
+  telefon: z.string().min(5, 'Bitte geben Sie Ihre Telefonnummer ein.'),
   interesse: z.array(z.string()).min(1, 'Bitte wählen Sie mindestens ein Interesse.'),
   nachricht: z.string().optional(),
   datenschutz: z

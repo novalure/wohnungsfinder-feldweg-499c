@@ -23,13 +23,13 @@
     "logoSvg": "/img/logo_schwarz_grasl.png"
   },
   "contact": {
-    "ansprechpartner": "{{ANSPRECHPARTNER_NAME}}",
-    "rolle": "{{ANSPRECHPARTNER_ROLLE}}",
-    "telefon": "{{TELEFON_E164}}",
-    "telefonDisplay": "{{TELEFON_ANZEIGE}}",
-    "mobil": "{{MOBIL_E164}}",
-    "mobilDisplay": "{{MOBIL_ANZEIGE}}",
-    "email": "{{EMAIL_KONTAKT}}",
+    "ansprechpartner": "SV Thomas Grasl",
+    "rolle": "GRASL Immobilien",
+    "telefon": "+43524266666",
+    "telefonDisplay": "+43 (0)5242 66666",
+    "mobil": "",
+    "mobilDisplay": "",
+    "email": "office@grasl-immobilien.at",
     "portrait": "/img/ansprechpartner.jpg"
   },
   "bautraeger": {
