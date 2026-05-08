@@ -27,8 +27,6 @@ const trustBadges = [
   },
 ]
 
-const carouselBadges = [...trustBadges, ...trustBadges]
-
 export function Bautraeger() {
   const { company, contact } = projectConfig
 
@@ -69,10 +67,17 @@ export function Bautraeger() {
 
           <Reveal delay={0.1}>
             <div className="overflow-hidden rounded-md border border-line bg-bg p-4 sm:p-6">
-              <div className="logo-carousel -mx-1">
-                {carouselBadges.map((badge, index) => (
-                  <TrustBadge key={`${badge.src}-${index}`} src={badge.src} alt={badge.alt} />
-                ))}
+              <div className="logo-carousel">
+                <div className="logo-carousel-set">
+                  {trustBadges.map((badge) => (
+                    <TrustBadge key={badge.src} src={badge.src} alt={badge.alt} />
+                  ))}
+                </div>
+                <div className="logo-carousel-set" aria-hidden="true">
+                  {trustBadges.map((badge) => (
+                    <TrustBadge key={`${badge.src}-clone`} src={badge.src} alt={badge.alt} />
+                  ))}
+                </div>
               </div>
             </div>
             <p className="mt-5 text-sm leading-6 text-muted">
@@ -93,7 +98,7 @@ function TrustBadge({ src, alt }: { src: string; alt: string }) {
   const [failed, setFailed] = useState(false)
 
   return (
-    <div className="flex min-h-20 w-[220px] shrink-0 items-center justify-center rounded-sm border border-line bg-surface px-3 py-4 sm:w-[240px]">
+    <div className="flex h-20 min-w-0 items-center justify-center rounded-sm border border-line bg-surface px-3 py-3">
       {failed ? (
         <span className="text-center text-xs font-semibold leading-5 text-muted">{alt}</span>
       ) : (
