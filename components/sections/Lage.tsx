@@ -7,19 +7,19 @@ import { LageMap } from './LageMap'
 const clusters = [
   {
     title: 'Natur & Aktiv',
-    image: '/img/lage-natur.jpg',
+    image: '/img/lage-rofan-wandern.jpg',
     icon: Mountain,
     text: 'Wandern, Segeln, Skifahren und Mountainbike-Routen liegen hier nicht als Wochenendprogramm fern, sondern gehören zum direkten Umfeld.',
   },
   {
     title: 'Genuss & Kultur',
-    image: '/img/lage-genuss.jpg',
+    image: '/img/lage-huetteneinkehr.jpg',
     icon: Utensils,
     text: 'Hütten, Gasthäuser, regionale Produzenten und Veranstaltungen rund um den Achensee geben dem Ort seine gewachsene Qualität.',
   },
   {
     title: 'Erreichbarkeit',
-    image: '/img/lage-erreichbarkeit.jpg',
+    image: '/img/lage-achenseebahn-seespitz.jpg',
     icon: Car,
     text: 'Innsbruck, München und Salzburg bleiben gut erreichbar. Jenbach bindet die Region zusätzlich an Bahnverbindungen an.',
   },
@@ -46,18 +46,18 @@ export function Lage() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {clusters.map((cluster, index) => (
-            <Reveal key={cluster.title} delay={index * 0.08}>
-              <article className="overflow-hidden rounded-md border border-line bg-surface">
-                <div className="relative aspect-[4/3]">
+            <Reveal key={cluster.title} className="h-full" delay={index * 0.08}>
+              <article className="flex h-full flex-col overflow-hidden rounded-md border border-line bg-surface">
+                <div className="relative aspect-[3/2] bg-bg">
                   <Image
                     src={cluster.image}
                     alt={cluster.title}
                     fill
                     sizes="(min-width: 768px) 33vw, 100vw"
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
-                <div className="p-6">
+                <div className="flex flex-1 flex-col p-6 md:min-h-[290px]">
                   <cluster.icon className="h-5 w-5 text-accent2" />
                   <h3 className="mt-4 font-serif text-3xl text-ink">{cluster.title}</h3>
                   <p className="mt-3 leading-7 text-muted">{cluster.text}</p>

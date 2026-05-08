@@ -45,14 +45,42 @@ export default function QuellenverzeichnisPage() {
 
         <section>
           <h2 className="font-serif text-3xl text-ink">Bildquellen</h2>
-          <dl className="mt-4 rounded-md border border-line bg-surface p-5">
-            <dt className="font-semibold text-ink">Intro-/Achensee-Bild</dt>
-            <dd className="mt-2">
-              Segelregatta am Achensee. Quelle: Medien- und Presseportal
-              Achensee Tourismus, Ordner „Segeln“. Fotocredit: © Achensee
-              Tourismus. Datei: Segelregatta am Achensee Sailing regatta at Lake
-              Achensee.jpg.
-            </dd>
+          <dl className="mt-4 space-y-5 rounded-md border border-line bg-surface p-5">
+            <div>
+              <dt className="font-semibold text-ink">Intro-/Achensee-Bild</dt>
+              <dd className="mt-2">
+                Segelregatta am Achensee. Quelle: Medien- und Presseportal
+                Achensee Tourismus, Ordner „Segeln“. Fotocredit: © Achensee
+                Tourismus. Datei: Segelregatta am Achensee Sailing regatta at Lake
+                Achensee.jpg.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-ink">Lage-Bild „Natur & Aktiv“</dt>
+              <dd className="mt-2">
+                Wandern im Rofangebirge. Quelle: Medien- und Presseportal
+                Achensee Tourismus. Fotocredit: © Achensee Tourismus. Datei:
+                Wandern im Rofangebirge Hiking in the Rofan mountains.jpg.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-ink">Lage-Bild „Genuss & Kultur“</dt>
+              <dd className="mt-2">
+                Hütteneinkehr in Steinberg am Rofan. Quelle: Medien- und
+                Presseportal Achensee Tourismus. Fotocredit: © Achensee Tourismus.
+                Datei: Hütteneinkehr in Steinberg am Rofan Stopover at a mountain
+                hut in Steinberg am Rofan.jpg.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-ink">Lage-Bild „Erreichbarkeit“</dt>
+              <dd className="mt-2">
+                Achenseebahn bei Haltestelle Seespitz. Quelle: Medien- und
+                Presseportal Achensee Tourismus. Fotocredit: © Achensee Tourismus.
+                Datei: Achenseebahn bei Haltestelle Seespitz Achenseebahn at the
+                Seespitz station.jpg.
+              </dd>
+            </div>
           </dl>
         </section>
 
