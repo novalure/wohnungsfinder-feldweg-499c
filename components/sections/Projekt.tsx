@@ -15,7 +15,7 @@ const facts: Array<{ icon: LucideIcon; title: string; subline: string }> = [
   },
   {
     icon: Ruler,
-    title: '57–65 m²',
+    title: 'ca. 56–57 m²',
     subline: 'Wohnfläche',
   },
   {
