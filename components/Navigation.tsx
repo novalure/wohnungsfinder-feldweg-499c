@@ -10,7 +10,7 @@ const navItems = [
   ['Lage', '#lage'],
   ['Wohnungen', '#wohnungen'],
   ['Ausstattung', '#ausstattung'],
-  ['Bauträger', '#bautraeger'],
+  ['Vertrieb', '#bautraeger'],
   ['Kontakt', '#kontakt'],
 ]
 

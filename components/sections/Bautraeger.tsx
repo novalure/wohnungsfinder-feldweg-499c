@@ -28,7 +28,7 @@ const trustBadges = [
 ]
 
 export function Bautraeger() {
-  const { bautraeger, company, contact } = projectConfig
+  const { company, contact } = projectConfig
 
   return (
     <section id="bautraeger" className="border-y border-line bg-surface py-28 md:py-36">
@@ -80,23 +80,6 @@ export function Bautraeger() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-14 rounded-md border border-line bg-bg p-5 sm:p-6">
-          <div className="grid gap-5 md:grid-cols-[auto_1fr_auto] md:items-center">
-            <Image src={bautraeger.logo} width={150} height={54} alt={bautraeger.name} />
-            <div>
-              <p className="eyebrow">Bauträger</p>
-              <p className="mt-2 leading-7 text-muted">
-                {bautraeger.name} bleibt als Bauträger für die Umsetzung des
-                Projekts verantwortlich. Unterlagen, Ausstattungsdetails und
-                Verfügbarkeiten werden im Vertrieb transparent aufbereitet.
-              </p>
-            </div>
-            <ButtonLink href={bautraeger.url} variant="secondary" className="md:justify-self-end">
-              <ExternalLink size={17} />
-              Bauträger ansehen
-            </ButtonLink>
-          </div>
-        </Reveal>
       </div>
     </section>
   )

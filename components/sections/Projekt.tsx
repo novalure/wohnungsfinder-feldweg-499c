@@ -1,32 +1,37 @@
 'use client'
 
-import {
-  Building2,
-  Download,
-  Home,
-  Leaf,
-  Mountain,
-  ParkingCircle,
-  Ruler,
-  type LucideIcon,
-} from 'lucide-react'
-import projectConfig from '@/config/project.json'
+import { BedDouble, Download, Home, Leaf, Ruler, type LucideIcon } from 'lucide-react'
 import { Reveal } from '@/components/Reveal'
 import { ButtonLink } from '@/components/ui/Button'
 import { trackPdfDownload } from '@/lib/analytics'
 import { ProjectGallery } from './ProjectGallery'
+import projectConfig from '@/config/project.json'
+
+const facts: Array<{ icon: LucideIcon; title: string; subline: string }> = [
+  {
+    icon: Home,
+    title: '6',
+    subline: 'Eigentumswohnungen',
+  },
+  {
+    icon: Ruler,
+    title: '57–65 m²',
+    subline: 'Wohnfläche',
+  },
+  {
+    icon: BedDouble,
+    title: '2 Zimmer',
+    subline: 'Schlafzimmer + Wohnküche',
+  },
+  {
+    icon: Leaf,
+    title: 'Energieklasse A/B',
+    subline: 'HWB 44 · fGEE 0,70',
+  },
+]
 
 export function Projekt() {
-  const { project, downloads } = projectConfig
-  const facts: Array<[LucideIcon, string]> = [
-    [Home, `${project.anzahlWohnungen} Eigentumswohnungen`],
-    [Ruler, project.wohnflaecheRange],
-    [Building2, project.zimmerRange],
-    [Leaf, `HWB ${project.hwb}`],
-    [ParkingCircle, 'Tiefgarage / Stellplätze'],
-    [Mountain, 'Bergblick und Nähe zum See'],
-    [Building2, `Fertigstellung ${project.fertigstellung}`],
-  ]
+  const { downloads } = projectConfig
 
   return (
     <section id="projekt" className="border-y border-line bg-surface py-28 md:py-36">
@@ -78,12 +83,22 @@ export function Projekt() {
           </Reveal>
         </div>
 
-        <Reveal className="mt-14 border-y border-line py-6">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
-            {facts.map(([Icon, label]) => (
-              <div key={String(label)} className="flex items-center gap-3 border-line xl:border-r xl:last:border-r-0">
+        <Reveal className="mt-14 border-y border-line py-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
+            {facts.map(({ icon: Icon, title, subline }, index) => (
+              <div
+                key={title}
+                className={`flex min-h-28 items-center gap-4 px-5 py-5 sm:px-8 lg:px-10 ${
+                  index % 2 === 1 ? '' : 'border-r border-line'
+                } ${index > 1 ? 'border-t border-line lg:border-t-0' : ''} ${
+                  index < 3 ? 'lg:border-r lg:border-line' : 'lg:border-r-0'
+                }`}
+              >
                 <Icon className="h-5 w-5 shrink-0 text-accent2" />
-                <span className="text-sm font-semibold text-ink">{label}</span>
+                <div>
+                  <p className="text-lg font-bold leading-6 text-ink sm:text-xl">{title}</p>
+                  <p className="mt-1 text-sm leading-5 text-muted">{subline}</p>
+                </div>
               </div>
             ))}
           </div>

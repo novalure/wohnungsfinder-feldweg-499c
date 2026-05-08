@@ -5,7 +5,7 @@ import Link from 'next/link'
 import projectConfig from '@/config/project.json'
 
 export function Footer() {
-  const { project, company, contact, bautraeger } = projectConfig
+  const { project, company, contact } = projectConfig
 
   return (
     <footer className="bg-ink py-14 text-white">
@@ -14,7 +14,7 @@ export function Footer() {
           <p className="break-words font-serif text-3xl sm:text-4xl">{project.name}</p>
           <p className="mt-3 leading-7 text-white/70">{project.address}</p>
           <div className="mt-6 flex items-center gap-4">
-            <Image src={bautraeger.logo} width={130} height={48} alt={bautraeger.name} />
+            <ProjectWordmark />
             <Image src="/img/logo_weiss_grasl.png" width={92} height={67} alt={company.name} />
           </div>
         </div>
@@ -84,5 +84,15 @@ export function Footer() {
         </p>
       </div>
     </footer>
+  )
+}
+
+function ProjectWordmark() {
+  return (
+    <span className="block font-serif text-[1.5rem] font-semibold uppercase leading-[0.82] text-white">
+      <span className="block">Vallis</span>
+      <span className="block">Achen</span>
+      <span className="block">Residenzen</span>
+    </span>
   )
 }

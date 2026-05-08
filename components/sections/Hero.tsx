@@ -30,6 +30,9 @@ export function Hero() {
         <h1 className="mt-6 max-w-5xl text-balance break-words font-serif text-[3.15rem] font-semibold leading-[0.92] sm:text-6xl md:text-8xl">
           {project.name}
         </h1>
+        <p className="mt-5 max-w-2xl text-sm font-normal uppercase tracking-[0.16em] text-white/76 sm:text-base">
+          Bergblick und Nähe zum See
+        </p>
         <p className="mt-6 max-w-2xl text-base leading-7 text-white/88 md:text-xl md:leading-8">
           {project.tagline}
         </p>
