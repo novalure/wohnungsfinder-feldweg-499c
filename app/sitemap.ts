@@ -20,5 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/impressum`,
       lastModified: new Date(),
     },
+    {
+      url: `${baseUrl}/quellenverzeichnis`,
+      lastModified: new Date(),
+    },
   ]
 }
