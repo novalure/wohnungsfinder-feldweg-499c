@@ -54,7 +54,7 @@ export function Lage() {
                     alt={cluster.title}
                     fill
                     sizes="(min-width: 768px) 33vw, 100vw"
-                    className="object-contain"
+                    className={index === 2 ? 'object-cover object-[50%_52%]' : 'object-contain'}
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6 md:min-h-[290px]">
