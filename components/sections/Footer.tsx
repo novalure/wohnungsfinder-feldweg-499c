@@ -70,8 +70,17 @@ export function Footer() {
           Informationen an Dritte.
         </p>
         <p className="mt-4">
-          © {new Date().getFullYear()} {company.name}. Website-Konzept und Umsetzung
-          für Immobilienmarketing.
+          © {new Date().getFullYear()} {company.name}. Website-Umsetzung:{' '}
+          <a
+            href="https://www.novalure.eu"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-4 hover:text-white"
+          >
+            Novalure CLG
+          </a>
+          , 20 Harcourt Street, Dublin 2, D02 H364, Ireland, Registration number:
+          796735, hello@novalure.eu.
         </p>
       </div>
     </footer>
