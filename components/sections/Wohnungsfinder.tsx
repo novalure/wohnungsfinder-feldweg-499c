@@ -27,7 +27,7 @@ const statusLabels: Record<WohnungsStatus, string> = {
 const statusClasses: Record<WohnungsStatus, string> = {
   verfuegbar: 'bg-success/10 text-success',
   reserviert: 'bg-warn/15 text-[#8A6A18]',
-  verkauft: 'bg-muted/10 text-muted',
+  verkauft: 'bg-danger text-white',
 }
 
 export default function Wohnungsfinder({ onAnfrage }: Props) {
@@ -41,6 +41,11 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
   )
 
   const toggleActive = useCallback((nr: number) => {
+    const wohnung = WOHNUNGEN.find((item) => item.nr === nr)
+    if (wohnung?.status === 'verkauft') {
+      setActiveApt((current) => (current === nr ? null : current))
+      return
+    }
     setActiveApt((current) => (current === nr ? null : nr))
     trackEvent('wohnung_detail_open', { wohnung_nr: nr, top: `Top ${nr}` })
   }, [])
@@ -117,18 +122,22 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
 
               {sortedWohnungen.map((wohnung) => {
                 const active = isHighlighted(wohnung.nr)
+                const isSold = wohnung.status === 'verkauft'
                 return (
                   <button
                     key={wohnung.nr}
                     type="button"
-                    aria-label={`${wohnung.top} – Details anzeigen`}
+                    aria-label={isSold ? `${wohnung.top} ist verkauft` : `${wohnung.top} Details anzeigen`}
                     aria-pressed={activeApt === wohnung.nr}
+                    disabled={isSold}
                     onMouseEnter={() => handleEnter(wohnung.nr)}
                     onMouseLeave={handleLeave}
                     onFocus={() => handleEnter(wohnung.nr)}
                     onBlur={handleLeave}
                     onClick={() => toggleActive(wohnung.nr)}
-                    className="absolute flex cursor-pointer items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent2"
+                    className={`absolute flex items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent2 ${
+                      isSold ? 'cursor-not-allowed' : 'cursor-pointer'
+                    }`}
                     style={{
                       top: wohnung.hotspot.top,
                       left: wohnung.hotspot.left,
@@ -180,25 +189,35 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                     const isOpen = activeApt === wohnung.nr
                     const isHover = isHighlighted(wohnung.nr)
                     const detailId = `wohnung-detail-${wohnung.nr}`
+                    const isSold = wohnung.status === 'verkauft'
                     return (
                       <FragmentRow key={wohnung.nr}>
                         <tr
-                          role="button"
-                          tabIndex={0}
-                          aria-expanded={isOpen}
-                          aria-controls={detailId}
+                          role={isSold ? undefined : 'button'}
+                          tabIndex={isSold ? -1 : 0}
+                          aria-expanded={isSold ? undefined : isOpen}
+                          aria-controls={isSold ? undefined : detailId}
+                          aria-disabled={isSold ? true : undefined}
                           onMouseEnter={() => handleEnter(wohnung.nr)}
                           onMouseLeave={handleLeave}
                           onFocus={() => handleEnter(wohnung.nr)}
                           onBlur={handleLeave}
                           onClick={() => toggleActive(wohnung.nr)}
                           onKeyDown={(event) => onRowKeyDown(event, wohnung.nr)}
-                          className="cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent2 focus-visible:ring-inset"
+                          className={`transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent2 focus-visible:ring-inset ${
+                            isSold ? 'cursor-not-allowed' : 'cursor-pointer'
+                          }`}
                           style={{
-                            backgroundColor: isHover ? 'rgba(184,153,104,0.12)' : 'transparent',
-                            boxShadow: isHover
-                              ? 'inset 2px 0 0 0 #B89968'
-                              : 'inset 0 0 0 0 transparent',
+                            backgroundColor: isSold
+                              ? 'rgba(154,74,74,0.08)'
+                              : isHover
+                                ? 'rgba(184,153,104,0.12)'
+                                : 'transparent',
+                            boxShadow: isSold
+                              ? 'inset 3px 0 0 0 #9A4A4A'
+                              : isHover
+                                ? 'inset 2px 0 0 0 #B89968'
+                                : 'inset 0 0 0 0 transparent',
                           }}
                         >
                           <td className="px-2 py-3 font-semibold leading-tight text-ink sm:px-3">
@@ -213,13 +232,19 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                             {formatEUR(wohnung.kpGesamt)}
                           </td>
                           <td className="px-1 py-3 text-center text-muted sm:px-2">
-                            <ChevronDown
-                              size={16}
-                              className="mx-auto transition-transform duration-200 sm:h-[18px] sm:w-[18px]"
-                              style={{
-                                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                              }}
-                            />
+                            {isSold ? (
+                              <span className="block text-center text-base font-semibold text-danger">
+                                -
+                              </span>
+                            ) : (
+                              <ChevronDown
+                                size={16}
+                                className="mx-auto transition-transform duration-200 sm:h-[18px] sm:w-[18px]"
+                                style={{
+                                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                                }}
+                              />
+                            )}
                           </td>
                         </tr>
                         <tr aria-hidden={!isOpen}>
@@ -290,7 +315,7 @@ function FragmentRow({ children }: { children: React.ReactNode }) {
 function StatusBadge({ status }: { status: WohnungsStatus }) {
   return (
     <span
-      className={`mt-1 hidden rounded-full px-2 py-0.5 text-[10px] font-semibold sm:ml-2 sm:mt-0 sm:inline-flex sm:text-[11px] ${statusClasses[status]}`}
+      className={`mt-1 inline-flex rounded-full px-2 py-0.5 text-[10px] font-semibold sm:ml-2 sm:mt-0 sm:text-[11px] ${statusClasses[status]}`}
     >
       {statusLabels[status]}
     </span>
