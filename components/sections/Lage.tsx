@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Bike, Car, MapPin, Mountain, Utensils } from 'lucide-react'
+import { Car, MapPin, Mountain, Utensils } from 'lucide-react'
 import { Reveal } from '@/components/Reveal'
 import { ConversionLinks } from '@/components/ConversionLinks'
 import { LageMap } from './LageMap'
@@ -67,27 +67,19 @@ export function Lage() {
           ))}
         </div>
 
-        <Reveal className="mt-12 grid gap-8 border-y border-line py-8 md:grid-cols-2">
-          <div>
-            <h3 className="flex items-center gap-2 font-serif text-3xl text-ink">
-              <Bike className="h-5 w-5 text-accent2" />
-              Zu Fuß
-            </h3>
-            <ul className="mt-5 space-y-3 text-muted">
-              <li>Seeufer Achensee: {'{{DISTANZ_SEEUFER_FUSS}}'}</li>
-              <li>Nahversorgung: {'{{DISTANZ_NAHVERSORGUNG_FUSS}}'}</li>
-              <li>Bus: {'{{DISTANZ_BUS_FUSS}}'}</li>
-            </ul>
-          </div>
-          <div>
+        <Reveal className="mt-12 border-y border-line py-8">
+          <div className="max-w-3xl">
             <h3 className="flex items-center gap-2 font-serif text-3xl text-ink">
               <MapPin className="h-5 w-5 text-accent2" />
               Mit dem Auto
             </h3>
-            <ul className="mt-5 space-y-3 text-muted">
-              <li>Jenbach: {'{{DISTANZ_JENBACH_AUTO}}'}</li>
-              <li>Innsbruck: {'{{DISTANZ_INNSBRUCK_AUTO}}'}</li>
-              <li>München: {'{{DISTANZ_MUENCHEN_AUTO}}'}</li>
+            <ul className="mt-5 grid gap-3 text-muted sm:grid-cols-2">
+              <li>zum See: ca. 5 km</li>
+              <li>Jenbach: ca. 26,5 km</li>
+              <li>Innsbruck: ca. 58 km</li>
+              <li>München: ca. 83 km</li>
+              <li>Flughafen München: ca. 119 km</li>
+              <li>Tegernsee: ca. 31 km</li>
             </ul>
           </div>
         </Reveal>
