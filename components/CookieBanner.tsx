@@ -246,12 +246,12 @@ export function CookieBanner() {
   if (!visible) return null
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-surface/98 shadow-soft backdrop-blur">
-      <div className="section-shell max-h-[86vh] overflow-y-auto py-5">
+    <div className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-bg shadow-[0_-18px_60px_rgba(31,42,46,0.18)]">
+      <div className="section-shell max-h-[82vh] overflow-y-auto py-5 sm:py-6">
         <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="font-semibold text-ink">Cookie-Einstellungen</p>
-            <p className="mt-2 max-w-4xl text-sm leading-6 text-muted">
+            <p className="text-xl font-semibold text-ink sm:text-2xl">Cookie-Einstellungen</p>
+            <p className="mt-3 max-w-4xl text-base leading-7 text-ink/80 sm:text-sm sm:leading-6">
               Wir verwenden notwendige Cookies für den Betrieb der Website. Statistik
               und Marketing werden erst nach Ihrer aktiven Einwilligung geladen. Die
               Einwilligung erfolgt nach Art. 6 Abs. 1 lit. a DSGVO i. V. m. § 165
@@ -264,16 +264,15 @@ export function CookieBanner() {
             </p>
           </div>
           {!detailsOpen && (
-            <div className="grid gap-3 sm:grid-cols-3 lg:min-w-[520px]">
-              <Button variant="secondary" className="w-full" onClick={() => save(defaultSettings)}>
-                Alle ablehnen
-              </Button>
+            <div className="grid gap-3 sm:grid-cols-3 lg:min-w-[560px]">
               <Button
-                variant="secondary"
-                className="w-full"
+                className="w-full border border-accent bg-accent text-white shadow-soft hover:bg-[#263f31]"
                 onClick={() => save({ necessary: true, statistics: true, marketing: true })}
               >
                 Alle akzeptieren
+              </Button>
+              <Button variant="secondary" className="w-full bg-surface" onClick={() => save(defaultSettings)}>
+                Alle ablehnen
               </Button>
               <Button variant="secondary" className="w-full" onClick={() => setDetailsOpen(true)}>
                 Einstellungen
@@ -325,15 +324,14 @@ export function CookieBanner() {
               ))}
             </div>
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
-              <Button variant="secondary" className="w-full" onClick={() => save(defaultSettings)}>
-                Alle ablehnen
-              </Button>
               <Button
-                variant="secondary"
-                className="w-full"
+                className="w-full border border-accent bg-accent text-white shadow-soft hover:bg-[#263f31]"
                 onClick={() => save({ necessary: true, statistics: true, marketing: true })}
               >
                 Alle akzeptieren
+              </Button>
+              <Button variant="secondary" className="w-full bg-surface" onClick={() => save(defaultSettings)}>
+                Alle ablehnen
               </Button>
               <Button className="w-full" onClick={() => save(settings)}>
                 Auswahl speichern
