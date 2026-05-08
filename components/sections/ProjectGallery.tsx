@@ -6,20 +6,28 @@ import { useEffect } from 'react'
 
 const images = [
   {
-    src: '/img/projekt-01.jpg',
-    alt: 'Visualisierung der Wohnanlage am Achensee',
+    src: '/img/projekt-visualisierung-tag.png',
+    alt: 'Tagesvisualisierung der Vallis Achen Residenzen mit Bergpanorama',
+    width: 1672,
+    height: 941,
   },
   {
     src: '/img/projekt-02.jpg',
     alt: 'Architekturdetail mit natürlichen Materialien',
+    width: 1600,
+    height: 1100,
   },
   {
     src: '/img/projekt-03.jpg',
     alt: 'Wohnbereich mit ruhiger alpiner Atmosphäre',
+    width: 1600,
+    height: 1100,
   },
   {
     src: '/img/projekt-04.jpg',
     alt: 'Blickbezug zu Bergen und Landschaft',
+    width: 1600,
+    height: 1100,
   },
 ]
 
@@ -40,8 +48,8 @@ export function ProjectGallery() {
         <a
           key={image.src}
           href={image.src}
-          data-pswp-width="1600"
-          data-pswp-height="1100"
+          data-pswp-width={image.width}
+          data-pswp-height={image.height}
           className={`relative overflow-hidden rounded-md ${
             index === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
           }`}
