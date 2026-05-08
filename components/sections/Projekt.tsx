@@ -50,7 +50,7 @@ export function Projekt() {
               <p>
                 Der Wohnbau verbindet reduzierte Linien mit warmen Oberflächen und
                 solider Bauqualität. Jede Einheit ist auf dauerhafte Nutzbarkeit
-                ausgelegt: kompakte Wege, gut möblierbare Räume, Außenflächen für
+                ausgelegt: Kompakte Wege, gut möblierbare Räume, Außenflächen für
                 Morgenkaffee, Abendlicht und stille Stunden.
               </p>
               <p>
