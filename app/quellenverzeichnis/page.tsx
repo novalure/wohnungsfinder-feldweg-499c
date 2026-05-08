@@ -45,13 +45,15 @@ export default function QuellenverzeichnisPage() {
 
         <section>
           <h2 className="font-serif text-3xl text-ink">Bildquellen</h2>
-          <div className="mt-4 rounded-md border border-line bg-surface p-5">
-            <p className="font-semibold text-ink">Noch zu ergänzen</p>
-            <p className="mt-2">
-              Finale Bildcredits werden hier je Bildslot eingetragen, sobald die
-              jeweilige Datei hochgeladen wurde und die genaue Quelle bekannt ist.
-            </p>
-          </div>
+          <dl className="mt-4 rounded-md border border-line bg-surface p-5">
+            <dt className="font-semibold text-ink">Intro-/Achensee-Bild</dt>
+            <dd className="mt-2">
+              Segelregatta am Achensee. Quelle: Medien- und Presseportal
+              Achensee Tourismus, Ordner „Segeln“. Fotocredit: © Achensee
+              Tourismus. Datei: Segelregatta am Achensee Sailing regatta at Lake
+              Achensee.jpg.
+            </dd>
+          </dl>
         </section>
 
         <section>

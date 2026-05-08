@@ -8,15 +8,16 @@ export function Intro() {
     <section id="intro" className="py-28 md:py-40">
       <div className="section-shell grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-center">
         <Reveal>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-md">
+          <figure className="rounded-md">
             <Image
-              src="/img/intro-vertikal.jpg"
-              alt="Ruhige Achensee-Stimmung mit Bergen und Wasser"
-              fill
+              src="/img/achensee-segelregatta.jpg"
+              alt="Segelregatta am Achensee mit Blick auf Wasser und Berge"
+              width={5280}
+              height={2970}
               sizes="(min-width: 1024px) 42vw, 100vw"
-              className="object-cover"
+              className="h-auto w-full rounded-md border border-line bg-surface"
             />
-          </div>
+          </figure>
         </Reveal>
         <Reveal delay={0.1}>
           <div className="max-w-reading">
