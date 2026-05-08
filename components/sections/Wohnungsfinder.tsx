@@ -181,7 +181,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                     <TableHead>Zimmer</TableHead>
                     <TableHead align="right">ca. Fläche</TableHead>
                     <TableHead align="right">KP gesamt</TableHead>
-                    <th className="w-8 px-2 py-3" aria-hidden="true" />
+                    <th className="w-8 px-2 py-3 lg:pl-3 lg:pr-5" aria-hidden="true" />
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
@@ -231,7 +231,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                           <td className="px-1 py-3 text-right tabular-nums font-semibold text-ink sm:px-3">
                             {formatEUR(wohnung.kpGesamt)}
                           </td>
-                          <td className="px-1 py-3 text-center text-muted sm:px-2">
+                          <td className="px-1 py-3 text-center text-muted sm:px-2 lg:pl-3 lg:pr-5">
                             {isSold ? (
                               <span className="block text-center text-base font-semibold text-danger">
                                 -
