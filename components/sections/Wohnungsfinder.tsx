@@ -161,7 +161,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
               })}
             </div>
             <p className="mt-3 text-sm text-muted">
-              Hotspot oder Tabellenzeile anklicken, um Details zur Wohnung zu sehen.
+              Top im Bild oder in der Tabelle anklicken, um Grundriss, Details und Preisaufstellung zu öffnen.
             </p>
           </div>
 
