@@ -170,10 +170,10 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
               <table className="w-full table-fixed text-[12px] sm:text-sm">
                 <colgroup>
                   <col className="w-[30%] sm:w-[28%]" />
-                  <col className="w-[13%] sm:w-[17%]" />
-                  <col className="w-[25%] sm:w-[27%]" />
+                  <col className="w-[13%] sm:w-[16%]" />
+                  <col className="w-[25%] sm:w-[25%]" />
                   <col className="w-[24%] sm:w-[23%]" />
-                  <col className="w-[8%] sm:w-[5%]" />
+                  <col className="w-[8%] sm:w-[8%]" />
                 </colgroup>
                 <thead>
                   <tr className="bg-bg">
@@ -181,7 +181,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                     <TableHead>Zimmer</TableHead>
                     <TableHead align="right">ca. Fläche</TableHead>
                     <TableHead align="right">KP gesamt</TableHead>
-                    <th className="w-8 px-2 py-3 lg:pl-3 lg:pr-5" aria-hidden="true" />
+                    <th className="w-10 px-3 py-3 lg:pl-2 lg:pr-6" aria-hidden="true" />
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
@@ -231,7 +231,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                           <td className="px-1 py-3 text-right tabular-nums font-semibold text-ink sm:px-3">
                             {formatEUR(wohnung.kpGesamt)}
                           </td>
-                          <td className="px-1 py-3 text-center text-muted sm:px-2 lg:pl-3 lg:pr-5">
+                          <td className="px-2 py-3 text-center text-muted sm:px-3 lg:pl-2 lg:pr-6">
                             {isSold ? (
                               <span className="block text-center text-base font-semibold text-danger">
                                 -
