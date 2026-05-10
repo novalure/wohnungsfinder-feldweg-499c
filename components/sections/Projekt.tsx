@@ -88,14 +88,14 @@ export function Projekt() {
             {facts.map(({ icon: Icon, title, subline }, index) => (
               <div
                 key={title}
-                className={`flex min-h-[9.5rem] flex-col items-center justify-center gap-3 px-3 py-6 text-center sm:min-h-40 sm:px-6 lg:min-h-28 lg:flex-row lg:justify-start lg:gap-4 lg:px-10 lg:py-5 lg:text-left ${
+                className={`flex min-h-[9.5rem] flex-col items-center justify-center gap-3 px-3 py-6 text-center sm:min-h-40 sm:px-6 lg:min-h-28 lg:flex-row lg:justify-center lg:gap-4 lg:px-8 lg:py-5 lg:text-left ${
                   index % 2 === 1 ? '' : 'border-r border-line'
                 } ${index > 1 ? 'border-t border-line lg:border-t-0' : ''} ${
                   index < 3 ? 'lg:border-r lg:border-line' : 'lg:border-r-0'
                 }`}
               >
-                <Icon className="h-5 w-5 shrink-0 text-accent2" />
-                <div className="min-w-0">
+                <Icon className="h-5 w-5 shrink-0 text-accent2 lg:mt-1" />
+                <div className="min-w-0 lg:min-w-[11rem]">
                   <p className="text-balance break-words text-xl font-bold leading-tight text-ink lg:text-xl">{title}</p>
                   <p className="mt-2 text-balance break-words text-base leading-snug text-muted lg:mt-1 lg:text-sm lg:leading-5">{subline}</p>
                 </div>
