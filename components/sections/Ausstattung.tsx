@@ -118,14 +118,22 @@ export function Ausstattung() {
         </Reveal>
 
         <Reveal className="mt-12 grid gap-6 md:grid-cols-2">
-          <div className="relative aspect-[16/10] overflow-hidden rounded-md">
-            <Image
-              src="/img/ausstattung-02.jpg"
-              alt="Detailfoto Bad und hochwertige Oberflächen"
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
-            />
+          <div>
+            <div className="relative aspect-[16/10] overflow-hidden rounded-md">
+              <Image
+                src="/img/ausstattung-02.jpg"
+                alt="Visualisierung eines Badezimmers mit bodengleicher Dusche und Holzoberflächen"
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              Visualisierung als beispielhafte Einrichtungsidee: Die dargestellte
+              Möblierung und Ausstattung zeigt eine mögliche Variante und ist nicht
+              Vertragsbestandteil; die tatsächliche Einrichtung liegt in der
+              Verantwortung der jeweiligen Eigentümer:innen.
+            </p>
           </div>
           <div className="flex items-center border-y border-line py-8">
             <p className="font-serif text-3xl leading-tight text-ink">
