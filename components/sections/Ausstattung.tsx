@@ -61,6 +61,14 @@ const features: Array<{ icon: LucideIcon; title: string; subtitle: string }> = [
   },
 ]
 
+const materialPanelItems: Array<{ icon: LucideIcon; label: string }> = [
+  { icon: Building2, label: 'Massive Bauweise' },
+  { icon: Flame, label: 'Fernwärme & Fußbodenheizung' },
+  { icon: PanelsTopLeft, label: '3-fach-Verglasung' },
+  { icon: Leaf, label: 'Energieklasse A+' },
+  { icon: BadgeCheck, label: 'Blower-Door-zertifiziert' },
+]
+
 export function Ausstattung() {
   const { downloads } = projectConfig
 
@@ -69,14 +77,31 @@ export function Ausstattung() {
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <Reveal>
-            <div className="relative aspect-[5/4] overflow-hidden rounded-md">
-              <Image
-                src="/img/ausstattung-01.jpg"
-                alt="Hochwertiges Materialdetail einer alpin-eleganten Wohnung"
-                fill
-                sizes="(min-width: 1024px) 52vw, 100vw"
-                className="object-cover"
-              />
+            <div className="relative flex aspect-[5/4] overflow-hidden rounded-md border border-line bg-[radial-gradient(circle_at_18%_12%,rgba(255,255,255,0.92),rgba(250,247,242,0.72)_34%,rgba(47,74,58,0.72)_100%)] p-8 shadow-soft sm:p-10">
+              <div className="absolute inset-x-8 top-8 h-px bg-line/80 sm:inset-x-10" />
+              <div className="absolute inset-x-8 bottom-8 h-px bg-line/80 sm:inset-x-10" />
+              <div className="relative z-10 flex w-full flex-col">
+                <div>
+                  <p className="font-serif text-4xl leading-tight text-ink sm:text-5xl">
+                    Bauweise & Material
+                  </p>
+                  <p className="mt-3 max-w-md text-base leading-7 text-ink/75">
+                    Solide Substanz, ruhige Oberflächen und geprüfte
+                    Energiequalität bilden die Grundlage der Ausstattung.
+                  </p>
+                </div>
+                <div className="mt-auto grid gap-3 pt-10 sm:grid-cols-2">
+                  {materialPanelItems.map(({ icon: Icon, label }) => (
+                    <div
+                      key={label}
+                      className="flex items-center gap-3 border-t border-line/80 pt-3 text-sm font-semibold text-ink"
+                    >
+                      <Icon className="h-4 w-4 shrink-0 text-accent2" />
+                      <span>{label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
