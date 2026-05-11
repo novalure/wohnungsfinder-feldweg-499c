@@ -77,20 +77,20 @@ export function Ausstattung() {
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <Reveal>
-            <div className="relative flex aspect-[5/4] overflow-hidden rounded-md border border-line bg-[radial-gradient(circle_at_18%_12%,rgba(255,255,255,0.92),rgba(250,247,242,0.72)_34%,rgba(47,74,58,0.72)_100%)] p-8 shadow-soft sm:p-10">
-              <div className="absolute inset-x-8 top-8 h-px bg-line/80 sm:inset-x-10" />
-              <div className="absolute inset-x-8 bottom-8 h-px bg-line/80 sm:inset-x-10" />
+            <div className="relative flex min-h-[32rem] overflow-hidden rounded-md border border-line bg-[radial-gradient(circle_at_18%_12%,rgba(255,255,255,0.92),rgba(250,247,242,0.72)_34%,rgba(47,74,58,0.72)_100%)] p-6 shadow-soft sm:aspect-[5/4] sm:min-h-0 sm:p-10">
+              <div className="absolute inset-x-6 top-6 h-px bg-line/80 sm:inset-x-10 sm:top-8" />
+              <div className="absolute inset-x-6 bottom-6 h-px bg-line/80 sm:inset-x-10 sm:bottom-8" />
               <div className="relative z-10 flex w-full flex-col">
                 <div>
-                  <p className="font-serif text-4xl leading-tight text-ink sm:text-5xl">
+                  <p className="font-serif text-3xl leading-tight text-ink sm:text-5xl">
                     Bauweise & Material
                   </p>
-                  <p className="mt-3 max-w-md text-base leading-7 text-ink/75">
+                  <p className="mt-3 max-w-md text-sm leading-6 text-ink/75 sm:text-base sm:leading-7">
                     Solide Substanz, ruhige Oberflächen und geprüfte
                     Energiequalität bilden die Grundlage der Ausstattung.
                   </p>
                 </div>
-                <div className="mt-auto grid gap-3 pt-10 sm:grid-cols-2">
+                <div className="mt-auto grid gap-3 pt-8 sm:grid-cols-2 sm:pt-10">
                   {materialPanelItems.map(({ icon: Icon, label }) => (
                     <div
                       key={label}
