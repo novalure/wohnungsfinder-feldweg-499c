@@ -1,6 +1,7 @@
 import { OnePager } from '@/components/OnePager'
 import projectConfig from '@/config/project.json'
 import { WOHNUNGEN } from '@/components/sections/data'
+import { SITE_URL } from '@/lib/legal-config'
 
 const { project, company } = projectConfig
 
@@ -9,7 +10,7 @@ function JsonLd() {
     '@context': 'https://schema.org',
     '@type': 'RealEstateListing',
     name: `${project.name} ${wohnung.top}`,
-    url: `/#wohnungen`,
+    url: `${SITE_URL}/#wohnungen`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: project.address,
@@ -39,7 +40,7 @@ function JsonLd() {
       name: company.name,
       legalName: company.legalName,
       address: company.address,
-      url: '/',
+      url: SITE_URL,
       logo: company.logoSvg,
     },
     {

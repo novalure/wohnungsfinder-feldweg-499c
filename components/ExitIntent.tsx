@@ -87,7 +87,7 @@ export function ExitIntent() {
                 checked={accepted}
                 onChange={(event) => setAccepted(event.target.checked)}
               />
-              Ich akzeptiere die Datenschutzbestimmungen.
+              Ich habe die Datenschutzerklärung zur Kenntnis genommen.
             </label>
             <Button className="mt-5 w-full" onClick={submit} disabled={!email || !accepted}>
               Exposé anfordern

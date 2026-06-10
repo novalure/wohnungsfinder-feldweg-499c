@@ -9,7 +9,7 @@ export const leadSchema = z.object({
   nachricht: z.string().optional(),
   datenschutz: z
     .boolean()
-    .refine((value) => value, 'Bitte akzeptieren Sie die Datenschutzbestimmungen.'),
+    .refine((value) => value, 'Bitte bestätigen Sie die Kenntnisnahme der Datenschutzerklärung.'),
   website: z.string().max(0, 'Spam-Schutz ausgelöst.').optional().or(z.literal('')),
   recaptchaToken: z.string().optional(),
 })

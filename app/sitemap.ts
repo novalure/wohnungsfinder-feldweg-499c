@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next'
+import { SITE_URL } from '@/lib/legal-config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.example.at'
+  const baseUrl = SITE_URL
   return [
     {
       url: baseUrl,
@@ -22,6 +23,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${baseUrl}/quellenverzeichnis`,
+      lastModified: new Date(),
+    },
+    {
+      url: `${baseUrl}/cookie-richtlinie`,
       lastModified: new Date(),
     },
   ]

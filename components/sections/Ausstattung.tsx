@@ -17,6 +17,7 @@ import projectConfig from '@/config/project.json'
 import { Reveal } from '@/components/Reveal'
 import { ButtonLink } from '@/components/ui/Button'
 import { trackPdfDownload } from '@/lib/analytics'
+import { LEGAL } from '@/lib/legal-config'
 
 const features: Array<{ icon: LucideIcon; title: string; subtitle: string }> = [
   {
@@ -36,8 +37,8 @@ const features: Array<{ icon: LucideIcon; title: string; subtitle: string }> = [
   },
   {
     icon: Leaf,
-    title: 'Energieklasse A+',
-    subtitle: 'fGEE 0,70 lt. Energieausweis',
+    title: LEGAL.energy.hwbShort,
+    subtitle: `fGEE ${LEGAL.energy.fgee} lt. Energieausweis`,
   },
   {
     icon: BadgeCheck,
@@ -65,7 +66,7 @@ const materialPanelItems: Array<{ icon: LucideIcon; label: string }> = [
   { icon: Building2, label: 'Massive Bauweise' },
   { icon: Flame, label: 'Fernwärme & Fußbodenheizung' },
   { icon: PanelsTopLeft, label: '3-fach-Verglasung' },
-  { icon: Leaf, label: 'Energieklasse A+' },
+  { icon: Leaf, label: LEGAL.energy.hwbShort },
   { icon: BadgeCheck, label: 'Blower-Door-zertifiziert' },
 ]
 

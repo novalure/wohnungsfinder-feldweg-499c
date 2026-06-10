@@ -5,7 +5,7 @@ export const metadata = {
   alternates: { canonical: '/quellenverzeichnis' },
 }
 
-const achenseeImageCreditTemplate = [
+const achenseeImageCreditFormat = [
   'Bildslot/Datei auf der Website',
   'Motiv oder Titel des Assets',
   'Quelle: Medien- und Presseportal Achensee Tourismus',
@@ -99,7 +99,7 @@ export default function QuellenverzeichnisPage() {
           <div className="mt-5 rounded-md border border-line bg-surface p-5">
             <p className="font-semibold text-ink">Format für künftige Bildnachweise</p>
             <ul className="mt-3 space-y-2">
-              {achenseeImageCreditTemplate.map((item) => (
+              {achenseeImageCreditFormat.map((item) => (
                 <li key={item}>• {item}</li>
               ))}
             </ul>

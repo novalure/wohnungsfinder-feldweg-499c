@@ -4,7 +4,9 @@ import 'leaflet/dist/leaflet.css'
 import 'photoswipe/style.css'
 import '../styles/globals.css'
 import projectConfig from '@/config/project.json'
-import { CookieBanner } from '@/components/CookieBanner'
+import { CookieConsent } from '@/components/consent/CookieConsent'
+import { SiteFooter } from '@/components/layout/SiteFooter'
+import { SITE_URL } from '@/lib/legal-config'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,7 +24,7 @@ const cormorant = Cormorant_Garamond({
 const project = projectConfig.project
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.example.at'),
+  metadataBase: new URL(SITE_URL),
   title: `${project.name} — Eigentumswohnungen am Achensee | ${project.ortKurz}`,
   description:
     'Eigentumswohnungen am Achensee in Tirol mit Bergblick, ruhiger Architektur und persönlicher Beratung durch GRASL Immobilien.',
@@ -60,7 +62,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="de-AT" className={`${inter.variable} ${cormorant.variable}`}>
       <body>
         {children}
-        <CookieBanner />
+        <SiteFooter />
+        <CookieConsent />
       </body>
     </html>
   )

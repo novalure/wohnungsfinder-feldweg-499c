@@ -12,8 +12,16 @@ import Wohnungsfinder from './sections/Wohnungsfinder'
 import { Ausstattung } from './sections/Ausstattung'
 import { Bautraeger } from './sections/Bautraeger'
 import { Kontakt } from './sections/Kontakt'
-import { Footer } from './sections/Footer'
 import { trackEvent } from '@/lib/analytics'
+
+function focusSection(id: string) {
+  const target = document.getElementById(id)
+  if (!target) return
+
+  target.setAttribute('tabindex', '-1')
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  window.setTimeout(() => target.focus({ preventScroll: true }), 250)
+}
 
 export function OnePager() {
   const [prefillTop, setPrefillTop] = useState<string | null>(null)
@@ -22,13 +30,13 @@ export function OnePager() {
     setPrefillTop(top)
     trackEvent('wohnung_anfrage', { top, wohnung_nr: nr })
     window.requestAnimationFrame(() => {
-      document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      focusSection('kontakt')
     })
   }, [])
 
   const handleGeneralAnfrage = useCallback(() => {
     setPrefillTop('noch unentschlossen')
-    document.getElementById('kontakt')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    focusSection('kontakt')
   }, [])
 
   useEffect(() => {
@@ -53,8 +61,11 @@ export function OnePager() {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Zum Inhalt springen
+      </a>
       <Navigation />
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
         <Intro />
         <Projekt />
@@ -64,7 +75,6 @@ export function OnePager() {
         <Bautraeger />
         <Kontakt prefillTop={prefillTop} />
       </main>
-      <Footer />
       <StickyCtaBar onInquiryClick={handleGeneralAnfrage} />
       <ExitIntent />
     </>

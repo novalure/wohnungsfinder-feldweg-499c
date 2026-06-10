@@ -4,6 +4,7 @@ import { BedDouble, Download, Home, Leaf, Ruler, type LucideIcon } from 'lucide-
 import { Reveal } from '@/components/Reveal'
 import { ButtonLink } from '@/components/ui/Button'
 import { trackPdfDownload } from '@/lib/analytics'
+import { LEGAL } from '@/lib/legal-config'
 import { ProjectGallery } from './ProjectGallery'
 import projectConfig from '@/config/project.json'
 
@@ -25,8 +26,8 @@ const facts: Array<{ icon: LucideIcon; title: string; subline: string }> = [
   },
   {
     icon: Leaf,
-    title: 'Energieklasse A/B',
-    subline: 'HWB 44 · fGEE 0,70',
+    title: LEGAL.energy.hwbShort,
+    subline: `fGEE ${LEGAL.energy.fgee}`,
   },
 ]
 
