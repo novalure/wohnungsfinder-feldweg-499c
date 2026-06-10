@@ -11,26 +11,26 @@ export function ConversionLinks({ className = '' }: { className?: string }) {
     <div className={`flex flex-wrap gap-3 ${className}`}>
       <a
         href="#kontakt"
-        className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-3 text-sm font-semibold text-white"
+        className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-3 text-sm font-semibold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        <Mail size={17} />
+        <Mail size={17} aria-hidden="true" />
         Anfrage senden
       </a>
       <a
         href={`tel:${contact.telefon}`}
-        className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-4 py-3 text-sm font-semibold text-ink"
+        className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-4 py-3 text-sm font-semibold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         onClick={() => trackPhoneClick('section_cta')}
       >
-        <Phone size={17} />
+        <Phone size={17} aria-hidden="true" />
         Anrufen
       </a>
       <a
         href={downloads.expose}
-        className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-4 py-3 text-sm font-semibold text-ink"
+        className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-4 py-3 text-sm font-semibold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         onClick={() => trackPdfDownload('Section CTA Expose', downloads.expose)}
       >
-        <Download size={17} />
-        Exposé
+        <Download size={17} aria-hidden="true" />
+        Exposé als PDF herunterladen
       </a>
       <a
         href={`mailto:${contact.email}`}

@@ -51,7 +51,7 @@ export function Lage() {
                 <div className="relative aspect-[3/2] bg-bg">
                   <Image
                     src={cluster.image}
-                    alt={cluster.title}
+                    alt=""
                     fill
                     sizes="(min-width: 768px) 33vw, 100vw"
                     className={index === 2 ? 'object-cover object-[50%_52%]' : 'object-contain'}

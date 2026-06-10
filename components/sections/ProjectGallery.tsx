@@ -54,7 +54,7 @@ export function ProjectGallery() {
 
         if (item.type === 'video') {
           return (
-            <div key={item.src} className={className} aria-label={item.alt}>
+            <div key={item.src} className={className} aria-hidden="true">
               <video
                 src={item.src}
                 poster={item.poster}
@@ -63,6 +63,7 @@ export function ProjectGallery() {
                 loop
                 playsInline
                 preload="metadata"
+                aria-hidden="true"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -75,8 +76,8 @@ export function ProjectGallery() {
             href={item.src}
             data-pswp-width={item.width}
             data-pswp-height={item.height}
-            className={className}
-            aria-label={`${item.alt} vergroessern`}
+            className={`${className} focus:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
+            aria-label={`${item.alt} vergrößern`}
           >
             <Image
               src={item.src}

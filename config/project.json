@@ -4,13 +4,13 @@
     "tagline": "Wohnen im Achental",
     "claim": "Wo das Tal seinen Namen fand.",
     "address": "A-6215 Achenkirch, Feldweg 499c",
-    "ortKurz": "{{ORT_KURZ}}",
+    "ortKurz": "Achenkirch",
     "anzahlWohnungen": 6,
-    "wohnflaecheRange": "{{WFL_VON}}-{{WFL_BIS}} m²",
-    "zimmerRange": "{{ZI_VON}}-{{ZI_BIS}} Zimmer",
-    "hwb": "{{HWB_WERT}} kWh/m²a",
-    "fertigstellung": "{{FERTIGSTELLUNG_QUARTAL}}",
-    "preisAb": "ab € {{PREIS_AB}}"
+    "wohnflaecheRange": "56,13-57,23 m²",
+    "zimmerRange": "2 Zimmer",
+    "hwb": "44 kWh/m²a",
+    "fertigstellung": "nach Vereinbarung",
+    "preisAb": "ab € 340.690"
   },
   "company": {
     "name": "GRASL Immobilien",
@@ -33,18 +33,18 @@
     "portrait": "/img/ansprechpartner.jpg"
   },
   "bautraeger": {
-    "name": "{{BAUTRAEGER_NAME}}",
+    "name": "Immobilien- und Sachverständigenbüro Thomas Grasl",
     "logo": "/img/bautraeger-logo.svg",
-    "url": "{{BAUTRAEGER_URL}}"
+    "url": "https://www.grasl-immobilien.at"
   },
   "downloads": {
-    "expose": "/pdf/{{PROJEKTNAME}}_Expose.pdf",
-    "preisliste": "/pdf/{{PROJEKTNAME}}_Preisliste.pdf",
-    "bab": "/pdf/{{PROJEKTNAME}}_BAB.pdf"
+    "expose": "/pdf/Vallis-Achen-Residenzen_Expose.pdf",
+    "preisliste": "/pdf/Vallis-Achen-Residenzen_Preisliste.pdf",
+    "bab": "/pdf/Vallis-Achen-Residenzen_BAB.pdf"
   },
   "tracking": {
-    "ga4": "{{GA4_ID}}",
-    "hotjar": "{{HOTJAR_ID}}",
-    "metaPixel": "{{META_PIXEL_ID}}"
+    "ga4": "",
+    "hotjar": "",
+    "metaPixel": ""
   }
 }

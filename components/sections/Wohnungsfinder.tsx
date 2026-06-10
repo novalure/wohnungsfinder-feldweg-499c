@@ -11,6 +11,7 @@ import {
 import { ChevronDown, Image as ImageIcon, Send, X } from 'lucide-react'
 import projectConfig from '@/config/project.json'
 import { trackEvent } from '@/lib/analytics'
+import { PROVISION_TEXT } from '@/lib/legal-config'
 import { WOHNUNGEN, type Wohnung, type WohnungsStatus } from './data'
 import { formatEUR, formatM2 } from './format'
 
@@ -108,7 +109,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
               className={`relative w-full overflow-hidden rounded-md bg-bg shadow-soft transition-all duration-300 ${
                 activeApt === null ? '' : 'lg:mt-2'
               }`}
-              style={{ aspectRatio: '1672 / 941' }}
+              style={{ aspectRatio: '2603 / 1344' }}
             >
               <Image
                 src="/skizze_feldweg499c.png"
@@ -129,13 +130,13 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                     type="button"
                     aria-label={isSold ? `${wohnung.top} ist verkauft` : `${wohnung.top} Details anzeigen`}
                     aria-pressed={activeApt === wohnung.nr}
-                    disabled={isSold}
+                    aria-disabled={isSold}
                     onMouseEnter={() => handleEnter(wohnung.nr)}
                     onMouseLeave={handleLeave}
                     onFocus={() => handleEnter(wohnung.nr)}
                     onBlur={handleLeave}
                     onClick={() => toggleActive(wohnung.nr)}
-                    className={`absolute flex items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent2 ${
+                    className={`absolute flex items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                       isSold ? 'cursor-not-allowed' : 'cursor-pointer'
                     }`}
                     style={{
@@ -204,7 +205,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                           onBlur={handleLeave}
                           onClick={() => toggleActive(wohnung.nr)}
                           onKeyDown={(event) => onRowKeyDown(event, wohnung.nr)}
-                          className={`transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent2 focus-visible:ring-inset ${
+                          className={`transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset ${
                             isSold ? 'cursor-not-allowed' : 'cursor-pointer'
                           }`}
                           style={{
@@ -271,10 +272,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
               </table>
             </div>
             <p className="mt-4 text-xs leading-6 text-muted">
-              Bei erfolgreichem Vertragsabschluss fällt eine Provision von 3 % des
-              Kaufpreises zzgl. 20 % USt an, gemäß Immobilienmaklerverordnung BGBl.
-              262 und 297/1996. Diese Provision gilt auch bei Weitergabe der
-              Informationen an Dritte.
+              {PROVISION_TEXT}
             </p>
           </div>
         </div>
@@ -366,18 +364,18 @@ function DetailPanel({
           </ul>
           <button
             type="button"
-            className="mt-6 inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#263f31]"
+            className="mt-6 inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#263f31] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={() => onAnfrage?.(wohnung.top, wohnung.nr)}
           >
-            <Send size={17} />
+            <Send size={17} aria-hidden="true" />
             {wohnung.top} anfragen
           </button>
           <button
             type="button"
-            className="ml-3 mt-6 inline-flex items-center gap-2 rounded-md border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent"
+            className="ml-3 mt-6 inline-flex items-center gap-2 rounded-md border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={onClose}
           >
-            <X size={17} />
+            <X size={17} aria-hidden="true" />
             Schließen
           </button>
         </div>
@@ -387,7 +385,7 @@ function DetailPanel({
             type="button"
             onClick={onOpenLightbox}
             aria-label={`Grundriss ${wohnung.top} vergrößern`}
-            className="group relative block w-full overflow-hidden rounded-md border border-line bg-surface transition-shadow hover:shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent2"
+            className="group relative block w-full overflow-hidden rounded-md border border-line bg-surface transition-shadow hover:shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Image
               src={wohnung.grundriss}

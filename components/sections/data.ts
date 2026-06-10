@@ -35,7 +35,7 @@ export const WOHNUNGEN: Wohnung[] = [
     kpGesamt: 382258,
     status: 'verkauft',
     highlights: ['Privater Garten', 'Zwei Stellplätze', 'Ruhige Orientierung'],
-    hotspot: { top: '61.5%', left: '67.2%', width: '17.7%', height: '22.2%' },
+    hotspot: { top: '61.4%', left: '72.5%', width: '18.6%', height: '21.8%' },
     grundriss: '/grundrisse/wohnung-1.png',
   },
   {
@@ -53,7 +53,7 @@ export const WOHNUNGEN: Wohnung[] = [
     kpGesamt: 340690.4,
     status: 'reserviert',
     highlights: ['Kompakter Garten', 'Effizienter Grundriss', 'Ein Stellplatz'],
-    hotspot: { top: '61.5%', left: '47.7%', width: '17.3%', height: '22.2%' },
+    hotspot: { top: '61.4%', left: '47.1%', width: '18.7%', height: '21.8%' },
     grundriss: '/grundrisse/wohnung-2.png',
   },
   {
@@ -71,7 +71,7 @@ export const WOHNUNGEN: Wohnung[] = [
     kpGesamt: 367930.5,
     status: 'verfuegbar',
     highlights: ['Großzügiger Garten', 'Zwei Stellplätze', 'Kurze Wege ins Freie'],
-    hotspot: { top: '61.5%', left: '25.7%', width: '17.4%', height: '22.2%' },
+    hotspot: { top: '61.4%', left: '22.4%', width: '19.4%', height: '21.8%' },
     grundriss: '/grundrisse/wohnung-3.png',
   },
   {
@@ -89,7 +89,7 @@ export const WOHNUNGEN: Wohnung[] = [
     kpGesamt: 363483,
     status: 'verfuegbar',
     highlights: ['Balkon', 'Zwei Stellplätze', 'Blick in die Umgebung'],
-    hotspot: { top: '38.5%', left: '67.2%', width: '17.7%', height: '22.9%' },
+    hotspot: { top: '38.0%', left: '72.5%', width: '18.6%', height: '23.4%' },
     grundriss: '/grundrisse/wohnung-4.png',
   },
   {
@@ -107,7 +107,7 @@ export const WOHNUNGEN: Wohnung[] = [
     kpGesamt: 346402.5,
     status: 'reserviert',
     highlights: ['Balkon', 'Ein Stellplatz', 'Klar zonierter Wohnbereich'],
-    hotspot: { top: '38.5%', left: '47.7%', width: '17.3%', height: '22.9%' },
+    hotspot: { top: '38.0%', left: '47.1%', width: '18.7%', height: '23.4%' },
     grundriss: '/grundrisse/wohnung-5.png',
   },
   {
@@ -125,7 +125,7 @@ export const WOHNUNGEN: Wohnung[] = [
     kpGesamt: 362244,
     status: 'verfuegbar',
     highlights: ['Balkon', 'Zwei Stellplätze', 'Ruhige Obergeschosslage'],
-    hotspot: { top: '38.5%', left: '25.7%', width: '17.4%', height: '22.9%' },
+    hotspot: { top: '38.0%', left: '22.4%', width: '19.4%', height: '23.4%' },
     grundriss: '/grundrisse/wohnung-6.png',
   },
 ]

@@ -25,6 +25,7 @@ async function getRecaptchaToken() {
 export function Kontakt({ prefillTop }: Props) {
   const { contact } = projectConfig
   const [sent, setSent] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const hasMobile = Boolean(contact.mobil && contact.mobilDisplay)
   const interests = useMemo(
     () => [
@@ -74,19 +75,25 @@ export function Kontakt({ prefillTop }: Props) {
   }, [prefillTop, setValue, watch])
 
   async function onSubmit(values: LeadInput) {
+    setSubmitError(null)
     const recaptchaToken = await getRecaptchaToken()
-    const response = await fetch('/api/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...values, recaptchaToken }),
-    })
+    try {
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...values, recaptchaToken }),
+      })
 
-    if (!response.ok) {
-      throw new Error('Lead konnte nicht gesendet werden.')
+      if (!response.ok) {
+        setSubmitError('Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns per Telefon.')
+        return
+      }
+
+      trackEvent('lead_submit', { source: 'contact_form' })
+      setSent(true)
+    } catch {
+      setSubmitError('Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns per Telefon.')
     }
-
-    trackEvent('lead_submit', { source: 'contact_form' })
-    setSent(true)
   }
 
   return (
@@ -116,28 +123,28 @@ export function Kontakt({ prefillTop }: Props) {
             <div className="mt-6 grid gap-3">
               <a
                 href={`tel:${contact.telefon}`}
-                className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
+                className="inline-flex min-h-6 min-w-0 items-center gap-3 break-all text-ink hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 onClick={() => trackPhoneClick('kontakt_telefon')}
               >
-                <Phone size={18} />
+                <Phone size={18} aria-hidden="true" />
                 {contact.telefonDisplay}
               </a>
               {hasMobile && (
                 <a
                   href={`tel:${contact.mobil}`}
-                  className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
+                  className="inline-flex min-h-6 min-w-0 items-center gap-3 break-all text-ink hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   onClick={() => trackPhoneClick('kontakt_mobil')}
                 >
-                  <Smartphone size={18} />
+                  <Smartphone size={18} aria-hidden="true" />
                   {contact.mobilDisplay}
                 </a>
               )}
               <a
                 href={`mailto:${contact.email}`}
-                className="inline-flex min-w-0 items-center gap-3 break-all text-ink hover:text-accent"
+                className="inline-flex min-h-6 min-w-0 items-center gap-3 break-all text-ink hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 onClick={() => trackEmailClick(contact.email)}
               >
-                <Mail size={18} />
+                <Mail size={18} aria-hidden="true" />
                 {contact.email}
               </a>
             </div>
@@ -146,7 +153,7 @@ export function Kontakt({ prefillTop }: Props) {
 
         <div className="min-w-0 max-w-full overflow-hidden rounded-md border border-line bg-surface p-4 shadow-soft sm:p-6 md:p-8">
           {sent ? (
-            <div className="rounded-md bg-success/10 p-8">
+            <div className="rounded-md bg-success/10 p-8" role="status" aria-live="polite">
               <p className="eyebrow text-success">Anfrage gesendet</p>
               <h3 className="mt-3 font-serif text-4xl text-ink">Danke — wir melden uns innerhalb von 24 h.</h3>
               <p className="mt-4 leading-7 text-muted">
@@ -155,32 +162,69 @@ export function Kontakt({ prefillTop }: Props) {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="grid min-w-0 gap-5">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid min-w-0 gap-5" noValidate>
+              <p className="text-sm leading-6 text-muted">
+                Felder mit dem Hinweis Pflichtfeld müssen ausgefüllt werden.
+              </p>
               <div className="grid min-w-0 gap-5 md:grid-cols-2">
-                <Field label="Anrede" error={errors.anrede?.message}>
-                  <select {...register('anrede')} className="form-field">
+                <Field id="lead-anrede" label="Anrede" error={errors.anrede?.message}>
+                  <select
+                    id="lead-anrede"
+                    {...register('anrede')}
+                    className="form-field"
+                    aria-invalid={Boolean(errors.anrede)}
+                    aria-describedby={errors.anrede ? 'lead-anrede-error' : undefined}
+                  >
                     <option value="">Optional</option>
                     <option value="Frau">Frau</option>
                     <option value="Herr">Herr</option>
                     <option value="Divers">Divers</option>
                   </select>
                 </Field>
-                <Field label="Vor- und Nachname" error={errors.name?.message} required>
-                  <input {...register('name')} className="form-field" autoComplete="name" required />
+                <Field id="lead-name" label="Vor- und Nachname" error={errors.name?.message} required>
+                  <input
+                    id="lead-name"
+                    {...register('name')}
+                    className="form-field"
+                    autoComplete="name"
+                    required
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? 'lead-name-error' : undefined}
+                  />
                 </Field>
               </div>
 
               <div className="grid min-w-0 gap-5 md:grid-cols-2">
-                <Field label="E-Mail" error={errors.email?.message} required>
-                  <input {...register('email')} className="form-field" type="email" autoComplete="email" required />
+                <Field id="lead-email" label="E-Mail" error={errors.email?.message} required>
+                  <input
+                    id="lead-email"
+                    {...register('email')}
+                    className="form-field"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? 'lead-email-error' : undefined}
+                  />
                 </Field>
-                <Field label="Telefon" error={errors.telefon?.message} required>
-                  <input {...register('telefon')} className="form-field" type="tel" autoComplete="tel" required />
+                <Field id="lead-telefon" label="Telefon" error={errors.telefon?.message} required>
+                  <input
+                    id="lead-telefon"
+                    {...register('telefon')}
+                    className="form-field"
+                    type="tel"
+                    autoComplete="tel"
+                    required
+                    aria-invalid={Boolean(errors.telefon)}
+                    aria-describedby={errors.telefon ? 'lead-telefon-error' : undefined}
+                  />
                 </Field>
               </div>
 
-              <div>
-                <p className="text-sm font-semibold text-ink">Interesse</p>
+              <fieldset aria-describedby={errors.interesse?.message ? 'lead-interesse-error' : undefined}>
+                <legend className="text-sm font-semibold text-ink">
+                  Interesse <span className="text-xs font-semibold text-accent">(Pflichtfeld)</span>
+                </legend>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   {interests.map((interest) => {
                     const isSold = interest.status === 'verkauft'
@@ -199,6 +243,7 @@ export function Kontakt({ prefillTop }: Props) {
                           value={interest.label}
                           disabled={isSold}
                           className="h-4 w-4 accent-accent disabled:cursor-not-allowed disabled:opacity-45"
+                          aria-invalid={Boolean(errors.interesse)}
                           {...register('interesse')}
                         />
                         <span className="min-w-0 break-words">{interest.label}</span>
@@ -212,12 +257,20 @@ export function Kontakt({ prefillTop }: Props) {
                   })}
                 </div>
                 {errors.interesse?.message && (
-                  <p className="mt-2 text-sm text-danger">{errors.interesse.message}</p>
+                  <p id="lead-interesse-error" className="mt-2 text-sm text-danger" role="alert">
+                    {errors.interesse.message}
+                  </p>
                 )}
-              </div>
+              </fieldset>
 
-              <Field label="Nachricht" error={errors.nachricht?.message}>
-                <textarea {...register('nachricht')} className="form-field min-h-36 resize-y" />
+              <Field id="lead-nachricht" label="Nachricht" error={errors.nachricht?.message}>
+                <textarea
+                  id="lead-nachricht"
+                  {...register('nachricht')}
+                  className="form-field min-h-36 resize-y"
+                  aria-invalid={Boolean(errors.nachricht)}
+                  aria-describedby={errors.nachricht ? 'lead-nachricht-error' : undefined}
+                />
               </Field>
 
               <input
@@ -229,17 +282,32 @@ export function Kontakt({ prefillTop }: Props) {
               />
 
               <label className="flex min-w-0 gap-3 text-sm leading-6 text-muted">
-                <input type="checkbox" className="mt-1 h-4 w-4 accent-accent" {...register('datenschutz')} required />
+                <input
+                  type="checkbox"
+                  className="mt-1 h-4 w-4 accent-accent"
+                  {...register('datenschutz')}
+                  required
+                  aria-invalid={Boolean(errors.datenschutz)}
+                  aria-describedby={errors.datenschutz ? 'lead-datenschutz-error' : undefined}
+                />
                 <span className="min-w-0 break-words">
                   Ich habe die{' '}
                   <Link href="/datenschutz" className="font-semibold text-accent underline-offset-4 hover:underline">
-                    Datenschutzbestimmungen
+                    Datenschutzerklärung
                   </Link>{' '}
-                  gelesen und akzeptiere die Verarbeitung meiner Angaben.
+                  zur Kenntnis genommen.
                 </span>
               </label>
               {errors.datenschutz?.message && (
-                <p className="text-sm text-danger">{errors.datenschutz.message}</p>
+                <p id="lead-datenschutz-error" className="text-sm text-danger" role="alert">
+                  {errors.datenschutz.message}
+                </p>
+              )}
+
+              {submitError && (
+                <p className="rounded-md bg-danger/10 px-4 py-3 text-sm font-semibold text-danger" role="alert">
+                  {submitError}
+                </p>
               )}
 
               <Button type="submit" disabled={isSubmitting} className="w-full md:w-auto">
@@ -255,24 +323,30 @@ export function Kontakt({ prefillTop }: Props) {
 }
 
 function Field({
+  id,
   label,
   error,
   required,
   children,
 }: {
+  id: string
   label: string
   error?: string
   required?: boolean
   children: React.ReactNode
 }) {
   return (
-    <label className="grid min-w-0 gap-2">
+    <label htmlFor={id} className="grid min-w-0 gap-2">
       <span className="text-sm font-semibold text-ink">
         {label}
-        {required && <span className="text-accent2"> *</span>}
+        {required && <span className="text-xs font-semibold text-accent"> (Pflichtfeld)</span>}
       </span>
       {children}
-      {error && <span className="text-sm text-danger">{error}</span>}
+      {error && (
+        <span id={`${id}-error`} className="text-sm text-danger" role="alert">
+          {error}
+        </span>
+      )}
     </label>
   )
 }

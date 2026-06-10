@@ -1,12 +1,22 @@
 'use client'
 
 /* eslint-disable @next/next/no-img-element */
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { getCurrentConsent, openConsentSettings, subscribeConsent } from '@/lib/consent'
 
 const projectLocation: [number, number] = [47.542, 11.7044]
 
 export function LageMap() {
+  const [functionalAllowed, setFunctionalAllowed] = useState(false)
+
   useEffect(() => {
+    setFunctionalAllowed(getCurrentConsent().functional)
+    return subscribeConsent((consent) => setFunctionalAllowed(consent.functional))
+  }, [])
+
+  useEffect(() => {
+    if (!functionalAllowed) return
+
     let map: import('leaflet').Map | null = null
 
     async function init() {
@@ -37,11 +47,29 @@ export function LageMap() {
     return () => {
       map?.remove()
     }
-  }, [])
+  }, [functionalAllowed])
 
   return (
     <div className="relative overflow-hidden rounded-md border border-line bg-surface">
-      <div id="lage-map" className="h-[420px] w-full" aria-label="Interaktive Karte Achensee" />
+      {functionalAllowed ? (
+        <div id="lage-map" className="h-[420px] w-full" aria-label="Interaktive Karte Achensee" />
+      ) : (
+        <div className="grid min-h-[420px] place-items-center bg-bg p-6 text-center">
+          <div className="max-w-md">
+            <p className="font-serif text-3xl text-ink">Interaktive Karte</p>
+            <p className="mt-3 text-sm leading-6 text-muted">
+              Die Karte wird erst geladen, wenn Sie funktionalen Diensten zustimmen.
+            </p>
+            <button
+              type="button"
+              className="mt-5 rounded-md border border-accent bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#263f31] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              onClick={openConsentSettings}
+            >
+              Cookie-Einstellungen öffnen
+            </button>
+          </div>
+        </div>
+      )}
       <noscript>
         <img src="/img/lage-karte.jpg" alt="Statische Karte der Lage am Achensee" />
       </noscript>

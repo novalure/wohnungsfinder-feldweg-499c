@@ -1,7 +1,7 @@
 'use client'
 
 import { Menu, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
 import projectConfig from '@/config/project.json'
 import { ButtonLink } from './ui/Button'
 
@@ -37,6 +37,26 @@ export function Navigation() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
   const { project } = projectConfig
+
+  function focusAnchor(
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+    closeMenu = false,
+  ) {
+    if (!href.startsWith('#')) return
+
+    event.preventDefault()
+    if (closeMenu) setOpen(false)
+
+    window.requestAnimationFrame(() => {
+      const target = document.getElementById(href.slice(1))
+      if (!target) return
+
+      target.setAttribute('tabindex', '-1')
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      window.setTimeout(() => target.focus({ preventScroll: true }), 250)
+    })
+  }
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 80)
@@ -76,7 +96,12 @@ export function Navigation() {
           aria-label="Hauptnavigation links"
         >
           {leftNavItems.map(([label, href]) => (
-            <a key={href} href={href} className={`text-sm font-medium transition ${linkClasses}`}>
+            <a
+              key={href}
+              href={href}
+              className={`text-sm font-medium transition ${linkClasses}`}
+              onClick={(event) => focusAnchor(event, href)}
+            >
               {label}
             </a>
           ))}
@@ -88,6 +113,7 @@ export function Navigation() {
             solid ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
           }`}
           aria-label={`${project.name} Start`}
+          onClick={(event) => focusAnchor(event, '#hero')}
         >
           <ProjectWordmark compact />
         </a>
@@ -98,6 +124,7 @@ export function Navigation() {
             solid ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
           }`}
           aria-label={`${project.name} Start`}
+          onClick={(event) => focusAnchor(event, '#hero')}
         >
           <ProjectWordmark compact />
         </a>
@@ -114,12 +141,21 @@ export function Navigation() {
             aria-label="Hauptnavigation rechts"
           >
             {rightNavItems.map(([label, href]) => (
-              <a key={href} href={href} className={`text-sm font-medium transition ${linkClasses}`}>
+              <a
+                key={href}
+                href={href}
+                className={`text-sm font-medium transition ${linkClasses}`}
+                onClick={(event) => focusAnchor(event, href)}
+              >
                 {label}
               </a>
             ))}
           </nav>
-          <ButtonLink href="#kontakt" className="px-4 py-2.5">
+          <ButtonLink
+            href="#kontakt"
+            className="px-4 py-2.5"
+            onClick={(event) => focusAnchor(event, '#kontakt')}
+          >
             Exposé anfragen
           </ButtonLink>
         </div>
@@ -155,12 +191,16 @@ export function Navigation() {
                 key={href}
                 href={href}
                 className="font-serif text-4xl text-ink"
-                onClick={() => setOpen(false)}
+                onClick={(event) => focusAnchor(event, href, true)}
               >
                 {label}
               </a>
             ))}
-            <ButtonLink href="#kontakt" className="mt-4" onClick={() => setOpen(false)}>
+            <ButtonLink
+              href="#kontakt"
+              className="mt-4"
+              onClick={(event) => focusAnchor(event, '#kontakt', true)}
+            >
               Exposé anfragen
             </ButtonLink>
           </nav>
