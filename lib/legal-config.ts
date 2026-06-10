@@ -2,7 +2,9 @@ export const SITE_URL = 'https://wohnungsfinder-feldweg-499c.vercel.app'
 
 export const LEGAL = {
   controller: {
-    name: 'Immobilien- und Sachverständigenbüro Thomas Grasl',
+    name: 'Thomas Josef Grasl',
+    businessDesignation: 'GRASL Immobilien',
+    officeName: 'Immobilien- und Sachverständigenbüro Thomas Grasl',
     street: 'Münchner Straße 11 / 2. Stock',
     city: 'A-6130 Schwaz',
     country: 'Österreich',
@@ -14,7 +16,7 @@ export const LEGAL = {
     web: 'https://www.grasl-immobilien.at',
     webDisplay: 'www.grasl-immobilien.at',
     uid: 'ATU63080739',
-    gisa: 'wird nachgereicht',
+    gisa: '22446015',
     authority: 'Bezirkshauptmannschaft Schwaz',
   },
   processor: {

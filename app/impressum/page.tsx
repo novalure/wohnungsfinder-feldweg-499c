@@ -31,12 +31,16 @@ export default function ImpressumPage() {
           <p className="mt-4">
             {LEGAL.controller.name}
             <br />
+            Geschäftsbezeichnung: {LEGAL.controller.businessDesignation}
+            <br />
+            {LEGAL.controller.officeName}
+            <br />
             {LEGAL.controller.street}, {LEGAL.controller.city},{' '}
             {LEGAL.controller.country}
           </p>
           <ul className="mt-4 space-y-1">
             <li>- Rechtsform: Einzelunternehmen</li>
-            <li>- Inhaber: Thomas Grasl</li>
+            <li>- Medieninhaber / Inhaber: {LEGAL.controller.name}</li>
             <li>- UID-Nr.: {LEGAL.controller.uid}</li>
             <li>- GISA-Zahl: {LEGAL.controller.gisa}</li>
             <li>
@@ -62,8 +66,9 @@ export default function ImpressumPage() {
           <h2 className="font-serif text-3xl text-ink">Berufsrechtliche Angaben</h2>
           <ul className="mt-4 space-y-1">
             <li>
-              - Berufsbezeichnung: Immobilientreuhänder (Makler), verliehen in
-              Österreich
+              - Berufsbezeichnung: Immobilientreuhänder gemäß § 94 Z 35 GewO
+              1994, eingeschränkt auf Immobilienmakler und Immobilienverwalter,
+              verliehen in Österreich
             </li>
             <li>
               - Fachgruppe: Immobilien- und Vermögenstreuhänder, Wirtschaftskammer
