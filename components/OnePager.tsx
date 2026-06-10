@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Navigation } from './Navigation'
 import { ExitIntent } from './ExitIntent'
-import { StickyCta } from './StickyCta'
+import { StickyCtaBar } from './StickyCtaBar'
 import { Hero } from './sections/Hero'
 import { Intro } from './sections/Intro'
 import { Projekt } from './sections/Projekt'
@@ -65,7 +65,7 @@ export function OnePager() {
         <Kontakt prefillTop={prefillTop} />
       </main>
       <Footer />
-      <StickyCta onClick={handleGeneralAnfrage} />
+      <StickyCtaBar onInquiryClick={handleGeneralAnfrage} />
       <ExitIntent />
     </>
   )

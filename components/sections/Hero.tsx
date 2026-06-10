@@ -13,33 +13,41 @@ export function Hero() {
   const scale = useTransform(scrollY, [0, 700], [1, 1.08])
 
   return (
-    <section id="hero" className="relative min-h-[88svh] overflow-hidden md:min-h-screen">
+    <section id="hero" className="relative min-h-[64svh] overflow-hidden sm:min-h-[82svh] md:min-h-screen">
       <motion.div className="absolute inset-0" style={{ scale }}>
         <Image
-          src="/img/hero.png"
+          src="/img/hero-mobile.png"
+          alt="Wohnbauprojekt am Achensee mit Bergpanorama in der Abenddaemmerung"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center md:hidden"
+        />
+        <Image
+          src="/img/hero-rendering-night.jpg"
           alt="Wohnbauprojekt am Achensee mit Berg- und Wasserbezug"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[50%_52%] md:object-center"
+          className="hidden object-cover object-[50%_52%] md:block md:object-center"
         />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/35 to-ink/20" />
-      <div className="section-shell relative z-10 flex min-h-[88svh] flex-col items-center justify-center pt-24 text-center text-white md:min-h-screen">
-        <p className="eyebrow max-w-full break-words text-accent2">{project.address}</p>
-        <h1 className="mt-6 max-w-5xl text-balance break-words font-serif text-[3.15rem] font-semibold leading-[0.92] sm:text-6xl md:text-8xl">
+      <div className="section-shell relative z-10 flex min-h-[64svh] flex-col items-center justify-center pb-7 pt-20 text-center text-white sm:min-h-[82svh] sm:pb-0 sm:pt-24 md:min-h-screen">
+        <p className="eyebrow max-w-full break-words text-[0.68rem] text-accent2 sm:text-xs">{project.address}</p>
+        <h1 className="mt-4 max-w-5xl text-balance break-words font-serif text-[2.45rem] font-semibold leading-[0.92] sm:mt-6 sm:text-6xl md:text-8xl">
           {project.name}
         </h1>
-        <p className="mt-5 max-w-2xl text-sm font-normal uppercase tracking-[0.16em] text-white/76 sm:text-base">
+        <p className="mt-3 max-w-2xl text-xs font-normal uppercase tracking-[0.16em] text-white/76 sm:mt-5 sm:text-base">
           Bergblick und Nähe zum See
         </p>
-        <p className="mt-6 max-w-2xl text-base leading-7 text-white/88 md:text-xl md:leading-8">
+        <p className="mt-4 max-w-2xl text-sm leading-6 text-white/88 sm:mt-6 sm:text-base sm:leading-7 md:text-xl md:leading-8">
           {project.tagline}
         </p>
-        <p className="mt-3 max-w-3xl text-balance break-words font-serif text-2xl leading-tight text-white sm:text-3xl md:text-5xl">
+        <p className="mt-2 max-w-3xl text-balance break-words font-serif text-xl leading-tight text-white sm:mt-3 sm:text-3xl md:text-5xl">
           {project.claim}
         </p>
-        <div className="mt-9 flex w-full flex-wrap justify-center gap-3">
+        <div className="mt-6 flex w-full flex-wrap justify-center gap-3 sm:mt-9">
           <ButtonLink href="#kontakt">
             <Mail size={18} />
             Exposé anfragen
@@ -47,7 +55,7 @@ export function Hero() {
           <ButtonLink
             href={downloads.expose}
             variant="secondary"
-            className="border-white/40 bg-white/10 text-white hover:bg-white/20"
+            className="border-white/40 bg-white/10 text-white hover:bg-white/20 max-sm:hidden"
             onClick={() => trackPdfDownload('Expose Hero', downloads.expose)}
           >
             <Download size={18} />

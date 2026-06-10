@@ -4,32 +4,35 @@ import Image from 'next/image'
 import PhotoSwipeLightbox from 'photoswipe/lightbox'
 import { useEffect } from 'react'
 
-const images = [
+const mediaItems = [
   {
-    src: '/img/projekt-visualisierung-tag.png',
+    type: 'video',
+    src: '/video/hero-visualisation-video.mp4',
+    poster: '/img/projekt-visualisierung-tag.png',
     alt: 'Tagesvisualisierung der Vallis Achen Residenzen mit Bergpanorama',
-    width: 1672,
-    height: 941,
   },
   {
+    type: 'image',
     src: '/img/projekt-schlafzimmer.jpg',
-    alt: 'Schlafzimmer mit Naturholz, ruhigen Materialien und heller Atmosphäre',
+    alt: 'Schlafzimmer mit Naturholz, ruhigen Materialien und heller Atmosphaere',
     width: 2688,
     height: 1598,
   },
   {
+    type: 'image',
     src: '/img/projekt-bad.jpg',
     alt: 'Badezimmer mit Holzdetails, Glasdusche und heller Ausstattung',
     width: 2057,
     height: 1376,
   },
   {
+    type: 'image',
     src: '/img/projekt-wohnen.jpg',
     alt: 'Wohn- und Essbereich mit Balkon und Blick in die Berglandschaft',
-    width: 1377,
-    height: 768,
+    width: 3840,
+    height: 4416,
   },
-]
+] as const
 
 export function ProjectGallery() {
   useEffect(() => {
@@ -44,26 +47,47 @@ export function ProjectGallery() {
 
   return (
     <div id="projekt-gallery" className="grid grid-cols-2 gap-3">
-      {images.map((image, index) => (
-        <a
-          key={image.src}
-          href={image.src}
-          data-pswp-width={image.width}
-          data-pswp-height={image.height}
-          className={`relative overflow-hidden rounded-md ${
-            index === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
-          }`}
-          aria-label={`${image.alt} vergrößern`}
-        >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            sizes="(min-width: 1024px) 40vw, 100vw"
-            className="object-cover transition duration-700 hover:scale-105"
-          />
-        </a>
-      ))}
+      {mediaItems.map((item, index) => {
+        const className = `relative overflow-hidden rounded-md ${
+          index === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
+        }`
+
+        if (item.type === 'video') {
+          return (
+            <div key={item.src} className={className} aria-label={item.alt}>
+              <video
+                src={item.src}
+                poster={item.poster}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          )
+        }
+
+        return (
+          <a
+            key={item.src}
+            href={item.src}
+            data-pswp-width={item.width}
+            data-pswp-height={item.height}
+            className={className}
+            aria-label={`${item.alt} vergroessern`}
+          >
+            <Image
+              src={item.src}
+              alt={item.alt}
+              fill
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="object-cover transition duration-700 hover:scale-105"
+            />
+          </a>
+        )
+      })}
     </div>
   )
 }
