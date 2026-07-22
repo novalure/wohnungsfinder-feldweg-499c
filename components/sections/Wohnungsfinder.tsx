@@ -230,7 +230,13 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                             {formatM2(wohnung.wohnflaeche)}
                           </td>
                           <td className="px-1 py-3 text-right tabular-nums font-semibold text-ink sm:px-3">
-                            {formatEUR(wohnung.kpGesamt)}
+                            {isSold ? (
+                              <span className="text-danger" aria-label="Kaufpreis nicht verfuegbar">
+                                -
+                              </span>
+                            ) : (
+                              formatEUR(wohnung.kpGesamt)
+                            )}
                           </td>
                           <td className="px-2 py-3 text-center text-muted sm:px-3 lg:pl-2 lg:pr-6">
                             {isSold ? (

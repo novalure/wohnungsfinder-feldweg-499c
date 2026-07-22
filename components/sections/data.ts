@@ -69,7 +69,7 @@ export const WOHNUNGEN: Wohnung[] = [
     kpWohnung: 342930.5,
     kpParkplaetze: 25000,
     kpGesamt: 367930.5,
-    status: 'verfuegbar',
+    status: 'verkauft',
     highlights: ['Großzügiger Garten', 'Zwei Stellplätze', 'Kurze Wege ins Freie'],
     hotspot: { top: '61.4%', left: '22.4%', width: '19.4%', height: '21.8%' },
     grundriss: '/grundrisse/wohnung-3.png',
