@@ -254,6 +254,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                             )}
                           </td>
                         </tr>
+                        {!isSold && (
                         <tr aria-hidden={!isOpen}>
                           <td colSpan={5} className="p-0">
                             <div
@@ -271,6 +272,7 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                             </div>
                           </td>
                         </tr>
+                        )}
                       </FragmentRow>
                     )
                   })}
