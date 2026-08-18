@@ -187,9 +187,13 @@ function JsonLd({ wohnung }: { wohnung: Wohnung }) {
 export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
   const { project, contact, downloads } = projectConfig
   const sortedWohnungen = [...WOHNUNGEN].sort((a, b) => a.nr - b.nr)
-  const currentIndex = sortedWohnungen.findIndex((item) => item.nr === wohnung.nr)
-  const previous = sortedWohnungen[(currentIndex - 1 + sortedWohnungen.length) % sortedWohnungen.length]
-  const next = sortedWohnungen[(currentIndex + 1) % sortedWohnungen.length]
+  const availableUnits = sortedWohnungen.filter(
+    (item) => item.status === 'verfuegbar' && item.nr !== wohnung.nr,
+  )
+  const switchUnits =
+    availableUnits.length > 0
+      ? availableUnits
+      : sortedWohnungen.filter((item) => item.nr !== wohnung.nr)
   const copy = getApartmentCopy(wohnung)
   const outdoor = getWohnungOutdoorLabel(wohnung)
   const isSold = wohnung.status === 'verkauft'
@@ -457,18 +461,82 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
           </div>
         </section>
 
-        <nav className="section-shell flex flex-col gap-3 py-10 sm:flex-row sm:items-center sm:justify-between" aria-label="Wohnungen wechseln">
-          <ButtonLink href={getWohnungDetailPath(previous)} variant="secondary" className="justify-start">
-            <ArrowLeft size={18} aria-hidden="true" />
-            {previous.top}
-          </ButtonLink>
-          <ButtonLink href={getWohnungDetailPath(next)} variant="secondary" className="justify-start sm:justify-end">
-            {next.top}
-            <ArrowRight size={18} aria-hidden="true" />
-          </ButtonLink>
-        </nav>
+        <section className="py-20 md:py-24" aria-labelledby="weitere-einheiten-heading">
+          <div className="section-shell">
+            <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+              <div className="max-w-3xl">
+                <p className="eyebrow">Weitere Einheiten</p>
+                <h2
+                  id="weitere-einheiten-heading"
+                  className="mt-4 text-balance break-words font-serif text-[2.25rem] leading-[1.04] text-ink sm:text-5xl"
+                >
+                  Weitere verfügbare Wohnungen ansehen.
+                </h2>
+              </div>
+              <ButtonLink href="/#wohnungen" variant="secondary" className="w-fit">
+                Zur Übersicht
+                <ArrowRight size={18} aria-hidden="true" />
+              </ButtonLink>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              {switchUnits.map((unit) => (
+                <WohnungSwitchCard key={unit.nr} wohnung={unit} />
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
     </>
+  )
+}
+
+function WohnungSwitchCard({ wohnung }: { wohnung: Wohnung }) {
+  const outdoor = getWohnungOutdoorLabel(wohnung)
+  const isSold = wohnung.status === 'verkauft'
+
+  return (
+    <Link
+      href={getWohnungDetailPath(wohnung)}
+      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-md border border-line bg-surface shadow-soft transition hover:-translate-y-0.5 hover:border-accent/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      aria-label={`${wohnung.top} ansehen`}
+    >
+      <div className="relative aspect-[4/3] bg-bg">
+        <Image
+          src={wohnung.grundriss}
+          alt={`Grundriss ${wohnung.top}`}
+          fill
+          sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+          className="object-contain p-3 transition duration-500 group-hover:scale-[1.02]"
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-serif text-3xl leading-none text-ink">{wohnung.top}</h3>
+          <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${statusClasses[wohnung.status]}`}>
+            {WOHNUNG_STATUS_LABELS[wohnung.status]}
+          </span>
+        </div>
+        <dl className="mt-5 grid gap-2 text-sm">
+          <SwitchCardFact label="Wohnfläche" value={formatM2(wohnung.wohnflaeche)} />
+          <SwitchCardFact label="Zimmer" value={`${wohnung.zimmer}`} />
+          <SwitchCardFact label="Freifläche" value={outdoor || 'siehe Exposé'} />
+          <SwitchCardFact label="Preis" value={isSold ? 'verkauft' : formatEUR(wohnung.kpGesamt)} />
+        </dl>
+        <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent">
+          Details ansehen
+          <ArrowRight size={17} aria-hidden="true" />
+        </span>
+      </div>
+    </Link>
+  )
+}
+
+function SwitchCardFact({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-baseline justify-between gap-4 border-t border-line pt-2">
+      <dt className="text-muted">{label}</dt>
+      <dd className="min-w-0 break-words text-right font-semibold text-ink">{value}</dd>
+    </div>
   )
 }
 
