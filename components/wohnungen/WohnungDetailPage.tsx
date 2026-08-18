@@ -228,8 +228,8 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
       <main id="main-content" tabIndex={-1} className="bg-bg">
         <section className="relative min-h-[72svh] overflow-hidden bg-ink pt-24 text-white">
           <Image
-            src="/img/projekt-visualisierung-neu.jpg"
-            alt={`${project.name} am Achensee als Tagesvisualisierung für ${wohnung.top}`}
+            src="/img/hero-rendering-night.jpg"
+            alt={`${project.name} am Achensee als Visualisierung für ${wohnung.top}`}
             fill
             priority
             sizes="100vw"

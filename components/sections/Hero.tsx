@@ -16,20 +16,20 @@ export function Hero() {
     <section id="hero" className="relative min-h-[64svh] overflow-hidden sm:min-h-[82svh] md:min-h-screen">
       <motion.div className="absolute inset-0" style={{ scale }}>
         <Image
-          src="/img/projekt-visualisierung-neu.jpg"
-          alt="Tagesvisualisierung der Vallis Achen Residenzen mit Bergpanorama"
+          src="/img/hero-mobile.png"
+          alt="Wohnbauprojekt am Achensee mit Bergpanorama in der Abenddaemmerung"
           fill
           priority
           sizes="100vw"
           className="object-cover object-center md:hidden"
         />
         <Image
-          src="/img/projekt-visualisierung-neu.jpg"
-          alt="Tagesvisualisierung der Vallis Achen Residenzen mit Bergpanorama"
+          src="/img/hero-rendering-night.jpg"
+          alt="Wohnbauprojekt am Achensee mit Berg- und Wasserbezug"
           fill
           priority
           sizes="100vw"
-          className="hidden object-cover object-center md:block"
+          className="hidden object-cover object-[50%_52%] md:block md:object-center"
         />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/35 to-ink/20" />
