@@ -28,7 +28,7 @@ const trustBadges = [
 ]
 
 export function Bautraeger() {
-  const { company, contact } = projectConfig
+  const { company, contact, bautraeger } = projectConfig
 
   return (
     <section id="bautraeger" className="border-y border-line bg-surface py-28 md:py-36">
@@ -52,6 +52,11 @@ export function Bautraeger() {
                 Immobilienkauf aus einer Hand: Liegenschaftsbewertung,
                 Finanzierungsberatung, Vertragsservice und Energieausweis. Ein
                 Ansprechpartner, klare Zuständigkeiten.
+              </p>
+              <p>
+                Bauwerber und Grundeigentümer des Projekts ist laut Bau- und
+                Ausstattungsbeschreibung die {bautraeger.name},{' '}
+                {bautraeger.address}.
               </p>
             </div>
             <ButtonLink
@@ -83,6 +88,9 @@ export function Bautraeger() {
             <p className="mt-5 text-sm leading-6 text-muted">
               {company.name} · Münchner Straße 11 / 2. Stock,{' '}
               <span className="whitespace-nowrap">A-6130 Schwaz · Tel. {contact.telefonDisplay}</span>
+            </p>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              {bautraeger.role}: {bautraeger.name}, {bautraeger.address}.
             </p>
             <ConversionLinks className="mt-8" />
           </Reveal>

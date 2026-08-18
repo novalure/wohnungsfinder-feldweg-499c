@@ -22,52 +22,52 @@ import { LEGAL } from '@/lib/legal-config'
 const features: Array<{ icon: LucideIcon; title: string; subtitle: string }> = [
   {
     icon: Building2,
-    title: 'Massivbau in Ziegel und Beton',
-    subtitle: 'Solide Substanz für Generationen',
+    title: 'Passivhauskonforme Massivwand',
+    subtitle: 'Zusätzliches Wärmedämmsystem, u-Wert 0,15 W/m²K',
   },
   {
     icon: Flame,
-    title: 'Fernwärme & Fußbodenheizung',
-    subtitle: 'Behagliche Wärme aus regionaler Quelle',
+    title: 'Kommunale Fernwärme & Fußbodenheizung',
+    subtitle: 'Warmwasser-Fußbodenheizung mit witterungsgeführter Regelung',
   },
   {
     icon: PanelsTopLeft,
-    title: '3-fach-Verglasung, passivhausgeeignet',
-    subtitle: 'Ug ≤ 0,5 W/m²K, ruhige Räume',
+    title: 'Passivhausgeeignete Fenster',
+    subtitle: 'Ug ≤ 0,5 W/m²K, luftdichter Einbau nach ÖNORM B5320',
   },
   {
     icon: Leaf,
     title: LEGAL.energy.hwbShort,
-    subtitle: `fGEE ${LEGAL.energy.fgee} lt. Energieausweis`,
+    subtitle: `${LEGAL.energy.energyClass} laut Energieausweis vom ${LEGAL.energy.certificateDate}`,
   },
   {
     icon: BadgeCheck,
-    title: 'Blower-Door-zertifiziert',
-    subtitle: 'Geprüfte Winddichtigkeit nach OIB-RL 6',
+    title: 'Blower-Door-Test',
+    subtitle: 'Winddichtigkeit nach OIB-Richtlinie 6 mit Zertifikat',
   },
   {
     icon: Droplets,
-    title: 'Markensanitär, bodengleiche Dusche',
-    subtitle: 'Ausstattung nach Ausstattungslinie',
+    title: 'Sanitärausstattung',
+    subtitle: 'Dusche ca. 90 x 90, Waschtisch und WC',
   },
   {
     icon: ShieldCheck,
-    title: 'Sicherheits-Haustür, 5-fach-Verriegelung',
-    subtitle: 'Inkl. Sicherheitskarte und drei Schlüsseln',
+    title: 'Haustür & Sprechanlage',
+    subtitle: '5-fach-Verriegelung, drei Schlüssel und Audio-Gegensprechanlage',
   },
   {
     icon: Trees,
-    title: 'Privatgarten oder Balkon',
-    subtitle: 'Eigener Freiraum für jede Einheit',
+    title: 'Terrasse/Garten oder Balkon',
+    subtitle: 'EG mit Privatgarten, OG mit Balkon und Laubengang',
   },
 ]
 
 const materialPanelItems: Array<{ icon: LucideIcon; label: string }> = [
-  { icon: Building2, label: 'Massive Bauweise' },
-  { icon: Flame, label: 'Fernwärme & Fußbodenheizung' },
-  { icon: PanelsTopLeft, label: '3-fach-Verglasung' },
+  { icon: Building2, label: 'Massivwand + WDVS' },
+  { icon: Flame, label: 'Fernwärme + Fußbodenheizung' },
+  { icon: PanelsTopLeft, label: 'Fenster Ug ≤ 0,5' },
   { icon: Leaf, label: LEGAL.energy.hwbShort },
-  { icon: BadgeCheck, label: 'Blower-Door-zertifiziert' },
+  { icon: BadgeCheck, label: 'Blower-Door-Test' },
 ]
 
 export function Ausstattung() {
@@ -87,8 +87,8 @@ export function Ausstattung() {
                     Bauweise & Material
                   </p>
                   <p className="mt-3 max-w-md text-sm leading-6 text-ink/75 sm:text-base sm:leading-7">
-                    Solide Substanz, ruhige Oberflächen und geprüfte
-                    Energiequalität bilden die Grundlage der Ausstattung.
+                    Die Bau- und Ausstattungsbeschreibung vom 17.08.2026 bildet
+                    die Grundlage für Bauweise, Haustechnik und Ausführung.
                   </p>
                 </div>
                 <div className="mt-auto grid gap-3 pt-8 sm:grid-cols-2 sm:pt-10">
@@ -112,14 +112,15 @@ export function Ausstattung() {
             </h2>
             <div className="mt-6 grid gap-5 text-lg leading-8 text-muted md:grid-cols-2">
               <p>
-                Massive Bauweise, hochwertige Dämmung und solide Haustechnik bilden
-                die Grundlage für ein Wohngefühl, das sich wertbeständig anfühlt,
-                ohne laut zu werden.
+                Die Ausführung sieht passivhauskonforme Massivwände mit
+                zusätzlichem Wärmedämmsystem, passivhausgeeignete Fenster und
+                geprüfte Winddichtigkeit per Blower-Door-Test vor.
               </p>
               <p>
-                Die Ausführung ist auf Komfort, Energieeffizienz und langfristige
-                Werthaltigkeit ausgerichtet. Details werden in der Bau- und
-                Ausstattungsbeschreibung final festgelegt.
+                Heizung und Warmwasser erfolgen über kommunale Fernwärme und
+                Warmwasser-Fußbodenheizung. Jede Wohnung erhält eine
+                Audio-Gegensprechanlage; innen liegende Bäder oder WCs werden
+                mechanisch be- und entlüftet.
               </p>
             </div>
             <ButtonLink

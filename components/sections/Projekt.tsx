@@ -27,7 +27,7 @@ const facts: Array<{ icon: LucideIcon; title: string; subline: string }> = [
   {
     icon: Leaf,
     title: LEGAL.energy.hwbShort,
-    subline: `fGEE ${LEGAL.energy.fgee}`,
+    subline: `${LEGAL.energy.energyClass}, ${LEGAL.energy.heating}`,
   },
 ]
 
@@ -43,10 +43,11 @@ export function Projekt() {
             Ein kleines Ensemble mit klarem Anspruch.
           </h2>
           <p className="mt-6 text-lg leading-8 text-muted">
-            Sechs Eigentumswohnungen, bewusst proportioniert und auf ein
-            hochwertiges Wohnen in Tirol ausgerichtet. Die Planung setzt auf
-            helle Räume, private Freiflächen und eine Architektur, die sich
-            ruhig in den alpinen Kontext einfügt.
+            Sechs Eigentumswohnungen in einem Mehrfamilienhaus mit Erd- und
+            Obergeschoss, bewusst proportioniert und auf hochwertiges Wohnen in
+            Tirol ausgerichtet. Die Planung setzt auf helle Räume, private
+            Freiflächen und eine Architektur, die sich ruhig in den alpinen
+            Kontext einfügt.
           </p>
         </Reveal>
 
@@ -54,14 +55,15 @@ export function Projekt() {
           <Reveal>
             <div className="space-y-5 text-lg leading-8 text-muted">
               <p>
-                Der Wohnbau verbindet reduzierte Linien mit warmen Oberflächen und
-                solider Bauqualität. Jede Einheit ist auf dauerhafte Nutzbarkeit
-                ausgelegt: Kompakte Wege, gut möblierbare Räume, Außenflächen für
-                Morgenkaffee, Abendlicht und stille Stunden.
+                Der Wohnbau ist laut Bau- und Ausstattungsbeschreibung nicht
+                unterkellert. Im Erdgeschoss sind Lagerraum, Haustechnik,
+                Müllraum und Zugänge vorgesehen; das Obergeschoss wird über
+                Laubengang und Freitreppe erschlossen.
               </p>
               <p>
-                Käufer:innen erhalten eine überschaubare Projektgröße mit persönlicher
-                Betreuung, transparenten Unterlagen und klaren Entscheidungswegen.
+                Drei Erdgeschosswohnungen erhalten Terrasse und Garten, die
+                Obergeschosswohnungen private Balkone. Straßenseitig sind laut
+                Einreichplan 10 Freiparkplätze für Kfz vorgesehen.
               </p>
               <p className="text-base leading-7 text-muted/85">
                 Innenvisualisierungen zeigen beispielhafte Einrichtungsvorschläge

@@ -41,9 +41,11 @@ export const LEGAL = {
     region: 'USA (iad1)',
   },
   energy: {
-    hwb: '44 kWh/m²a',
-    hwbShort: 'HWB 44',
-    fgee: '0,70',
+    hwb: 'HWBRef,RK 32,8 kWh/m²a',
+    hwbShort: 'HWBRef,RK 32,8',
+    energyClass: 'Klasse B',
+    certificateDate: '02.06.2025',
+    heating: 'Fernwärme',
   },
   consent: {
     version: 1,

@@ -3,7 +3,16 @@ import projectConfig from '@/config/project.json'
 import { WOHNUNGEN } from '@/components/sections/data'
 import { SITE_URL } from '@/lib/legal-config'
 
-const { project, company } = projectConfig
+const { project, company, bautraeger } = projectConfig
+
+const projectAddress = {
+  '@type': 'PostalAddress',
+  streetAddress: 'Feldweg 499c',
+  postalCode: '6215',
+  addressLocality: 'Achenkirch',
+  addressRegion: 'Tirol',
+  addressCountry: 'AT',
+}
 
 function JsonLd() {
   const listings = WOHNUNGEN.map((wohnung) => ({
@@ -11,11 +20,7 @@ function JsonLd() {
     '@type': 'RealEstateListing',
     name: `${project.name} ${wohnung.top}`,
     url: `${SITE_URL}/#wohnungen`,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: project.address,
-      addressCountry: 'AT',
-    },
+    address: projectAddress,
     floorSize: {
       '@type': 'QuantitativeValue',
       value: wohnung.wohnflaeche,
@@ -36,7 +41,7 @@ function JsonLd() {
   const graph = [
     {
       '@context': 'https://schema.org',
-      '@type': 'Organization',
+      '@type': 'RealEstateAgent',
       name: company.name,
       legalName: company.legalName,
       address: company.address,
@@ -45,9 +50,28 @@ function JsonLd() {
     },
     {
       '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: bautraeger.name,
+      address: bautraeger.address,
+      description: bautraeger.role,
+    },
+    {
+      '@context': 'https://schema.org',
       '@type': 'Place',
       name: project.name,
-      address: project.address,
+      address: projectAddress,
+      additionalProperty: [
+        {
+          '@type': 'PropertyValue',
+          name: 'Bauwerber und Grundeigentümer',
+          value: bautraeger.name,
+        },
+        {
+          '@type': 'PropertyValue',
+          name: 'Energiekennwert',
+          value: project.hwb,
+        },
+      ],
     },
     ...listings,
   ]

@@ -8,7 +8,7 @@
     "anzahlWohnungen": 6,
     "wohnflaecheRange": "56,13-57,23 m²",
     "zimmerRange": "2 Zimmer",
-    "hwb": "44 kWh/m²a",
+    "hwb": "HWBRef,RK 32,8 kWh/m²a",
     "fertigstellung": "nach Vereinbarung",
     "preisAb": "ab € 340.690"
   },
@@ -33,9 +33,9 @@
     "portrait": "/img/ansprechpartner.jpg"
   },
   "bautraeger": {
-    "name": "Immobilien- und Sachverständigenbüro Thomas Grasl",
-    "logo": "/img/bautraeger-logo.svg",
-    "url": "https://www.grasl-immobilien.at"
+    "name": "J&J Wohnbau GmbH",
+    "address": "Christlumsiedlung 119a, A-6215 Achenkirch",
+    "role": "Bauwerber und Grundeigentümer laut Bau- und Ausstattungsbeschreibung"
   },
   "downloads": {
     "expose": "/pdf/Vallis-Achen-Residenzen_Expose.pdf",
