@@ -35,10 +35,10 @@ import { WohnungDetailGallery, type WohnungGalleryItem } from './WohnungDetailGa
 
 const galleryImages: WohnungGalleryItem[] = [
   {
-    src: '/img/projekt-visualisierung-tag.png',
-    alt: 'Außenvisualisierung der Vallis Achen Residenzen mit Bergpanorama',
-    width: 1672,
-    height: 941,
+    src: '/img/projekt-visualisierung-neu.jpg',
+    alt: 'Tagesvisualisierung der Vallis Achen Residenzen mit Bergpanorama',
+    width: 1344,
+    height: 672,
   },
   {
     src: '/img/projekt-wohnen.jpg',
@@ -143,7 +143,7 @@ function JsonLd({ wohnung }: { wohnung: Wohnung }) {
       },
       numberOfRooms: wohnung.zimmer,
       image: [
-        `${SITE_URL}/img/projekt-visualisierung-tag.png`,
+        `${SITE_URL}/img/projekt-visualisierung-neu.jpg`,
         `${SITE_URL}${wohnung.grundriss}`,
       ],
       amenityFeature: [
@@ -228,8 +228,8 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
       <main id="main-content" tabIndex={-1} className="bg-bg">
         <section className="relative min-h-[72svh] overflow-hidden bg-ink pt-24 text-white">
           <Image
-            src="/img/hero-rendering-night.jpg"
-            alt={`${project.name} am Achensee als Visualisierung für ${wohnung.top}`}
+            src="/img/projekt-visualisierung-neu.jpg"
+            alt={`${project.name} am Achensee als Tagesvisualisierung für ${wohnung.top}`}
             fill
             priority
             sizes="100vw"

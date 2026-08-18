@@ -6,10 +6,11 @@ import { useEffect } from 'react'
 
 const mediaItems = [
   {
-    type: 'video',
-    src: '/video/hero-visualisation-video.mp4',
-    poster: '/img/projekt-visualisierung-tag.png',
+    type: 'image',
+    src: '/img/projekt-visualisierung-neu.jpg',
     alt: 'Tagesvisualisierung der Vallis Achen Residenzen mit Bergpanorama',
+    width: 1344,
+    height: 672,
   },
   {
     type: 'image',
@@ -49,26 +50,8 @@ export function ProjectGallery() {
     <div id="projekt-gallery" className="grid grid-cols-2 gap-3">
       {mediaItems.map((item, index) => {
         const className = `relative overflow-hidden rounded-md ${
-          index === 0 ? 'col-span-2 aspect-[16/9]' : 'aspect-[4/3]'
+          index === 0 ? 'col-span-2 aspect-[2/1]' : 'aspect-[4/3]'
         }`
-
-        if (item.type === 'video') {
-          return (
-            <div key={item.src} className={className} aria-hidden="true">
-              <video
-                src={item.src}
-                poster={item.poster}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                aria-hidden="true"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          )
-        }
 
         return (
           <a

@@ -40,7 +40,7 @@ export function WohnungDetailGallery({ galleryId, items }: Props) {
             data-pswp-width={item.width}
             data-pswp-height={item.height}
             className={`group relative overflow-hidden rounded-md bg-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-              isFeature ? 'aspect-[16/9] sm:col-span-2 lg:col-span-2' : 'aspect-[4/3]'
+              isFeature ? 'aspect-[2/1] sm:col-span-2 lg:col-span-2' : 'aspect-[4/3]'
             }`}
             aria-label={`${item.alt} vergrößern`}
           >
