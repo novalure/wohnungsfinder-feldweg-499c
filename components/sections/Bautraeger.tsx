@@ -8,22 +8,32 @@ import { Reveal } from '@/components/Reveal'
 import { ButtonLink } from '@/components/ui/Button'
 import { ConversionLinks } from '@/components/ConversionLinks'
 
-const trustBadges = [
+type TrustBadgeItem =
+  | {
+      src: string
+      alt: string
+      label?: never
+    }
+  | {
+      label: string
+      src?: never
+      alt?: never
+    }
+
+const trustBadges: TrustBadgeItem[] = [
   {
-    src: '/logos/grasl.svg',
+    src: '/logos/grasl-immobilien.png',
     alt: 'GRASL Immobilien',
   },
   {
-    src: '/logos/immobilientreuhaender.svg',
-    alt: 'Beh. konz. Immobilientreuhänder',
-  },
-  {
     src: '/logos/sachverstaendiger.svg',
-    alt: 'Allg. beeideter & gerichtlich zertifizierter Sachverständiger',
+    alt: 'Allgemein beeideter und gerichtlich zertifizierter Sachverständiger',
   },
   {
-    src: '/logos/oevi.svg',
-    alt: 'ÖVI – Österreichischer Verband der Immobilienwirtschaft',
+    label: 'Logo folgt',
+  },
+  {
+    label: 'Logo folgt',
   },
 ]
 
@@ -74,13 +84,13 @@ export function Bautraeger() {
             <div className="overflow-hidden rounded-md border border-line bg-bg p-4 sm:p-6">
               <div className="logo-carousel">
                 <div className="logo-carousel-set">
-                  {trustBadges.map((badge) => (
-                    <TrustBadge key={badge.src} src={badge.src} alt={badge.alt} />
+                  {trustBadges.map((badge, index) => (
+                    <TrustBadge key={badge.src ?? `placeholder-${index}`} badge={badge} />
                   ))}
                 </div>
                 <div className="logo-carousel-set" aria-hidden="true">
-                  {trustBadges.map((badge) => (
-                    <TrustBadge key={`${badge.src}-clone`} src={badge.src} alt={badge.alt} />
+                  {trustBadges.map((badge, index) => (
+                    <TrustBadge key={`${badge.src ?? `placeholder-${index}`}-clone`} badge={badge} />
                   ))}
                 </div>
               </div>
@@ -101,21 +111,24 @@ export function Bautraeger() {
   )
 }
 
-function TrustBadge({ src, alt }: { src: string; alt: string }) {
+function TrustBadge({ badge }: { badge: TrustBadgeItem }) {
   const [failed, setFailed] = useState(false)
 
   return (
-    <div className="flex h-20 min-w-0 items-center justify-center rounded-sm border border-line bg-surface px-2 py-3 sm:px-3">
-      {failed ? (
-        <span className="text-center text-sm font-semibold leading-none text-muted">Logo</span>
+    <div className="flex h-20 min-w-0 items-center justify-center rounded-sm border border-line bg-white px-2 py-3 sm:px-3">
+      {'label' in badge || failed ? (
+        <span className="text-center text-sm font-medium leading-none text-muted">
+          {badge.label ?? 'Logo folgt'}
+        </span>
       ) : (
         <Image
-          src={src}
-          alt={alt}
-          width={140}
-          height={80}
-          className="max-h-12 w-auto max-w-[140px] object-contain"
+          src={badge.src}
+          alt={badge.alt}
+          width={180}
+          height={120}
+          className="max-h-14 w-auto max-w-[160px] object-contain"
           onError={() => setFailed(true)}
+          unoptimized={badge.src.endsWith('.svg')}
         />
       )}
     </div>
