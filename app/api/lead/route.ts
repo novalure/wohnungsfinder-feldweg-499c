@@ -40,6 +40,19 @@ export async function POST(request: Request) {
     )
   }
 
-  await sendLeadMail(parsed.data)
+  try {
+    await sendLeadMail(parsed.data)
+  } catch (error) {
+    console.error('Lead mail delivery failed:', error)
+    return NextResponse.json(
+      {
+        ok: false,
+        message:
+          'Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns per Telefon.',
+      },
+      { status: 500 },
+    )
+  }
+
   return NextResponse.json({ ok: true })
 }
