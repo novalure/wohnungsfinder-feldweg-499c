@@ -8,17 +8,10 @@ import { Reveal } from '@/components/Reveal'
 import { ButtonLink } from '@/components/ui/Button'
 import { ConversionLinks } from '@/components/ConversionLinks'
 
-type TrustBadgeItem =
-  | {
-      src: string
-      alt: string
-      label?: never
-    }
-  | {
-      label: string
-      src?: never
-      alt?: never
-    }
+type TrustBadgeItem = {
+  src: string
+  alt: string
+}
 
 const trustBadges: TrustBadgeItem[] = [
   {
@@ -30,10 +23,36 @@ const trustBadges: TrustBadgeItem[] = [
     alt: 'Allgemein beeideter und gerichtlich zertifizierter Sachverständiger',
   },
   {
-    label: 'Logo folgt',
+    src: '/logos/oevi.jpeg',
+    alt: 'OEVI Oesterreichischer Verband der Immobilienwirtschaft',
   },
   {
-    label: 'Logo folgt',
+    src: '/logos/tuev-austria-certified.jpeg',
+    alt: 'TUEV Austria Certified by Austrian',
+  },
+  {
+    src: '/logos/wko-immobilientreuhaender.jpeg',
+    alt: 'WKO Immobilien- und Vermoegenstreuhaender',
+  },
+  {
+    src: '/logos/immobilientreuhaender-staatlich-geprueft.jpeg',
+    alt: 'Immobilientreuhaender staatlich geprueft',
+  },
+  {
+    src: '/logos/thomas-grasl-sachverstaendiger.jpeg',
+    alt: 'Thomas GRASL allgemein beeideter und gerichtlich zertifizierter Sachverstaendiger',
+  },
+  {
+    src: '/logos/iso-iec-17024-zertifizierung.jpeg',
+    alt: 'DIN EN ISO IEC 17024 Zertifizierungsstelle fuer Sachverstaendige',
+  },
+  {
+    src: '/logos/justiz-gv-at.jpeg',
+    alt: 'Justiz.gv.at',
+  },
+  {
+    src: '/logos/svd.jpeg',
+    alt: 'SVD Sachverstaendigenlogo',
   },
 ]
 
@@ -85,12 +104,12 @@ export function Bautraeger() {
               <div className="logo-carousel">
                 <div className="logo-carousel-set">
                   {trustBadges.map((badge, index) => (
-                    <TrustBadge key={badge.src ?? `placeholder-${index}`} badge={badge} />
+                    <TrustBadge key={badge.src} badge={badge} priority={index < 2} />
                   ))}
                 </div>
                 <div className="logo-carousel-set" aria-hidden="true">
-                  {trustBadges.map((badge, index) => (
-                    <TrustBadge key={`${badge.src ?? `placeholder-${index}`}-clone`} badge={badge} />
+                  {trustBadges.map((badge) => (
+                    <TrustBadge key={`${badge.src}-clone`} badge={badge} />
                   ))}
                 </div>
               </div>
@@ -111,24 +130,25 @@ export function Bautraeger() {
   )
 }
 
-function TrustBadge({ badge }: { badge: TrustBadgeItem }) {
+function TrustBadge({ badge, priority = false }: { badge: TrustBadgeItem; priority?: boolean }) {
   const [failed, setFailed] = useState(false)
 
   return (
-    <div className="flex h-20 min-w-0 items-center justify-center rounded-sm border border-line bg-white px-2 py-3 sm:px-3">
-      {'label' in badge || failed ? (
+    <div className="flex h-24 w-44 flex-none items-center justify-center rounded-sm border border-line bg-white px-3 py-3 sm:w-48">
+      {failed ? (
         <span className="text-center text-sm font-medium leading-none text-muted">
-          {badge.label ?? 'Logo folgt'}
+          Logo folgt
         </span>
       ) : (
         <Image
           src={badge.src}
           alt={badge.alt}
-          width={180}
-          height={120}
-          className="max-h-14 w-auto max-w-[160px] object-contain"
+          width={220}
+          height={140}
+          className="max-h-16 w-auto max-w-[168px] object-contain sm:max-w-[184px]"
           onError={() => setFailed(true)}
           unoptimized={badge.src.endsWith('.svg')}
+          priority={priority}
         />
       )}
     </div>

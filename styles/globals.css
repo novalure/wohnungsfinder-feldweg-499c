@@ -145,15 +145,15 @@ img {
 
 .logo-carousel {
   display: flex;
-  width: 200%;
+  width: max-content;
+  min-width: 100%;
   gap: 0;
-  animation: logo-carousel-scroll 24s linear infinite;
+  animation: logo-carousel-scroll 44s linear infinite;
 }
 
 .logo-carousel-set {
-  display: grid;
-  min-width: 50%;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex: 0 0 auto;
   gap: 0.75rem;
   padding-right: 0.75rem;
 }
@@ -179,6 +179,7 @@ img {
   }
 
   .logo-carousel-set {
+    flex-wrap: wrap;
     min-width: 100%;
     padding-right: 0;
   }
