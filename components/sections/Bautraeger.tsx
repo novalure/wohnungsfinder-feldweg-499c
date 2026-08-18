@@ -23,11 +23,11 @@ const trustBadges: TrustBadgeItem[] = [
     alt: 'Allgemein beeideter und gerichtlich zertifizierter Sachverständiger',
   },
   {
-    src: '/logos/oevi.jpeg',
+    src: '/logos/oevi-transparent.png',
     alt: 'OEVI Oesterreichischer Verband der Immobilienwirtschaft',
   },
   {
-    src: '/logos/tuev-austria-certified.jpeg',
+    src: '/logos/tuev-austria-certified-transparent.png',
     alt: 'TUEV Austria Certified by Austrian',
   },
   {
@@ -62,8 +62,8 @@ export function Bautraeger() {
   return (
     <section id="bautraeger" className="border-y border-line bg-surface py-28 md:py-36">
       <div className="section-shell">
-        <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-          <Reveal>
+        <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start">
+          <Reveal className="min-w-0">
             <p className="eyebrow">Exklusiver Vertriebspartner</p>
             <h2 className="mt-4 text-balance break-words font-serif text-[2.45rem] leading-[1.02] text-ink sm:text-5xl md:text-6xl">
               GRASL Immobilien — Ihr Begleiter aus Schwaz.
@@ -99,8 +99,8 @@ export function Bautraeger() {
             </ButtonLink>
           </Reveal>
 
-          <Reveal delay={0.1}>
-            <div className="overflow-hidden rounded-md border border-line bg-bg p-4 sm:p-6">
+          <Reveal className="min-w-0" delay={0.1}>
+            <div className="max-w-full overflow-hidden rounded-md border border-line bg-bg p-4 sm:p-6">
               <div className="logo-carousel">
                 <div className="logo-carousel-set">
                   {trustBadges.map((badge, index) => (
@@ -134,7 +134,7 @@ function TrustBadge({ badge, priority = false }: { badge: TrustBadgeItem; priori
   const [failed, setFailed] = useState(false)
 
   return (
-    <div className="flex h-24 w-44 flex-none items-center justify-center rounded-sm border border-line bg-white px-3 py-3 sm:w-48">
+    <div className="flex h-20 w-36 flex-none items-center justify-center rounded-sm border border-line bg-white px-2 py-3 sm:w-40">
       {failed ? (
         <span className="text-center text-sm font-medium leading-none text-muted">
           Logo folgt
@@ -143,10 +143,11 @@ function TrustBadge({ badge, priority = false }: { badge: TrustBadgeItem; priori
         <Image
           src={badge.src}
           alt={badge.alt}
-          width={220}
-          height={140}
-          className="max-h-16 w-auto max-w-[168px] object-contain sm:max-w-[184px]"
+          width={180}
+          height={120}
+          className="max-h-12 w-auto max-w-[128px] object-contain sm:max-w-[140px]"
           onError={() => setFailed(true)}
+          loading="eager"
           unoptimized={badge.src.endsWith('.svg')}
           priority={priority}
         />
