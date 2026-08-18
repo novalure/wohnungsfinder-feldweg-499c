@@ -1,5 +1,11 @@
 export type WohnungsStatus = 'verfuegbar' | 'reserviert' | 'verkauft'
 
+export const WOHNUNG_STATUS_LABELS: Record<WohnungsStatus, string> = {
+  verfuegbar: 'verfügbar',
+  reserviert: 'reserviert',
+  verkauft: 'verkauft',
+}
+
 export interface Wohnung {
   nr: 1 | 2 | 3 | 4 | 5 | 6
   top: string
@@ -17,6 +23,30 @@ export interface Wohnung {
   highlights: string[]
   hotspot: { top: string; left: string; width: string; height: string }
   grundriss: string
+}
+
+export function getWohnungSlug(wohnung: Pick<Wohnung, 'nr'>): string {
+  return `wohnung-${wohnung.nr}`
+}
+
+export function getWohnungDetailPath(wohnung: Pick<Wohnung, 'nr'>): string {
+  return `/wohnungen/${getWohnungSlug(wohnung)}`
+}
+
+export function getWohnungBySlug(slug: string): Wohnung | undefined {
+  return WOHNUNGEN.find((wohnung) => getWohnungSlug(wohnung) === slug)
+}
+
+export function getWohnungFloorLabel(wohnung: Wohnung): string {
+  return wohnung.terrasse !== null ? 'Erdgeschoss' : 'Obergeschoss'
+}
+
+export function getWohnungOutdoorLabel(wohnung: Wohnung): string {
+  const parts: string[] = []
+  if (wohnung.terrasse !== null) parts.push(`Terrasse ${wohnung.terrasse.toLocaleString('de-AT')} m²`)
+  if (wohnung.balkon !== null) parts.push(`Balkon ${wohnung.balkon.toLocaleString('de-AT')} m²`)
+  if (wohnung.garten > 0) parts.push(`Garten ${wohnung.garten.toLocaleString('de-AT')} m²`)
+  return parts.join(', ')
 }
 
 export const WOHNUNGEN: Wohnung[] = [

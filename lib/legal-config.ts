@@ -45,7 +45,10 @@ export const LEGAL = {
     hwbShort: 'HWBRef,RK 32,8',
     energyClass: 'Klasse B',
     certificateDate: '02.06.2025',
-    heating: 'Fernwärme',
+    validUntil: '01.06.2035',
+    fgee: '0,73',
+    zeusNumber: '87001.25.29406.02',
+    heating: 'zentrale Luft-Wasser-Wärmepumpe',
   },
   consent: {
     version: 1,

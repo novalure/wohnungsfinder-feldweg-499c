@@ -40,7 +40,10 @@
   "downloads": {
     "expose": "/pdf/Vallis-Achen-Residenzen_Expose.pdf",
     "preisliste": "/pdf/Vallis-Achen-Residenzen_Preisliste.pdf",
-    "bab": "/pdf/Vallis-Achen-Residenzen_BAB.pdf"
+    "bab": "/pdf/Vallis-Achen-Residenzen_BAB.pdf",
+    "energieausweis": "/pdf/Vallis-Achen-Residenzen_Energieausweis.pdf",
+    "energieausweisUploadProtokoll": "/pdf/Vallis-Achen-Residenzen_Energieausweis-Upload-Protokoll.pdf",
+    "pruefergebnisBaubehoerde": "/pdf/Vallis-Achen-Residenzen_Pruefergebnis-Baubehoerde.pdf"
   },
   "tracking": {
     "ga4": "",

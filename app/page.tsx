@@ -1,6 +1,6 @@
 import { OnePager } from '@/components/OnePager'
 import projectConfig from '@/config/project.json'
-import { WOHNUNGEN } from '@/components/sections/data'
+import { getWohnungDetailPath, WOHNUNGEN } from '@/components/sections/data'
 import { SITE_URL } from '@/lib/legal-config'
 
 const { project, company, bautraeger } = projectConfig
@@ -19,7 +19,7 @@ function JsonLd() {
     '@context': 'https://schema.org',
     '@type': 'RealEstateListing',
     name: `${project.name} ${wohnung.top}`,
-    url: `${SITE_URL}/#wohnungen`,
+    url: `${SITE_URL}${getWohnungDetailPath(wohnung)}`,
     address: projectAddress,
     floorSize: {
       '@type': 'QuantitativeValue',

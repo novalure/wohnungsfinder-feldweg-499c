@@ -40,6 +40,17 @@ export function OnePager() {
   }, [])
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const wohnung = params.get('wohnung')
+    if (!wohnung) return
+
+    setPrefillTop(wohnung)
+    window.setTimeout(() => {
+      focusSection('kontakt')
+    }, 150)
+  }, [])
+
+  useEffect(() => {
     const seen = new Set<string>()
     const observer = new IntersectionObserver(
       (entries) => {

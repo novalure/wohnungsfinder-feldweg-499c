@@ -8,21 +8,22 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from 'react'
-import { ChevronDown, Image as ImageIcon, Send, X } from 'lucide-react'
+import { ArrowRight, ChevronDown, Image as ImageIcon, Send, X } from 'lucide-react'
 import projectConfig from '@/config/project.json'
+import { ButtonLink } from '@/components/ui/Button'
 import { trackEvent } from '@/lib/analytics'
 import { PROVISION_TEXT } from '@/lib/legal-config'
-import { WOHNUNGEN, type Wohnung, type WohnungsStatus } from './data'
+import {
+  getWohnungDetailPath,
+  WOHNUNGEN,
+  WOHNUNG_STATUS_LABELS,
+  type Wohnung,
+  type WohnungsStatus,
+} from './data'
 import { formatEUR, formatM2 } from './format'
 
 type Props = {
   onAnfrage?: (top: string, nr: number) => void
-}
-
-const statusLabels: Record<WohnungsStatus, string> = {
-  verfuegbar: 'verfügbar',
-  reserviert: 'reserviert',
-  verkauft: 'verkauft',
 }
 
 const statusClasses: Record<WohnungsStatus, string> = {
@@ -42,11 +43,6 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
   )
 
   const toggleActive = useCallback((nr: number) => {
-    const wohnung = WOHNUNGEN.find((item) => item.nr === nr)
-    if (wohnung?.status === 'verkauft') {
-      setActiveApt((current) => (current === nr ? null : current))
-      return
-    }
     setActiveApt((current) => (current === nr ? null : nr))
     trackEvent('wohnung_detail_open', { wohnung_nr: nr, top: `Top ${nr}` })
   }, [])
@@ -123,22 +119,18 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
 
               {sortedWohnungen.map((wohnung) => {
                 const active = isHighlighted(wohnung.nr)
-                const isSold = wohnung.status === 'verkauft'
                 return (
                   <button
                     key={wohnung.nr}
                     type="button"
-                    aria-label={isSold ? `${wohnung.top} ist verkauft` : `${wohnung.top} Details anzeigen`}
+                    aria-label={`${wohnung.top} Details anzeigen (${WOHNUNG_STATUS_LABELS[wohnung.status]})`}
                     aria-pressed={activeApt === wohnung.nr}
-                    aria-disabled={isSold}
                     onMouseEnter={() => handleEnter(wohnung.nr)}
                     onMouseLeave={handleLeave}
                     onFocus={() => handleEnter(wohnung.nr)}
                     onBlur={handleLeave}
                     onClick={() => toggleActive(wohnung.nr)}
-                    className={`absolute flex items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                      isSold ? 'cursor-not-allowed' : 'cursor-pointer'
-                    }`}
+                    className="absolute flex cursor-pointer items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     style={{
                       top: wohnung.hotspot.top,
                       left: wohnung.hotspot.left,
@@ -194,20 +186,17 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                     return (
                       <FragmentRow key={wohnung.nr}>
                         <tr
-                          role={isSold ? undefined : 'button'}
-                          tabIndex={isSold ? -1 : 0}
-                          aria-expanded={isSold ? undefined : isOpen}
-                          aria-controls={isSold ? undefined : detailId}
-                          aria-disabled={isSold ? true : undefined}
+                          role="button"
+                          tabIndex={0}
+                          aria-expanded={isOpen}
+                          aria-controls={detailId}
                           onMouseEnter={() => handleEnter(wohnung.nr)}
                           onMouseLeave={handleLeave}
                           onFocus={() => handleEnter(wohnung.nr)}
                           onBlur={handleLeave}
                           onClick={() => toggleActive(wohnung.nr)}
                           onKeyDown={(event) => onRowKeyDown(event, wohnung.nr)}
-                          className={`transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset ${
-                            isSold ? 'cursor-not-allowed' : 'cursor-pointer'
-                          }`}
+                          className="cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-inset"
                           style={{
                             backgroundColor: isSold
                               ? 'rgba(154,74,74,0.08)'
@@ -232,29 +221,22 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                           <td className="px-1 py-3 text-right tabular-nums font-semibold text-ink sm:px-3">
                             {isSold ? (
                               <span className="text-danger" aria-label="Kaufpreis nicht verfuegbar">
-                                -
+                                verkauft
                               </span>
                             ) : (
                               formatEUR(wohnung.kpGesamt)
                             )}
                           </td>
                           <td className="px-2 py-3 text-center text-muted sm:px-3 lg:pl-2 lg:pr-6">
-                            {isSold ? (
-                              <span className="block text-center text-base font-semibold text-danger">
-                                -
-                              </span>
-                            ) : (
-                              <ChevronDown
-                                size={16}
-                                className="mx-auto transition-transform duration-200 sm:h-[18px] sm:w-[18px]"
-                                style={{
-                                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                                }}
-                              />
-                            )}
+                            <ChevronDown
+                              size={16}
+                              className="mx-auto transition-transform duration-200 sm:h-[18px] sm:w-[18px]"
+                              style={{
+                                transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                              }}
+                            />
                           </td>
                         </tr>
-                        {!isSold && (
                         <tr aria-hidden={!isOpen}>
                           <td colSpan={5} className="p-0">
                             <div
@@ -272,7 +254,6 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                             </div>
                           </td>
                         </tr>
-                        )}
                       </FragmentRow>
                     )
                   })}
@@ -323,7 +304,7 @@ function StatusBadge({ status }: { status: WohnungsStatus }) {
     <span
       className={`mt-1 inline-flex rounded-full px-2 py-0.5 text-[10px] font-semibold sm:ml-2 sm:mt-0 sm:text-[11px] ${statusClasses[status]}`}
     >
-      {statusLabels[status]}
+      {WOHNUNG_STATUS_LABELS[status]}
     </span>
   )
 }
@@ -340,9 +321,15 @@ function DetailPanel({
   onClose: () => void
 }) {
   const hwb = projectConfig.project.hwb
+  const isSold = wohnung.status === 'verkauft'
 
   return (
     <div className="border-t border-line bg-bg px-4 py-5 md:px-6 md:py-6">
+      {isSold && (
+        <p className="mb-4 rounded-md bg-danger/10 px-4 py-3 text-sm font-semibold text-danger">
+          Diese Wohnung ist verkauft. Das Profil bleibt zur Übersicht und Vergleichbarkeit verfügbar.
+        </p>
+      )}
       {wohnung.status === 'reserviert' && (
         <p className="mb-4 rounded-md bg-warn/15 px-4 py-3 text-sm font-semibold text-[#7A5A10]">
           Hohe Nachfrage — sichern Sie sich Ihre Wohnung jetzt.
@@ -373,14 +360,28 @@ function DetailPanel({
           <button
             type="button"
             className="mt-6 inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#263f31] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            onClick={() => onAnfrage?.(wohnung.top, wohnung.nr)}
+            onClick={() => onAnfrage?.(isSold ? 'noch unentschlossen' : wohnung.top, wohnung.nr)}
           >
             <Send size={17} aria-hidden="true" />
-            {wohnung.top} anfragen
+            {isSold ? 'Alternative anfragen' : `${wohnung.top} anfragen`}
           </button>
+          <ButtonLink
+            href={getWohnungDetailPath(wohnung)}
+            variant="secondary"
+            className="ml-0 mt-3 sm:ml-3 sm:mt-6"
+            onClick={() =>
+              trackEvent('wohnung_detail_page_click', {
+                wohnung_nr: wohnung.nr,
+                top: wohnung.top,
+              })
+            }
+          >
+            Mehr Infos
+            <ArrowRight size={17} aria-hidden="true" />
+          </ButtonLink>
           <button
             type="button"
-            className="ml-3 mt-6 inline-flex items-center gap-2 rounded-md border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="ml-0 mt-3 inline-flex items-center gap-2 rounded-md border border-line bg-surface px-5 py-3 text-sm font-semibold text-ink transition hover:border-accent hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent sm:ml-3 sm:mt-6"
             onClick={onClose}
           >
             <X size={17} aria-hidden="true" />

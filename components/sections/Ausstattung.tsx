@@ -27,8 +27,8 @@ const features: Array<{ icon: LucideIcon; title: string; subtitle: string }> = [
   },
   {
     icon: Flame,
-    title: 'Kommunale Fernwärme & Fußbodenheizung',
-    subtitle: 'Warmwasser-Fußbodenheizung mit witterungsgeführter Regelung',
+    title: 'Luft-Wasser-Wärmepumpe & Fußbodenheizung',
+    subtitle: 'Zentrales Wärmepumpen-System laut Energieausweis',
   },
   {
     icon: PanelsTopLeft,
@@ -64,7 +64,7 @@ const features: Array<{ icon: LucideIcon; title: string; subtitle: string }> = [
 
 const materialPanelItems: Array<{ icon: LucideIcon; label: string }> = [
   { icon: Building2, label: 'Massivwand + WDVS' },
-  { icon: Flame, label: 'Fernwärme + Fußbodenheizung' },
+  { icon: Flame, label: 'Wärmepumpe + Fußbodenheizung' },
   { icon: PanelsTopLeft, label: 'Fenster Ug ≤ 0,5' },
   { icon: Leaf, label: LEGAL.energy.hwbShort },
   { icon: BadgeCheck, label: 'Blower-Door-Test' },
@@ -117,8 +117,8 @@ export function Ausstattung() {
                 geprüfte Winddichtigkeit per Blower-Door-Test vor.
               </p>
               <p>
-                Heizung und Warmwasser erfolgen über kommunale Fernwärme und
-                Warmwasser-Fußbodenheizung. Jede Wohnung erhält eine
+                Heizung und Warmwasser erfolgen laut Energieausweis über ein
+                zentrales Luft-Wasser-Wärmepumpen-System. Jede Wohnung erhält eine
                 Audio-Gegensprechanlage; innen liegende Bäder oder WCs werden
                 mechanisch be- und entlüftet.
               </p>
@@ -130,6 +130,15 @@ export function Ausstattung() {
             >
               <Download size={18} />
               Bau- und Ausstattungsbeschreibung herunterladen
+            </ButtonLink>
+            <ButtonLink
+              href={downloads.energieausweis}
+              variant="secondary"
+              className="ml-0 mt-3 sm:ml-3 sm:mt-8"
+              onClick={() => trackPdfDownload('Energieausweis Ausstattung', downloads.energieausweis)}
+            >
+              <Download size={18} />
+              Energieausweis herunterladen
             </ButtonLink>
           </Reveal>
         </div>

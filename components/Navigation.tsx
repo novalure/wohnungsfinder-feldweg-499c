@@ -1,18 +1,19 @@
 'use client'
 
 import { Menu, X } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState, type MouseEvent } from 'react'
 import projectConfig from '@/config/project.json'
 import { ButtonLink } from './ui/Button'
 
 const navItems = [
-  ['Projekt', '#projekt'],
-  ['Lage', '#lage'],
-  ['Wohnungen', '#wohnungen'],
-  ['Ausstattung', '#ausstattung'],
-  ['Vertrieb', '#bautraeger'],
-  ['Kontakt', '#kontakt'],
-]
+  { label: 'Projekt', sectionId: 'projekt' },
+  { label: 'Lage', sectionId: 'lage' },
+  { label: 'Wohnungen', sectionId: 'wohnungen' },
+  { label: 'Ausstattung', sectionId: 'ausstattung' },
+  { label: 'Vertrieb', sectionId: 'bautraeger' },
+  { label: 'Kontakt', sectionId: 'kontakt' },
+] as const
 
 const leftNavItems = navItems.slice(0, 3)
 const rightNavItems = navItems.slice(3)
@@ -36,7 +37,11 @@ function ProjectWordmark({ compact = false }: { compact?: boolean }) {
 export function Navigation() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
   const { project } = projectConfig
+  const isHome = pathname === '/'
+  const getSectionHref = (sectionId: string) => (isHome ? `#${sectionId}` : `/#${sectionId}`)
+  const heroHref = isHome ? '#hero' : '/#hero'
 
   function focusAnchor(
     event: MouseEvent<HTMLAnchorElement>,
@@ -95,36 +100,39 @@ export function Navigation() {
           }`}
           aria-label="Hauptnavigation links"
         >
-          {leftNavItems.map(([label, href]) => (
-            <a
-              key={href}
-              href={href}
-              className={`text-sm font-medium transition ${linkClasses}`}
-              onClick={(event) => focusAnchor(event, href)}
-            >
-              {label}
-            </a>
-          ))}
+          {leftNavItems.map(({ label, sectionId }) => {
+            const href = getSectionHref(sectionId)
+            return (
+              <a
+                key={href}
+                href={href}
+                className={`text-sm font-medium transition ${linkClasses}`}
+                onClick={(event) => focusAnchor(event, href)}
+              >
+                {label}
+              </a>
+            )
+          })}
         </nav>
 
         <a
-          href="#hero"
+          href={heroHref}
           className={`hidden overflow-hidden text-center transition-all duration-500 ease-out lg:block ${
             solid ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
           }`}
           aria-label={`${project.name} Start`}
-          onClick={(event) => focusAnchor(event, '#hero')}
+          onClick={(event) => focusAnchor(event, heroHref)}
         >
           <ProjectWordmark compact />
         </a>
 
         <a
-          href="#hero"
+          href={heroHref}
           className={`min-w-0 overflow-hidden text-center transition-all duration-500 ease-out lg:hidden ${
             solid ? 'scale-100 opacity-100' : 'pointer-events-none scale-95 opacity-0'
           }`}
           aria-label={`${project.name} Start`}
-          onClick={(event) => focusAnchor(event, '#hero')}
+          onClick={(event) => focusAnchor(event, heroHref)}
         >
           <ProjectWordmark compact />
         </a>
@@ -140,21 +148,24 @@ export function Navigation() {
             }`}
             aria-label="Hauptnavigation rechts"
           >
-            {rightNavItems.map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                className={`text-sm font-medium transition ${linkClasses}`}
-                onClick={(event) => focusAnchor(event, href)}
-              >
-                {label}
-              </a>
-            ))}
+            {rightNavItems.map(({ label, sectionId }) => {
+              const href = getSectionHref(sectionId)
+              return (
+                <a
+                  key={href}
+                  href={href}
+                  className={`text-sm font-medium transition ${linkClasses}`}
+                  onClick={(event) => focusAnchor(event, href)}
+                >
+                  {label}
+                </a>
+              )
+            })}
           </nav>
           <ButtonLink
-            href="#kontakt"
+            href={getSectionHref('kontakt')}
             className="px-4 py-2.5"
-            onClick={(event) => focusAnchor(event, '#kontakt')}
+            onClick={(event) => focusAnchor(event, getSectionHref('kontakt'))}
           >
             Exposé anfragen
           </ButtonLink>
@@ -186,20 +197,23 @@ export function Navigation() {
             </button>
           </div>
           <nav className="mt-14 grid gap-7" aria-label="Mobile Navigation">
-            {navItems.map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                className="font-serif text-4xl text-ink"
-                onClick={(event) => focusAnchor(event, href, true)}
-              >
-                {label}
-              </a>
-            ))}
+            {navItems.map(({ label, sectionId }) => {
+              const href = getSectionHref(sectionId)
+              return (
+                <a
+                  key={href}
+                  href={href}
+                  className="font-serif text-4xl text-ink"
+                  onClick={(event) => focusAnchor(event, href, true)}
+                >
+                  {label}
+                </a>
+              )
+            })}
             <ButtonLink
-              href="#kontakt"
+              href={getSectionHref('kontakt')}
               className="mt-4"
-              onClick={(event) => focusAnchor(event, '#kontakt', true)}
+              onClick={(event) => focusAnchor(event, getSectionHref('kontakt'), true)}
             >
               Exposé anfragen
             </ButtonLink>
