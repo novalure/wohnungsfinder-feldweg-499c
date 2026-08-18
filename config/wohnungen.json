@@ -8,7 +8,7 @@
     "ausrichtung": "siehe Exposé",
     "stockwerk": "EG",
     "preis": 382258,
-    "status": "verfuegbar",
+    "status": "verkauft",
     "grundriss": "/grundrisse/wohnung-1.png",
     "highlights": ["Privater Garten", "Zwei Stellplätze", "Ruhige Orientierung"]
   },
@@ -34,7 +34,7 @@
     "ausrichtung": "siehe Exposé",
     "stockwerk": "EG",
     "preis": 367930.5,
-    "status": "verfuegbar",
+    "status": "verkauft",
     "grundriss": "/grundrisse/wohnung-3.png",
     "highlights": ["Großzügiger Garten", "Zwei Stellplätze", "Kurze Wege ins Freie"]
   },

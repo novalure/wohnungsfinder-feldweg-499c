@@ -187,13 +187,15 @@ function JsonLd({ wohnung }: { wohnung: Wohnung }) {
 export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
   const { project, contact, downloads } = projectConfig
   const sortedWohnungen = [...WOHNUNGEN].sort((a, b) => a.nr - b.nr)
-  const availableUnits = sortedWohnungen.filter(
-    (item) => item.status === 'verfuegbar' && item.nr !== wohnung.nr,
-  )
+  const availableUnits = sortedWohnungen.filter((item) => item.status === 'verfuegbar')
   const switchUnits =
     availableUnits.length > 0
       ? availableUnits
       : sortedWohnungen.filter((item) => item.nr !== wohnung.nr)
+  const switchTitle =
+    availableUnits.length > 0
+      ? `${availableUnits.length} verfügbare Wohnungen im Überblick.`
+      : 'Weitere Wohnungen im Überblick.'
   const copy = getApartmentCopy(wohnung)
   const outdoor = getWohnungOutdoorLabel(wohnung)
   const isSold = wohnung.status === 'verkauft'
@@ -465,12 +467,12 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
           <div className="section-shell">
             <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
               <div className="max-w-3xl">
-                <p className="eyebrow">Weitere Einheiten</p>
+                <p className="eyebrow">Verfügbare Einheiten</p>
                 <h2
                   id="weitere-einheiten-heading"
                   className="mt-4 text-balance break-words font-serif text-[2.25rem] leading-[1.04] text-ink sm:text-5xl"
                 >
-                  Weitere verfügbare Wohnungen ansehen.
+                  {switchTitle}
                 </h2>
               </div>
               <ButtonLink href="/#wohnungen" variant="secondary" className="w-fit">
@@ -480,7 +482,7 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
             </div>
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {switchUnits.map((unit) => (
-                <WohnungSwitchCard key={unit.nr} wohnung={unit} />
+                <WohnungSwitchCard key={unit.nr} wohnung={unit} isCurrent={unit.nr === wohnung.nr} />
               ))}
             </div>
           </div>
@@ -490,15 +492,18 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
   )
 }
 
-function WohnungSwitchCard({ wohnung }: { wohnung: Wohnung }) {
+function WohnungSwitchCard({ wohnung, isCurrent }: { wohnung: Wohnung; isCurrent: boolean }) {
   const outdoor = getWohnungOutdoorLabel(wohnung)
   const isSold = wohnung.status === 'verkauft'
 
   return (
     <Link
       href={getWohnungDetailPath(wohnung)}
-      className="group flex h-full min-w-0 flex-col overflow-hidden rounded-md border border-line bg-surface shadow-soft transition hover:-translate-y-0.5 hover:border-accent/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-      aria-label={`${wohnung.top} ansehen`}
+      className={`group flex h-full min-w-0 flex-col overflow-hidden rounded-md border bg-surface shadow-soft transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+        isCurrent ? 'border-accent/50 ring-2 ring-accent/15' : 'border-line hover:border-accent/40'
+      }`}
+      aria-current={isCurrent ? 'page' : undefined}
+      aria-label={isCurrent ? `${wohnung.top} ist die aktuelle Wohnung` : `${wohnung.top} ansehen`}
     >
       <div className="relative aspect-[4/3] bg-bg">
         <Image
@@ -512,9 +517,16 @@ function WohnungSwitchCard({ wohnung }: { wohnung: Wohnung }) {
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-serif text-3xl leading-none text-ink">{wohnung.top}</h3>
-          <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${statusClasses[wohnung.status]}`}>
-            {WOHNUNG_STATUS_LABELS[wohnung.status]}
-          </span>
+          <div className="flex flex-wrap justify-end gap-2">
+            {isCurrent && (
+              <span className="rounded-full bg-accent/10 px-2.5 py-1 text-[11px] font-semibold text-accent">
+                Aktuell
+              </span>
+            )}
+            <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${statusClasses[wohnung.status]}`}>
+              {WOHNUNG_STATUS_LABELS[wohnung.status]}
+            </span>
+          </div>
         </div>
         <dl className="mt-5 grid gap-2 text-sm">
           <SwitchCardFact label="Wohnfläche" value={formatM2(wohnung.wohnflaeche)} />
@@ -523,8 +535,8 @@ function WohnungSwitchCard({ wohnung }: { wohnung: Wohnung }) {
           <SwitchCardFact label="Preis" value={isSold ? 'verkauft' : formatEUR(wohnung.kpGesamt)} />
         </dl>
         <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent">
-          Details ansehen
-          <ArrowRight size={17} aria-hidden="true" />
+          {isCurrent ? 'Aktuelle Wohnung' : 'Details ansehen'}
+          {!isCurrent && <ArrowRight size={17} aria-hidden="true" />}
         </span>
       </div>
     </Link>
