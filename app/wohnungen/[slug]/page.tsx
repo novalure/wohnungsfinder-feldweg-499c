@@ -10,7 +10,7 @@ import {
   WOHNUNGEN,
   WOHNUNG_STATUS_LABELS,
 } from '@/components/sections/data'
-import { SITE_URL } from '@/lib/legal-config'
+import { absUrl } from '@/lib/site'
 import { formatEUR, formatM2 } from '@/components/sections/format'
 import projectConfig from '@/config/project.json'
 
@@ -40,12 +40,15 @@ export function generateMetadata({ params }: Props): Metadata {
   }
 
   const path = getWohnungDetailPath(wohnung)
+  const detailUrl = absUrl(path)
+  const isSold = wohnung.status === 'verkauft'
   const status = WOHNUNG_STATUS_LABELS[wohnung.status]
-  const price = wohnung.status === 'verkauft' ? status : formatEUR(wohnung.kpGesamt)
-  const description = `${wohnung.top} in Achenkirch: ${formatM2(wohnung.wohnflaeche)}, ${wohnung.zimmer} Zimmer, ${getWohnungFloorLabel(wohnung)}, ${getWohnungOutdoorLabel(wohnung)}. Grundriss, Bilder, Energieausweis und Anfrage. Kaufpreis: ${price}.`
+  const outdoor = getWohnungOutdoorLabel(wohnung)
+  const price = isSold ? status : formatEUR(wohnung.kpGesamt)
+  const description = `${wohnung.top} in Achenkirch am Achensee: ${formatM2(wohnung.wohnflaeche)}, ${wohnung.zimmer} Zimmer, ${getWohnungFloorLabel(wohnung)}, ${outdoor || 'Freifläche laut Exposé'}, ${wohnung.parkplaetze} Stellplatz${wohnung.parkplaetze === 1 ? '' : 'e'}. Status: ${status}. Kaufpreis gesamt: ${price}.`
 
   return {
-    title: `${wohnung.top} kaufen | Feldweg 499c Achenkirch`,
+    title: `${wohnung.top}: ${wohnung.zimmer}-Zimmer-Wohnung ${formatM2(wohnung.wohnflaeche)} in Achenkirch | ${status}`,
     description,
     alternates: {
       canonical: path,
@@ -54,18 +57,19 @@ export function generateMetadata({ params }: Props): Metadata {
       },
     },
     robots: {
-      index: true,
+      index: !isSold,
       follow: true,
     },
     openGraph: {
       title: `${wohnung.top} | ${projectConfig.project.name}`,
       description,
-      url: `${SITE_URL}${path}`,
+      url: detailUrl,
       locale: 'de_AT',
+      siteName: 'Vallis Achen Residenzen',
       type: 'website',
       images: [
         {
-          url: '/img/og-image.jpg',
+          url: absUrl('/img/og-image.jpg'),
           width: 1200,
           height: 630,
           alt: `${projectConfig.project.name} ${wohnung.top}`,
@@ -76,7 +80,7 @@ export function generateMetadata({ params }: Props): Metadata {
       card: 'summary_large_image',
       title: `${wohnung.top} | ${projectConfig.project.name}`,
       description,
-      images: ['/img/og-image.jpg'],
+      images: [absUrl('/img/og-image.jpg')],
     },
   }
 }

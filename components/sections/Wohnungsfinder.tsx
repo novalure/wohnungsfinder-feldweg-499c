@@ -286,6 +286,7 @@ function TableHead({
 }) {
   return (
     <th
+      scope="col"
       className={`px-1 py-3 text-[9px] font-semibold uppercase tracking-[0.08em] text-muted sm:px-3 sm:text-xs sm:tracking-[0.14em] ${
         align === 'right' ? 'text-right' : 'text-left'
       }`}
@@ -394,14 +395,14 @@ function DetailPanel({
             type="button"
             onClick={onOpenLightbox}
             aria-label={`Grundriss ${wohnung.top} vergrößern`}
-            className="group relative block w-full overflow-hidden rounded-md border border-line bg-surface transition-shadow hover:shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="group relative block aspect-[19/13] w-full overflow-hidden rounded-md border border-line bg-surface transition-shadow hover:shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Image
               src={wohnung.grundriss}
               alt={`Grundriss ${wohnung.top}`}
-              width={760}
-              height={520}
-              className="block h-auto w-full"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-contain p-3"
               loading="lazy"
             />
             <span className="absolute inset-0 flex items-center justify-center bg-black/0 text-sm text-white opacity-0 transition group-hover:bg-black/30 group-hover:opacity-100">
@@ -454,14 +455,16 @@ function Lightbox({ wohnung, onClose }: { wohnung: Wohnung; onClose: () => void 
       >
         <X size={24} />
       </button>
-      <div onClick={(event) => event.stopPropagation()} className="max-h-full w-full max-w-6xl">
-        <Image
-          src={wohnung.grundriss}
-          alt={`Grundriss ${wohnung.top} vergrößert`}
-          width={1600}
-          height={1100}
-          className="h-auto max-h-[90vh] w-full rounded-md object-contain shadow-2xl"
-        />
+      <div onClick={(event) => event.stopPropagation()} className="w-full max-w-6xl">
+        <div className="relative h-[calc(100vh-7rem)] w-full">
+          <Image
+            src={wohnung.grundriss}
+            alt={`Grundriss ${wohnung.top} vergrößert`}
+            fill
+            sizes="100vw"
+            className="rounded-md object-contain shadow-2xl"
+          />
+        </div>
         <p className="mt-3 text-center text-sm text-white/90">{wohnung.top} · Grundriss</p>
       </div>
     </div>

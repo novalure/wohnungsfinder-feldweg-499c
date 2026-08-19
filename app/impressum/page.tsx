@@ -4,6 +4,7 @@ import { LEGAL, PROVISION_TEXT } from '@/lib/legal-config'
 export const metadata = {
   title: 'Impressum',
   alternates: { canonical: '/impressum' },
+  robots: { index: false, follow: true },
 }
 
 export default function ImpressumPage() {

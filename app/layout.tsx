@@ -6,7 +6,7 @@ import '../styles/globals.css'
 import projectConfig from '@/config/project.json'
 import { CookieConsent } from '@/components/consent/CookieConsent'
 import { SiteFooter } from '@/components/layout/SiteFooter'
-import { SITE_URL } from '@/lib/legal-config'
+import { SITE_URL } from '@/lib/site'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     description:
       'Sechs exklusive Eigentumswohnungen am Achensee. Exposé anfragen und persönliche Beratung sichern.',
     locale: 'de_AT',
+    siteName: 'Vallis Achen Residenzen',
     type: 'website',
     images: [
       {
@@ -52,7 +53,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: `${project.name} — Eigentumswohnungen am Achensee`,
-    description: 'Wohnbauprojekt mit 6 Eigentumswohnungen in Tirol.',
+    description:
+      'Eigentumswohnungen am Achensee in Tirol mit Bergblick, ruhiger Architektur und persönlicher Beratung durch GRASL Immobilien.',
     images: ['/img/og-image.jpg'],
   },
 }

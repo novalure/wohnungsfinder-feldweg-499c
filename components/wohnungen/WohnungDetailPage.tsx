@@ -30,7 +30,8 @@ import {
   type Wohnung,
 } from '@/components/sections/data'
 import { formatEUR, formatM2 } from '@/components/sections/format'
-import { LEGAL, SITE_URL } from '@/lib/legal-config'
+import { buildWohnungDetailJsonLd } from '@/lib/jsonld'
+import { LEGAL } from '@/lib/legal-config'
 import { WohnungDetailGallery, type WohnungGalleryItem } from './WohnungDetailGallery'
 
 const galleryImages: WohnungGalleryItem[] = [
@@ -78,15 +79,6 @@ const statusClasses: Record<Wohnung['status'], string> = {
   verkauft: 'bg-danger text-white',
 }
 
-const projectAddress = {
-  '@type': 'PostalAddress',
-  streetAddress: 'Feldweg 499c',
-  postalCode: '6215',
-  addressLocality: 'Achenkirch',
-  addressRegion: 'Tirol',
-  addressCountry: 'AT',
-}
-
 function buildInquiryHref(wohnung: Wohnung) {
   const interest = wohnung.status === 'verkauft' ? 'noch unentschlossen' : wohnung.top
   return `/?wohnung=${encodeURIComponent(interest)}#kontakt`
@@ -125,60 +117,11 @@ function getApartmentCopy(wohnung: Wohnung) {
 }
 
 function JsonLd({ wohnung }: { wohnung: Wohnung }) {
-  const url = `${SITE_URL}${getWohnungDetailPath(wohnung)}`
-  const isSold = wohnung.status === 'verkauft'
-  const outdoor = getWohnungOutdoorLabel(wohnung)
-  const graph = [
-    {
-      '@type': 'Apartment',
-      '@id': `${url}#apartment`,
-      name: `${projectConfig.project.name} ${wohnung.top}`,
-      url,
-      address: projectAddress,
-      floorLevel: getWohnungFloorLabel(wohnung),
-      floorSize: {
-        '@type': 'QuantitativeValue',
-        value: wohnung.wohnflaeche,
-        unitCode: 'MTK',
-      },
-      numberOfRooms: wohnung.zimmer,
-      image: [
-        `${SITE_URL}/img/projekt-visualisierung-neu.jpg`,
-        `${SITE_URL}${wohnung.grundriss}`,
-      ],
-      amenityFeature: [
-        {
-          '@type': 'LocationFeatureSpecification',
-          name: outdoor || 'Private Freifläche',
-          value: Boolean(outdoor),
-        },
-        {
-          '@type': 'LocationFeatureSpecification',
-          name: `${wohnung.parkplaetze} Freistellplatz${wohnung.parkplaetze === 1 ? '' : 'e'}`,
-          value: true,
-        },
-      ],
-    },
-    {
-      '@type': 'Offer',
-      url,
-      priceCurrency: 'EUR',
-      ...(isSold ? {} : { price: wohnung.kpGesamt }),
-      availability: isSold ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
-      itemOffered: {
-        '@id': `${url}#apartment`,
-      },
-    },
-  ]
-
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          '@context': 'https://schema.org',
-          '@graph': graph,
-        }),
+        __html: JSON.stringify(buildWohnungDetailJsonLd(wohnung)),
       }}
     />
   )
@@ -353,15 +296,15 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
               </h2>
               <a
                 href={wohnung.grundriss}
-                className="mt-8 block overflow-hidden rounded-md border border-line bg-surface shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="relative mt-8 block aspect-[19/13] overflow-hidden rounded-md border border-line bg-surface shadow-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 aria-label={`Grundriss ${wohnung.top} vergrößern`}
               >
                 <Image
                   src={wohnung.grundriss}
                   alt={`Grundriss ${wohnung.top} der Vallis Achen Residenzen`}
-                  width={800}
-                  height={600}
-                  className="h-auto w-full"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-contain p-4"
                 />
               </a>
               <div className="mt-5 flex flex-wrap gap-3">
@@ -505,7 +448,7 @@ function WohnungSwitchCard({ wohnung, isCurrent }: { wohnung: Wohnung; isCurrent
       aria-current={isCurrent ? 'page' : undefined}
       aria-label={isCurrent ? `${wohnung.top} ist die aktuelle Wohnung` : `${wohnung.top} ansehen`}
     >
-      <div className="relative aspect-[4/3] bg-bg">
+      <div className="relative aspect-[19/13] bg-bg">
         <Image
           src={wohnung.grundriss}
           alt={`Grundriss ${wohnung.top}`}

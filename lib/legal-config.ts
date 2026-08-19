@@ -1,5 +1,3 @@
-export const SITE_URL = 'https://wohnungsfinder-feldweg-499c.vercel.app'
-
 export const LEGAL = {
   controller: {
     name: 'Thomas Josef Grasl',

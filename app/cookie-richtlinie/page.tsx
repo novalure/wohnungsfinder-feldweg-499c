@@ -6,6 +6,7 @@ import { LEGAL } from '@/lib/legal-config'
 export const metadata = {
   title: 'Cookie-Richtlinie',
   alternates: { canonical: '/cookie-richtlinie' },
+  robots: { index: false, follow: true },
 }
 
 function getCookieRows() {

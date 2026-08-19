@@ -1,5 +1,7 @@
 export type WohnungsStatus = 'verfuegbar' | 'reserviert' | 'verkauft'
 
+export const CONTENT_UPDATED_AT = '2026-08-18'
+
 export const WOHNUNG_STATUS_LABELS: Record<WohnungsStatus, string> = {
   verfuegbar: 'verfügbar',
   reserviert: 'reserviert',
@@ -35,6 +37,14 @@ export function getWohnungDetailPath(wohnung: Pick<Wohnung, 'nr'>): string {
 
 export function getWohnungBySlug(slug: string): Wohnung | undefined {
   return WOHNUNGEN.find((wohnung) => getWohnungSlug(wohnung) === slug)
+}
+
+export function getAvailableWohnungen(): Wohnung[] {
+  return WOHNUNGEN.filter((wohnung) => wohnung.status === 'verfuegbar')
+}
+
+export function getSoldWohnungen(): Wohnung[] {
+  return WOHNUNGEN.filter((wohnung) => wohnung.status === 'verkauft')
 }
 
 export function getWohnungFloorLabel(wohnung: Wohnung): string {

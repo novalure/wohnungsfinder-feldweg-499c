@@ -4,6 +4,7 @@ import { LEGAL } from '@/lib/legal-config'
 export const metadata = {
   title: 'Datenschutz',
   alternates: { canonical: '/datenschutz' },
+  robots: { index: false, follow: true },
 }
 
 export default function DatenschutzPage() {

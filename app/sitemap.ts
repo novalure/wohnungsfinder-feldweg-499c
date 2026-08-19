@@ -1,44 +1,33 @@
 import type { MetadataRoute } from 'next'
-import { SITE_URL } from '@/lib/legal-config'
-import { getWohnungDetailPath, WOHNUNGEN } from '@/components/sections/data'
+import { absUrl } from '@/lib/site'
+import {
+  CONTENT_UPDATED_AT,
+  getWohnungDetailPath,
+  WOHNUNGEN,
+} from '@/components/sections/data'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = SITE_URL
-  const lastModified = new Date()
+  const lastModified = new Date(CONTENT_UPDATED_AT)
+  const indexableWohnungen = WOHNUNGEN.filter((wohnung) => wohnung.status !== 'verkauft')
+
   return [
     {
-      url: baseUrl,
+      url: absUrl('/'),
       lastModified,
       alternates: {
         languages: {
-          'de-AT': baseUrl,
+          'de-AT': absUrl('/'),
         },
       },
     },
-    ...WOHNUNGEN.map((wohnung) => ({
-      url: `${baseUrl}${getWohnungDetailPath(wohnung)}`,
+    ...indexableWohnungen.map((wohnung) => ({
+      url: absUrl(getWohnungDetailPath(wohnung)),
       lastModified,
       alternates: {
         languages: {
-          'de-AT': `${baseUrl}${getWohnungDetailPath(wohnung)}`,
+          'de-AT': absUrl(getWohnungDetailPath(wohnung)),
         },
       },
     })),
-    {
-      url: `${baseUrl}/datenschutz`,
-      lastModified,
-    },
-    {
-      url: `${baseUrl}/impressum`,
-      lastModified,
-    },
-    {
-      url: `${baseUrl}/quellenverzeichnis`,
-      lastModified,
-    },
-    {
-      url: `${baseUrl}/cookie-richtlinie`,
-      lastModified,
-    },
   ]
 }

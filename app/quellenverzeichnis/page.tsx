@@ -3,6 +3,7 @@ import Link from 'next/link'
 export const metadata = {
   title: 'Quellenverzeichnis',
   alternates: { canonical: '/quellenverzeichnis' },
+  robots: { index: false, follow: true },
 }
 
 const achenseeImageCreditFormat = [

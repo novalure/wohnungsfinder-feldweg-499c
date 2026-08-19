@@ -23,13 +23,12 @@ npx pnpm@9.15.4 dev
 Zentrale Projekt- und Kontaktdaten liegen in:
 
 - `config/project.json`
-- `config/wohnungen.json`
 
 Alle `{{ ... }}`-Platzhalter können dort ersetzt werden. Projektname, Adresse, Kontakt, Downloads, Bauträger, Tracking-IDs und rechtliche Firmendaten werden daraus in der Website ausgespielt.
 
 ## Wohnungs-Status pflegen
 
-Die produktiven Wohnungsdaten der integrierten Wohnungsfinder-Komponente liegen in `components/sections/data.ts`. Der Status wird pro Wohnung im Feld `status` gepflegt.
+Die produktiven Wohnungsdaten für Wohnungsfinder, Detailseiten, Sitemap, JSON-LD und `llms.txt` liegen in `components/sections/data.ts`. Der Status wird pro Wohnung im Feld `status` gepflegt.
 
 Erlaubte Werte:
 
@@ -89,6 +88,8 @@ Implementierte Events:
 3. ENV-Variablen in Vercel setzen.
 4. Build Command: `pnpm build`.
 5. Output wird automatisch von Next.js verwaltet.
+
+Bei einer späteren Domainumstellung nur `NEXT_PUBLIC_SITE_URL` in Vercel setzen und neu deployen. Der Fallback für die aktuelle Vercel-URL liegt in `lib/site.ts`.
 
 ## Rechtliches
 
