@@ -11,7 +11,7 @@ import {
 } from '@/components/sections/data'
 import { formatEUR, formatM2 } from '@/components/sections/format'
 import { LEGAL } from '@/lib/legal-config'
-import { absUrl } from '@/lib/site'
+import { absUrl, SOCIAL_IMAGE_PATH } from '@/lib/site'
 
 type JsonLdNode = Record<string, unknown>
 
@@ -58,7 +58,7 @@ function buildAgent(): JsonLdNode {
     legalName: LEGAL.controller.officeName,
     url: LEGAL.controller.web,
     logo: absUrl(projectConfig.company.logoSvg),
-    image: absUrl('/img/og-image.jpg'),
+    image: absUrl(SOCIAL_IMAGE_PATH),
     telephone: LEGAL.controller.phone,
     email: LEGAL.controller.email,
     vatID: LEGAL.controller.uid,
@@ -205,7 +205,7 @@ function buildApartmentComplex(): JsonLdNode {
     description:
       'Wohnbauprojekt mit sechs 2-Zimmer-Eigentumswohnungen am Feldweg 499c in Achenkirch am Achensee. Vertrieb und Beratung erfolgen durch GRASL Immobilien in Schwaz.',
     url: absUrl('/'),
-    image: absUrl('/img/og-image.jpg'),
+    image: absUrl(SOCIAL_IMAGE_PATH),
     numberOfAccommodationUnits: WOHNUNGEN.length,
     numberOfAvailableAccommodationUnits: getAvailableWohnungen().length,
     address: projectAddress,

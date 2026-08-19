@@ -6,7 +6,7 @@ import '../styles/globals.css'
 import projectConfig from '@/config/project.json'
 import { CookieConsent } from '@/components/consent/CookieConsent'
 import { SiteFooter } from '@/components/layout/SiteFooter'
-import { SITE_URL } from '@/lib/site'
+import { SITE_URL, SOCIAL_IMAGE_PATH } from '@/lib/site'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -43,10 +43,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/img/og-image.jpg',
+        url: SOCIAL_IMAGE_PATH,
         width: 1200,
         height: 630,
-        alt: `${project.name} am Achensee`,
+        alt: `Rendering der ${project.name} am Achensee`,
       },
     ],
   },
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: `${project.name} — Eigentumswohnungen am Achensee`,
     description:
       'Eigentumswohnungen am Achensee in Tirol mit Bergblick, ruhiger Architektur und persönlicher Beratung durch GRASL Immobilien.',
-    images: ['/img/og-image.jpg'],
+    images: [SOCIAL_IMAGE_PATH],
   },
 }
 

@@ -10,7 +10,7 @@ import {
   WOHNUNGEN,
   WOHNUNG_STATUS_LABELS,
 } from '@/components/sections/data'
-import { absUrl } from '@/lib/site'
+import { absUrl, SOCIAL_IMAGE_PATH } from '@/lib/site'
 import { formatEUR, formatM2 } from '@/components/sections/format'
 import projectConfig from '@/config/project.json'
 
@@ -69,10 +69,10 @@ export function generateMetadata({ params }: Props): Metadata {
       type: 'website',
       images: [
         {
-          url: absUrl('/img/og-image.jpg'),
+          url: absUrl(SOCIAL_IMAGE_PATH),
           width: 1200,
           height: 630,
-          alt: `${projectConfig.project.name} ${wohnung.top}`,
+          alt: `Rendering der ${projectConfig.project.name} für ${wohnung.top}`,
         },
       ],
     },
@@ -80,7 +80,7 @@ export function generateMetadata({ params }: Props): Metadata {
       card: 'summary_large_image',
       title: `${wohnung.top} | ${projectConfig.project.name}`,
       description,
-      images: [absUrl('/img/og-image.jpg')],
+      images: [absUrl(SOCIAL_IMAGE_PATH)],
     },
   }
 }
