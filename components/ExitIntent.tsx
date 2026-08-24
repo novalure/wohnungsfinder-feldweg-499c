@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react'
 import { X } from 'lucide-react'
 import { Button } from './ui/Button'
 import { trackEvent } from '@/lib/analytics'
+import { BUYER_TYPE_LABELS, type LeadInput } from '@/lib/validation'
 
 export function ExitIntent() {
   const [open, setOpen] = useState(false)
   const [email, setEmail] = useState('')
+  const [kaeuferart, setKaeuferart] = useState<LeadInput['kaeuferart'] | ''>('')
   const [accepted, setAccepted] = useState(false)
   const [sent, setSent] = useState(false)
 
@@ -24,20 +26,22 @@ export function ExitIntent() {
   }, [])
 
   async function submit() {
-    if (!email || !accepted) return
-    await fetch('/api/lead', {
+    if (!email || !kaeuferart || !accepted) return
+    const response = await fetch('/api/lead', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         name: 'Exposé-Anfrage',
         email,
-        telefon: '',
+        telefon: 'nicht angegeben',
         interesse: ['Exposé'],
+        kaeuferart,
         nachricht: 'Bitte senden Sie mir das Exposé per E-Mail zu.',
         datenschutz: true,
         website: '',
       }),
     })
+    if (!response.ok) return
     trackEvent('lead_submit', { source: 'exit_intent' })
     setSent(true)
   }
@@ -80,6 +84,29 @@ export function ExitIntent() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
+            <fieldset className="mt-4">
+              <legend className="text-sm font-semibold text-ink">
+                Nutzung <span className="text-xs font-semibold text-accent">(Pflichtfeld)</span>
+              </legend>
+              <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                {Object.entries(BUYER_TYPE_LABELS).map(([value, label]) => (
+                  <label
+                    key={value}
+                    className="flex items-center gap-3 rounded-md border border-line px-3 py-3 text-sm text-ink"
+                  >
+                    <input
+                      type="radio"
+                      name="exit-kaeuferart"
+                      value={value}
+                      checked={kaeuferart === value}
+                      className="h-4 w-4 accent-accent"
+                      onChange={() => setKaeuferart(value as LeadInput['kaeuferart'])}
+                    />
+                    <span>{label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
             <label className="mt-4 flex gap-3 text-sm leading-6 text-muted">
               <input
                 type="checkbox"
@@ -89,7 +116,7 @@ export function ExitIntent() {
               />
               Ich habe die Datenschutzerklärung zur Kenntnis genommen.
             </label>
-            <Button className="mt-5 w-full" onClick={submit} disabled={!email || !accepted}>
+            <Button className="mt-5 w-full" onClick={submit} disabled={!email || !kaeuferart || !accepted}>
               Exposé anfordern
             </Button>
           </div>

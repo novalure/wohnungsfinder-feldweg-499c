@@ -1,4 +1,4 @@
-import type { LeadInput } from './validation'
+import { BUYER_TYPE_LABELS, type LeadInput } from './validation'
 
 let resendClient: unknown
 
@@ -29,6 +29,7 @@ export async function sendLeadMail(lead: LeadInput) {
   const replyTo = process.env.CONTACT_REPLY_TO_EMAIL || DEFAULT_MAILBOX
   const resend = await getResend()
   const interesse = lead.interesse.join(', ')
+  const kaeuferart = BUYER_TYPE_LABELS[lead.kaeuferart]
 
   const internalText = [
     'Neue Anfrage ueber die Website Vallis Achen Residenzen',
@@ -38,6 +39,7 @@ export async function sendLeadMail(lead: LeadInput) {
     `E-Mail: ${lead.email}`,
     `Telefon: ${lead.telefon || '-'}`,
     `Interesse: ${interesse}`,
+    `Kaeuferart: ${kaeuferart}`,
     '',
     'Nachricht:',
     lead.nachricht || '-',
@@ -48,6 +50,7 @@ export async function sendLeadMail(lead: LeadInput) {
     '',
     'vielen Dank fuer Ihre Anfrage zu den Vallis Achen Residenzen.',
     `Wir haben Ihr Interesse an ${interesse} erhalten und melden uns zeitnah mit den passenden Unterlagen und naechsten Schritten.`,
+    `Ihre Auswahl: ${kaeuferart}.`,
     '',
     'Diese E-Mail ist eine automatische Eingangsbestätigung.',
     '',
@@ -62,7 +65,7 @@ export async function sendLeadMail(lead: LeadInput) {
     subject: `Neue Anfrage: ${interesse}`,
     reply_to: lead.email,
     text: internalText,
-    html: renderInternalHtml(lead, interesse),
+    html: renderInternalHtml(lead, interesse, kaeuferart),
   })
 
   const confirmationResult = await sendEmail(resend, {
@@ -71,7 +74,7 @@ export async function sendLeadMail(lead: LeadInput) {
     subject: 'Ihre Anfrage ist eingegangen - Vallis Achen Residenzen',
     reply_to: replyTo,
     text: confirmationText,
-    html: renderConfirmationHtml(lead, interesse),
+    html: renderConfirmationHtml(lead, interesse, kaeuferart),
   })
 
   return {
@@ -98,7 +101,7 @@ function formatResendError(error: NonNullable<ResendSendResult['error']>) {
   return [error.name, error.message].filter(Boolean).join(': ') || 'Resend email send failed.'
 }
 
-function renderInternalHtml(lead: LeadInput, interesse: string) {
+function renderInternalHtml(lead: LeadInput, interesse: string, kaeuferart: string) {
   return renderHtmlShell(
     'Neue Website-Anfrage',
     'Eine neue Anfrage wurde ueber das Kontaktformular gesendet.',
@@ -108,17 +111,19 @@ function renderInternalHtml(lead: LeadInput, interesse: string) {
       ['E-Mail', lead.email],
       ['Telefon', lead.telefon || '-'],
       ['Interesse', interesse],
+      ['Käuferart', kaeuferart],
       ['Nachricht', lead.nachricht || '-'],
     ],
   )
 }
 
-function renderConfirmationHtml(lead: LeadInput, interesse: string) {
+function renderConfirmationHtml(lead: LeadInput, interesse: string, kaeuferart: string) {
   return renderHtmlShell(
     'Ihre Anfrage ist eingegangen',
     `Guten Tag ${escapeHtml(lead.name)}, vielen Dank fuer Ihre Anfrage zu den Vallis Achen Residenzen. Wir haben Ihr Interesse an ${escapeHtml(interesse)} erhalten und melden uns zeitnah mit den passenden Unterlagen und naechsten Schritten.`,
     [
       ['Interesse', interesse],
+      ['Käuferart', kaeuferart],
       ['Kontakt', DEFAULT_MAILBOX],
     ],
     'Diese E-Mail ist eine automatische Eingangsbestätigung.',

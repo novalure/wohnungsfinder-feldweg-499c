@@ -54,8 +54,9 @@ export default function DatenschutzPage() {
           </h2>
           <p className="mt-4">
             Bei Nutzung des Kontaktformulars bzw. Kontakt per E-Mail/Telefon
-            verarbeiten wir Anrede, Name, E-Mail, Telefon, Objektinteresse und
-            Nachricht zur Bearbeitung Ihrer Anfrage und für Anschlussfragen.
+            verarbeiten wir Anrede, Name, E-Mail, Telefon, Objektinteresse,
+            Käuferart und Nachricht zur Bearbeitung Ihrer Anfrage und für
+            Anschlussfragen.
           </p>
           <ul className="mt-4 space-y-1">
             <li>

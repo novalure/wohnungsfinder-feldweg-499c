@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import projectConfig from '@/config/project.json'
 import { WOHNUNGEN } from './data'
-import { leadSchema, type LeadInput } from '@/lib/validation'
+import { BUYER_TYPE_LABELS, leadSchema, type LeadInput } from '@/lib/validation'
 import { trackEmailClick, trackEvent, trackPhoneClick } from '@/lib/analytics'
 import { Button } from '@/components/ui/Button'
 
@@ -52,6 +52,7 @@ export function Kontakt({ prefillTop }: Props) {
       email: '',
       telefon: '',
       interesse: [],
+      kaeuferart: undefined,
       nachricht: '',
       datenschutz: false,
       website: '',
@@ -259,6 +260,33 @@ export function Kontakt({ prefillTop }: Props) {
                 {errors.interesse?.message && (
                   <p id="lead-interesse-error" className="mt-2 text-sm text-danger" role="alert">
                     {errors.interesse.message}
+                  </p>
+                )}
+              </fieldset>
+
+              <fieldset aria-describedby={errors.kaeuferart?.message ? 'lead-kaeuferart-error' : undefined}>
+                <legend className="text-sm font-semibold text-ink">
+                  Nutzung <span className="text-xs font-semibold text-accent">(Pflichtfeld)</span>
+                </legend>
+                <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                  {Object.entries(BUYER_TYPE_LABELS).map(([value, label]) => (
+                    <label
+                      key={value}
+                      className="flex min-w-0 items-center gap-3 rounded-md border border-line px-3 py-3 text-sm text-ink"
+                    >
+                      <input
+                        type="radio"
+                        value={value}
+                        className="h-4 w-4 accent-accent"
+                        {...register('kaeuferart')}
+                      />
+                      <span className="min-w-0 break-words">{label}</span>
+                    </label>
+                  ))}
+                </div>
+                {errors.kaeuferart?.message && (
+                  <p id="lead-kaeuferart-error" className="mt-2 text-sm text-danger" role="alert">
+                    {errors.kaeuferart.message}
                   </p>
                 )}
               </fieldset>
