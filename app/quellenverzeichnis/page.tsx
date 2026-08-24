@@ -6,14 +6,6 @@ export const metadata = {
   robots: { index: false, follow: true },
 }
 
-const achenseeImageCreditFormat = [
-  'Bildslot/Datei auf der Website',
-  'Motiv oder Titel des Assets',
-  'Quelle: Medien- und Presseportal Achensee Tourismus',
-  'Fotocredit: © Achensee Tourismus oder der beim Asset angegebene Credit',
-  'Falls zutreffend: © Karwendelmarsch',
-]
-
 export default function QuellenverzeichnisPage() {
   return (
     <main className="section-shell py-20">
@@ -29,8 +21,7 @@ export default function QuellenverzeichnisPage() {
           </h1>
           <p className="mt-5">
             Diese Seite sammelt Textquellen, Bildquellen und erforderliche Credits
-            für die Website. Bildnachweise werden ergänzt, sobald finale Bilder
-            hochgeladen und freigegeben sind.
+            für die Website.
           </p>
         </div>
 
@@ -97,14 +88,6 @@ export default function QuellenverzeichnisPage() {
             Kollektion „Karwendelmarsch“ sind mit „© Karwendelmarsch“ zu
             kennzeichnen.
           </p>
-          <div className="mt-5 rounded-md border border-line bg-surface p-5">
-            <p className="font-semibold text-ink">Format für künftige Bildnachweise</p>
-            <ul className="mt-3 space-y-2">
-              {achenseeImageCreditFormat.map((item) => (
-                <li key={item}>• {item}</li>
-              ))}
-            </ul>
-          </div>
           <p className="mt-5 text-sm leading-7">
             Anbieter: Tourismusverband Achensee, Achenseestraße 63, 6212 Maurach
             am Achensee, Telefon +43 5 95300-0, E-Mail info@achensee.com,

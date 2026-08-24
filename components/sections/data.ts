@@ -21,6 +21,9 @@ export interface Wohnung {
   kpWohnung: number
   kpParkplaetze: number
   kpGesamt: number
+  kpWohnungInvestorNet: number
+  kpParkplaetzeInvestorNet: number
+  kpGesamtInvestorNet: number
   status: WohnungsStatus
   highlights: string[]
   hotspot: { top: string; left: string; width: string; height: string }
@@ -73,6 +76,9 @@ export const WOHNUNGEN: Wohnung[] = [
     kpWohnung: 357258,
     kpParkplaetze: 25000,
     kpGesamt: 382258,
+    kpWohnungInvestorNet: 347507,
+    kpParkplaetzeInvestorNet: 22727,
+    kpGesamtInvestorNet: 370234,
     status: 'verkauft',
     highlights: ['Privater Garten', 'Zwei Stellplätze', 'Ruhige Orientierung'],
     hotspot: { top: '61.4%', left: '72.5%', width: '18.6%', height: '21.8%' },
@@ -91,6 +97,9 @@ export const WOHNUNGEN: Wohnung[] = [
     kpWohnung: 328190.4,
     kpParkplaetze: 12500,
     kpGesamt: 340690.4,
+    kpWohnungInvestorNet: 309719,
+    kpParkplaetzeInvestorNet: 11364,
+    kpGesamtInvestorNet: 321083,
     status: 'verfuegbar',
     highlights: ['Kompakter Garten', 'Effizienter Grundriss', 'Ein Stellplatz'],
     hotspot: { top: '61.4%', left: '47.1%', width: '18.7%', height: '21.8%' },
@@ -109,6 +118,9 @@ export const WOHNUNGEN: Wohnung[] = [
     kpWohnung: 342930.5,
     kpParkplaetze: 25000,
     kpGesamt: 367930.5,
+    kpWohnungInvestorNet: 334482,
+    kpParkplaetzeInvestorNet: 22727,
+    kpGesamtInvestorNet: 357209,
     status: 'verkauft',
     highlights: ['Großzügiger Garten', 'Zwei Stellplätze', 'Kurze Wege ins Freie'],
     hotspot: { top: '61.4%', left: '22.4%', width: '19.4%', height: '21.8%' },
@@ -127,6 +139,9 @@ export const WOHNUNGEN: Wohnung[] = [
     kpWohnung: 338483,
     kpParkplaetze: 25000,
     kpGesamt: 363483,
+    kpWohnungInvestorNet: 330439,
+    kpParkplaetzeInvestorNet: 22727,
+    kpGesamtInvestorNet: 353166,
     status: 'verfuegbar',
     highlights: ['Balkon', 'Zwei Stellplätze', 'Blick in die Umgebung'],
     hotspot: { top: '38.0%', left: '72.5%', width: '18.6%', height: '23.4%' },
@@ -145,6 +160,9 @@ export const WOHNUNGEN: Wohnung[] = [
     kpWohnung: 333902.5,
     kpParkplaetze: 12500,
     kpGesamt: 346402.5,
+    kpWohnungInvestorNet: 314911,
+    kpParkplaetzeInvestorNet: 11364,
+    kpGesamtInvestorNet: 326275,
     status: 'verfuegbar',
     highlights: ['Balkon', 'Ein Stellplatz', 'Klar zonierter Wohnbereich'],
     hotspot: { top: '38.0%', left: '47.1%', width: '18.7%', height: '23.4%' },
@@ -163,6 +181,9 @@ export const WOHNUNGEN: Wohnung[] = [
     kpWohnung: 337244,
     kpParkplaetze: 25000,
     kpGesamt: 362244,
+    kpWohnungInvestorNet: 329313,
+    kpParkplaetzeInvestorNet: 22727,
+    kpGesamtInvestorNet: 352040,
     status: 'verfuegbar',
     highlights: ['Balkon', 'Zwei Stellplätze', 'Ruhige Obergeschosslage'],
     hotspot: { top: '38.0%', left: '22.4%', width: '19.4%', height: '23.4%' },

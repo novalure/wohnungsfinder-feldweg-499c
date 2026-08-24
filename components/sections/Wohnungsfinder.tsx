@@ -11,6 +11,7 @@ import {
 import { ArrowRight, ChevronDown, Image as ImageIcon, Send, X } from 'lucide-react'
 import projectConfig from '@/config/project.json'
 import { ButtonLink } from '@/components/ui/Button'
+import { InvestorFinancingNote, PriceAmount, PriceModeToggle } from '@/components/price/PriceMode'
 import { trackEvent } from '@/lib/analytics'
 import { PROVISION_TEXT } from '@/lib/legal-config'
 import {
@@ -20,7 +21,7 @@ import {
   type Wohnung,
   type WohnungsStatus,
 } from './data'
-import { formatEUR, formatM2 } from './format'
+import { formatM2 } from './format'
 
 type Props = {
   onAnfrage?: (top: string, nr: number) => void
@@ -159,6 +160,10 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
           </div>
 
           <div className="min-w-0">
+            <div className="mb-4">
+              <PriceModeToggle />
+              <InvestorFinancingNote className="mt-3" />
+            </div>
             <div className="overflow-hidden rounded-md border border-line shadow-soft">
               <table className="w-full table-fixed text-[12px] sm:text-sm">
                 <colgroup>
@@ -220,11 +225,19 @@ export default function Wohnungsfinder({ onAnfrage }: Props) {
                           </td>
                           <td className="px-1 py-3 text-right tabular-nums font-semibold text-ink sm:px-3">
                             {isSold ? (
-                              <span className="text-danger" aria-label="Kaufpreis nicht verfuegbar">
-                                verkauft
-                              </span>
+                              <PriceAmount
+                                gross={wohnung.kpGesamt}
+                                investorNet={wohnung.kpGesamtInvestorNet}
+                                status={wohnung.status}
+                                unavailableDisplay="status"
+                                soldClassName="text-danger"
+                              />
                             ) : (
-                              formatEUR(wohnung.kpGesamt)
+                              <PriceAmount
+                                gross={wohnung.kpGesamt}
+                                investorNet={wohnung.kpGesamtInvestorNet}
+                                status={wohnung.status}
+                              />
                             )}
                           </td>
                           <td className="px-2 py-3 text-center text-muted sm:px-3 lg:pl-2 lg:pr-6">
@@ -349,9 +362,37 @@ function DetailPanel({
             <DLItem label="Inkl. Parkplätze" value={`${wohnung.parkplaetze} Stk.`} />
             <DLItem label="HWB" value={hwb} />
             <div className="my-2 h-px bg-line" />
-            <DLItem label="KP Wohnung" value={formatEUR(wohnung.kpWohnung)} />
-            <DLItem label="KP Parkplätze" value={formatEUR(wohnung.kpParkplaetze)} />
-            <DLItem label="KP gesamt" value={formatEUR(wohnung.kpGesamt)} emphasized />
+            <DLItem
+              label="KP Wohnung"
+              value={
+                <PriceAmount
+                  gross={wohnung.kpWohnung}
+                  investorNet={wohnung.kpWohnungInvestorNet}
+                  status={wohnung.status}
+                />
+              }
+            />
+            <DLItem
+              label="KP Parkplätze"
+              value={
+                <PriceAmount
+                  gross={wohnung.kpParkplaetze}
+                  investorNet={wohnung.kpParkplaetzeInvestorNet}
+                  status={wohnung.status}
+                />
+              }
+            />
+            <DLItem
+              label="KP gesamt"
+              value={
+                <PriceAmount
+                  gross={wohnung.kpGesamt}
+                  investorNet={wohnung.kpGesamtInvestorNet}
+                  status={wohnung.status}
+                />
+              }
+              emphasized
+            />
           </dl>
           <ul className="mt-5 grid gap-2 text-sm text-muted">
             {wohnung.highlights.map((highlight) => (
@@ -425,7 +466,7 @@ function DLItem({
   emphasized = false,
 }: {
   label: string
-  value: string
+  value: React.ReactNode
   emphasized?: boolean
 }) {
   return (
