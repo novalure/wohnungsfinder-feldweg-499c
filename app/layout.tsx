@@ -6,6 +6,7 @@ import '../styles/globals.css'
 import projectConfig from '@/config/project.json'
 import { CookieConsent } from '@/components/consent/CookieConsent'
 import { SiteFooter } from '@/components/layout/SiteFooter'
+import { PriceModeProvider } from '@/components/price/PriceMode'
 import { SITE_URL, SOCIAL_IMAGE_PATH } from '@/lib/site'
 
 const inter = Inter({
@@ -63,9 +64,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="de-AT" className={`${inter.variable} ${cormorant.variable}`}>
       <body>
-        {children}
-        <SiteFooter />
-        <CookieConsent />
+        <PriceModeProvider>
+          {children}
+          <SiteFooter />
+          <CookieConsent />
+        </PriceModeProvider>
       </body>
     </html>
   )

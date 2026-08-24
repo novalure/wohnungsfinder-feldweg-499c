@@ -15,6 +15,11 @@ export function formatEUR(value: number | null | undefined): string {
   return `${eurFormatter.format(value)},–`
 }
 
+export function formatInvestorEUR(value: number | null | undefined): string {
+  const formatted = formatEUR(value)
+  return formatted ? `${formatted} netto zzgl. 20 % USt.` : ''
+}
+
 export function formatM2(value: number | null | undefined): string {
   if (value === null || value === undefined) return ''
   return `${m2Formatter.format(value)} m²`

@@ -19,6 +19,7 @@ import {
 } from 'lucide-react'
 import projectConfig from '@/config/project.json'
 import { Navigation } from '@/components/Navigation'
+import { InvestorFinancingNote, PriceAmount, PriceModeToggle } from '@/components/price/PriceMode'
 import { ButtonLink } from '@/components/ui/Button'
 import {
   getWohnungDetailPath,
@@ -29,7 +30,7 @@ import {
   WOHNUNG_STATUS_LABELS,
   type Wohnung,
 } from '@/components/sections/data'
-import { formatEUR, formatM2 } from '@/components/sections/format'
+import { formatM2 } from '@/components/sections/format'
 import { buildWohnungDetailJsonLd } from '@/lib/jsonld'
 import { LEGAL } from '@/lib/legal-config'
 import { WohnungDetailGallery, type WohnungGalleryItem } from './WohnungDetailGallery'
@@ -150,7 +151,18 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
     { label: 'Zimmer', value: `${wohnung.zimmer} Zimmer` },
     { label: 'Etage', value: getWohnungFloorLabel(wohnung) },
     { label: 'Freifläche', value: outdoor || 'nicht hinterlegt' },
-    { label: 'Kaufpreis', value: isSold ? 'verkauft' : formatEUR(wohnung.kpGesamt) },
+    {
+      label: 'Kaufpreis',
+      value: (
+        <PriceAmount
+          gross={wohnung.kpGesamt}
+          investorNet={wohnung.kpGesamtInvestorNet}
+          status={wohnung.status}
+          unavailableDisplay="status"
+          soldClassName="text-danger"
+        />
+      ),
+    },
     { label: 'Status', value: WOHNUNG_STATUS_LABELS[wohnung.status] },
     { label: 'Ausrichtung', value: 'siehe Exposé' },
     {
@@ -226,6 +238,10 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
 
         <section className="border-y border-line bg-surface py-16 md:py-20">
           <div className="section-shell">
+            <div className="mb-6">
+              <PriceModeToggle />
+              {!isSold && <InvestorFinancingNote className="mt-3" />}
+            </div>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {facts.map((fact) => (
                 <div key={fact.label} className="rounded-md border border-line bg-bg p-5">
@@ -258,9 +274,39 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
               </div>
               {!isSold && (
                 <div className="grid gap-3 rounded-md border border-line bg-surface p-5 text-base leading-7">
-                  <PriceRow label="KP Wohnung" value={formatEUR(wohnung.kpWohnung)} />
-                  <PriceRow label="KP Parkplätze" value={formatEUR(wohnung.kpParkplaetze)} />
-                  <PriceRow label="KP gesamt" value={formatEUR(wohnung.kpGesamt)} emphasized />
+                  <PriceModeToggle />
+                  <PriceRow
+                    label="KP Wohnung"
+                    value={
+                      <PriceAmount
+                        gross={wohnung.kpWohnung}
+                        investorNet={wohnung.kpWohnungInvestorNet}
+                        status={wohnung.status}
+                      />
+                    }
+                  />
+                  <PriceRow
+                    label="KP Parkplätze"
+                    value={
+                      <PriceAmount
+                        gross={wohnung.kpParkplaetze}
+                        investorNet={wohnung.kpParkplaetzeInvestorNet}
+                        status={wohnung.status}
+                      />
+                    }
+                  />
+                  <PriceRow
+                    label="KP gesamt"
+                    value={
+                      <PriceAmount
+                        gross={wohnung.kpGesamt}
+                        investorNet={wohnung.kpGesamtInvestorNet}
+                        status={wohnung.status}
+                      />
+                    }
+                    emphasized
+                  />
+                  <InvestorFinancingNote className="border-t border-line pt-3" />
                 </div>
               )}
             </div>
@@ -418,11 +464,15 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
                   {switchTitle}
                 </h2>
               </div>
-              <ButtonLink href="/#wohnungen" variant="secondary" className="w-fit">
-                Zur Übersicht
-                <ArrowRight size={18} aria-hidden="true" />
-              </ButtonLink>
+              <div className="flex flex-col items-start gap-3 md:items-end">
+                <ButtonLink href="/#wohnungen" variant="secondary" className="w-fit">
+                  Zur Übersicht
+                  <ArrowRight size={18} aria-hidden="true" />
+                </ButtonLink>
+                <PriceModeToggle />
+              </div>
             </div>
+            <InvestorFinancingNote className="mb-6" />
             <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
               {switchUnits.map((unit) => (
                 <WohnungSwitchCard key={unit.nr} wohnung={unit} isCurrent={unit.nr === wohnung.nr} />
@@ -437,7 +487,6 @@ export function WohnungDetailPage({ wohnung }: { wohnung: Wohnung }) {
 
 function WohnungSwitchCard({ wohnung, isCurrent }: { wohnung: Wohnung; isCurrent: boolean }) {
   const outdoor = getWohnungOutdoorLabel(wohnung)
-  const isSold = wohnung.status === 'verkauft'
 
   return (
     <Link
@@ -475,7 +524,18 @@ function WohnungSwitchCard({ wohnung, isCurrent }: { wohnung: Wohnung; isCurrent
           <SwitchCardFact label="Wohnfläche" value={formatM2(wohnung.wohnflaeche)} />
           <SwitchCardFact label="Zimmer" value={`${wohnung.zimmer}`} />
           <SwitchCardFact label="Freifläche" value={outdoor || 'siehe Exposé'} />
-          <SwitchCardFact label="Preis" value={isSold ? 'verkauft' : formatEUR(wohnung.kpGesamt)} />
+          <SwitchCardFact
+            label="Preis"
+            value={
+              <PriceAmount
+                gross={wohnung.kpGesamt}
+                investorNet={wohnung.kpGesamtInvestorNet}
+                status={wohnung.status}
+                unavailableDisplay="status"
+                soldClassName="text-danger"
+              />
+            }
+          />
         </dl>
         <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent">
           {isCurrent ? 'Aktuelle Wohnung' : 'Details ansehen'}
@@ -486,7 +546,7 @@ function WohnungSwitchCard({ wohnung, isCurrent }: { wohnung: Wohnung; isCurrent
   )
 }
 
-function SwitchCardFact({ label, value }: { label: string; value: string }) {
+function SwitchCardFact({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex items-baseline justify-between gap-4 border-t border-line pt-2">
       <dt className="text-muted">{label}</dt>
@@ -519,7 +579,7 @@ function PriceRow({
   emphasized = false,
 }: {
   label: string
-  value: string
+  value: React.ReactNode
   emphasized?: boolean
 }) {
   return (
